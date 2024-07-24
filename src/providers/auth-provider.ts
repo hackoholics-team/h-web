@@ -1,15 +1,20 @@
 import { AuthProvider } from 'react-admin';
+import firebaseAuthProvider, {
+  FirebaseSigninType,
+} from '@/security/firebase-auth-provider';
 
-//TODO: implementation
 export const authProvider: AuthProvider = {
-  login: async () => {},
-  checkAuth: async () => {},
-  logout: async () => {
-    localStorage.clear();
-    sessionStorage.clear();
+  login: async (_signinData: FirebaseSigninType) => {
+    // return firebaseAuthProvider.signIn(signinData);
+    return Promise.resolve();
   },
-  checkError: () => Promise.resolve(/* ... */),
+  logout: async () => {
+    // return firebaseAuthProvider.signOut();
+    return Promise.resolve();
+  },
+  checkAuth: async () => Promise.reject(),
   // getIdentity: () => Promise.resolve(/* ... */),
+  checkError: () => Promise.resolve(/* ... */),
   handleCallback: () => Promise.resolve(/* ... */), // for third-party authentication only
   getPermissions: () => Promise.resolve(/* ... */),
 };
