@@ -1,28 +1,39 @@
 import {
   Button,
+  email,
   PasswordInput,
+  required,
   SimpleForm,
   TextInput,
   Toolbar,
+  useTranslate,
 } from 'react-admin';
 import { Typography, Box } from '@mui/material';
+import { confirmPasswordValidator } from '@/common/input-validator';
 
 export const SignupUi = () => {
+  const translate = useTranslate();
+
   return (
-    <Box flex={1} sx={{ p: 5 }}>
-      <Typography sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+    <Box flex={1} p={5}>
+      <Typography fontWeight="bold" fontSize="1.2rem">
         Create account
       </Typography>
       <Typography fontSize="14px" mb={3}>
         Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
         cillum sint consectetur cupidatat.
       </Typography>
-      <Box sx={{ width: '100%', maxWidth: '400px' }}>
+      <Box width="100%" maxWidth="400px">
         <SimpleForm
-          sx={{ pl: 0 }}
+          pl={0}
           toolbar={
-            <Toolbar>
-              <Button label="Signup" size="small" variant="contained" />
+            <Toolbar sx={{ mt: 1 }}>
+              <Button
+                type="submit"
+                label="Signup"
+                size="small"
+                variant="contained"
+              />
             </Toolbar>
           }
         >
@@ -30,20 +41,26 @@ export const SignupUi = () => {
             variant="filled"
             fullWidth
             source="email"
-            label="Email"
             type="email"
+            label="Email"
+            validate={[required(), email()]}
           />
           <PasswordInput
-            variant="filled"
             fullWidth
+            validate={required()}
+            variant="filled"
             source="password"
-            label="source"
+            label="Password"
           />
           <PasswordInput
             variant="filled"
             fullWidth
             source="confirmPassword"
-            label="Confirm your Password"
+            label={translate('ha.login.forms.confirmPassword.label')}
+            validate={confirmPasswordValidator(
+              'password',
+              translate('ha.login.forms.confirmPassword.error')
+            )}
           />
         </SimpleForm>
       </Box>

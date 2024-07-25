@@ -1,9 +1,15 @@
-import { LocalesMenuButton, ToggleThemeButton } from 'react-admin';
-import { Typography, Box, SxProps } from '@mui/material';
-import { FlexBox } from '@/operations/common/components/box';
-import { usePalette } from '@/operations/common/hooks';
-import loginIllustration from '@/assets/login-illustration.png';
+import {
+  LocalesMenuButton,
+  ToggleThemeButton,
+  useTranslate,
+} from 'react-admin';
+import { Typography, SxProps } from '@mui/material';
+import { GTranslate as GTranslateIcon } from '@mui/icons-material';
+import { FlexBox } from '@/common/components/box';
 import { SignupUi } from './signup-ui';
+import { usePalette } from '@/common/hooks';
+import { SUPPORTED_LOCALES } from '@/providers/i18n';
+import loginIllustration from '@/assets/login-illustration.png';
 
 const LOGIN_PAGE_SX: SxProps = {
   alignItems: 'start',
@@ -24,17 +30,27 @@ const ILLUSTRATION_BOX_SX: SxProps = {
   justifyContent: 'end',
 };
 
-const ILLUSTRATION_TEXT_SX: SxProps = {
+const ILLUSTRATION_HEADER_TEXT_SX: SxProps = {
   textAlign: 'center',
   fontSize: '1.7rem',
   color: 'white',
+  mb: 2,
   fontWeight: 'bold',
 };
 
 const LoginActionOptions = () => {
+  const translate = useTranslate();
+
+  const languages = SUPPORTED_LOCALES.map((locale) => {
+    return {
+      locale,
+      name: translate(`ha.locales.${locale}.name`),
+    };
+  });
+
   return (
     <FlexBox sx={{ position: 'absolute', gap: 1, top: 5, right: 5 }}>
-      <LocalesMenuButton />
+      <LocalesMenuButton languages={languages} icon={<GTranslateIcon />} />
       <ToggleThemeButton />
     </FlexBox>
   );
@@ -42,6 +58,7 @@ const LoginActionOptions = () => {
 
 export const LoginPage = () => {
   const { palette, getPaletteColorValue } = usePalette();
+  const translate = useTranslate();
 
   return (
     <FlexBox
@@ -58,8 +75,8 @@ export const LoginPage = () => {
             bgcolor: getPaletteColorValue(palette.primary, 200),
           }}
         >
-          <Typography sx={ILLUSTRATION_TEXT_SX} variant="h2">
-            Welcome back to something cool
+          <Typography sx={ILLUSTRATION_HEADER_TEXT_SX} variant="h2">
+            {translate('ha.login.illustration.header')}
           </Typography>
           <Typography
             sx={{ fontSize: '15px', textAlign: 'center', color: 'white' }}
@@ -68,14 +85,18 @@ export const LoginPage = () => {
             cillum sint consectetur cupidatat.
           </Typography>
           <img
-            src={loginIllustration}
             width={250}
+            src={loginIllustration}
             alt="hackoholics-login"
             style={{ display: 'block' }}
           />
-          <Typography sx={{ color: 'white', fontSize: '15px' }}>
-            Already have an account ?{' '}
-            <span style={{ textDecoration: 'underline' }}>Sign in</span>
+          <Typography
+            sx={{ textAlign: 'center', color: 'white', fontSize: '15px' }}
+          >
+            Trouver ici notre{' '}
+            <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
+              Règle Génerale
+            </span>
           </Typography>
         </FlexBox>
         <SignupUi />
