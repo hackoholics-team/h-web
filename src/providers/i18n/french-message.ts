@@ -8,6 +8,9 @@ export const haFrenchMessages: any = {
       or: 'Ou',
       signin: 'Se connecter',
       signup: "S'inscrire",
+      next: 'Suivant',
+      prev: 'Précédent',
+      finish: 'Terminer',
     },
     text: {
       forgotPassword: 'Mot de passe oublié ?',
@@ -23,6 +26,26 @@ export const haFrenchMessages: any = {
       },
       illustration: {
         header: 'Bienvenue à nouveau à votre travail',
+      },
+      signin: {
+        title: 'Se connecter',
+        description:
+          'Entrez vos informations de connexion pour accéder à votre compte.',
+      },
+      signup: {
+        title: 'Créer un compte',
+        description:
+          'Remplissez les informations ci-dessous pour créer un nouveau compte.',
+      },
+      completeInfo: {
+        title: 'Complétez vos informations',
+        description:
+          'Veuillez fournir les informations manquantes pour finaliser votre inscription.',
+        step0: 'Compte',
+        step1: 'Nom',
+        step2: 'Prénom',
+        step3: "Nom d'utilisateur",
+        step4: 'Date de naissance',
       },
     },
     locales: {
