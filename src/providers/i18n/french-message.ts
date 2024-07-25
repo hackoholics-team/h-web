@@ -6,6 +6,13 @@ export const haFrenchMessages: any = {
   ha: {
     words: {
       or: 'Ou',
+      signin: 'Se connecter',
+      signup: "S'inscrire",
+    },
+    text: {
+      forgotPassword: 'Mot de passe oublié ?',
+      alreadyHaveAccount: 'Vous avez déjà un compte ?',
+      doesNotHaveAccountYet: "Vous n'avez pas encore de compte ?",
     },
     login: {
       forms: {
@@ -13,10 +20,6 @@ export const haFrenchMessages: any = {
           label: 'Confirmer votre mot de passe',
           error: 'Les mots de passe ne correspondent pas',
         },
-      },
-      buttons: {
-        signup: 'Créer',
-        signin: 'Connecter',
       },
       illustration: {
         header: 'Bienvenue à nouveau à votre travail',

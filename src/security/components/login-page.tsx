@@ -6,7 +6,7 @@ import {
 import { Typography, SxProps } from '@mui/material';
 import { GTranslate as GTranslateIcon } from '@mui/icons-material';
 import { FlexBox } from '@/common/components/box';
-import { SignupUi } from './signup-ui';
+import { LoginForm } from './login-form';
 import { LoginLoadingContext } from '../context';
 import { usePalette } from '@/common/hooks';
 import { SUPPORTED_LOCALES } from '@/providers/i18n';
@@ -49,7 +49,15 @@ const LoginActionOptions = () => {
   });
 
   return (
-    <FlexBox sx={{ position: 'absolute', gap: 1, top: 5, right: 5 }}>
+    <FlexBox
+      sx={{
+        'position': 'absolute',
+        'gap': 1,
+        'top': 5,
+        'right': 5,
+        '& *': { textTransform: 'none !important' },
+      }}
+    >
       <LocalesMenuButton languages={languages} icon={<GTranslateIcon />} />
       <ToggleThemeButton />
     </FlexBox>
@@ -100,7 +108,7 @@ export const LoginPage = () => {
               </span>
             </Typography>
           </FlexBox>
-          <SignupUi />
+          <LoginForm />
           <LoginActionOptions />
         </FlexBox>
       </FlexBox>

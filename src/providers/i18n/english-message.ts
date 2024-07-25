@@ -6,6 +6,13 @@ export const haEnglishMessages: any = {
   ha: {
     words: {
       or: 'Or',
+      signin: 'Signin',
+      signup: 'Signup',
+    },
+    text: {
+      forgotPassword: 'Forgot password ?',
+      alreadyHaveAccount: 'Already have a account ?',
+      doesNotHaveAccountYet: 'Does not have an account yet ?',
     },
     login: {
       forms: {
@@ -13,10 +20,6 @@ export const haEnglishMessages: any = {
           label: 'Confirm your password',
           error: 'The passwords do not match',
         },
-      },
-      buttons: {
-        signup: 'Signup',
-        signin: 'Signin',
       },
       illustration: {
         header: 'Welcome back to your job',
