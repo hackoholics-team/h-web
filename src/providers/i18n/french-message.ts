@@ -6,6 +6,16 @@ export const haFrenchMessages: any = {
   ha: {
     words: {
       or: 'Ou',
+      signin: 'Se connecter',
+      signup: "S'inscrire",
+      next: 'Suivant',
+      prev: 'Précédent',
+      finish: 'Terminer',
+    },
+    text: {
+      forgotPassword: 'Mot de passe oublié ?',
+      alreadyHaveAccount: 'Vous avez déjà un compte ?',
+      doesNotHaveAccountYet: "Vous n'avez pas encore de compte ?",
     },
     login: {
       forms: {
@@ -14,12 +24,28 @@ export const haFrenchMessages: any = {
           error: 'Les mots de passe ne correspondent pas',
         },
       },
-      buttons: {
-        signup: 'Créer',
-        signin: 'Connecter',
-      },
       illustration: {
         header: 'Bienvenue à nouveau à votre travail',
+      },
+      signin: {
+        title: 'Se connecter',
+        description:
+          'Entrez vos informations de connexion pour accéder à votre compte.',
+      },
+      signup: {
+        title: 'Créer un compte',
+        description:
+          'Remplissez les informations ci-dessous pour créer un nouveau compte.',
+      },
+      completeInfo: {
+        title: 'Complétez vos informations',
+        description:
+          'Veuillez fournir les informations manquantes pour finaliser votre inscription.',
+        step0: 'Compte',
+        step1: 'Nom',
+        step2: 'Prénom',
+        step3: "Nom d'utilisateur",
+        step4: 'Date de naissance',
       },
     },
     locales: {

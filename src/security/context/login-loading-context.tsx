@@ -1,11 +1,10 @@
-import { FC, createContext, useState } from 'react';
-import { useLogin, useNotify } from 'react-admin';
+import { FC, createContext } from 'react';
+import { useLogin as useRaLogin, useNotify } from 'react-admin';
 import { SigninProviderType } from '../firebase-auth-provider';
+import { useLoginStore, UseLoginStoreType } from '../stores';
 
-export type LoginLoadingContextType = {
+export type LoginLoadingContextType = UseLoginStoreType & {
   login: (provider: SigninProviderType, errorMessage: string) => Promise<void>;
-  setIsLoading: (status: boolean) => void;
-  isLoading: boolean;
 };
 
 export const LOGIN_LOADING_CONTEXT =
@@ -14,8 +13,8 @@ export const LOGIN_LOADING_CONTEXT =
 export const LoginLoadingContext: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const login = useLogin();
+  const { view, setIsLoading, setView, isLoading } = useLoginStore();
+  const login = useRaLogin();
   const notify = useNotify();
 
   const doLogin = async (
@@ -34,11 +33,11 @@ export const LoginLoadingContext: FC<{ children: React.ReactNode }> = ({
   return (
     <LOGIN_LOADING_CONTEXT.Provider
       value={{
+        view,
         isLoading,
+        setView,
+        setIsLoading,
         login: doLogin,
-        setIsLoading: (status) => {
-          setIsLoading(status);
-        },
       }}
     >
       {children}

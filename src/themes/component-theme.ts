@@ -23,6 +23,8 @@ export const COMPONENT_THEME: Partial<RaThemeOptions['components']> = {
       root: {
         paddingTop: 8,
         paddingBottom: 6,
+        textTransform: 'none !important',
+        fontSize: '15px',
       },
     },
   },
