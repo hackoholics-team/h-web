@@ -1,14 +1,13 @@
 import {
-  Button,
-  email,
   PasswordInput,
-  required,
   SimpleForm,
   TextInput,
-  Toolbar,
+  email,
+  required,
   useTranslate,
 } from 'react-admin';
 import { Typography, Box } from '@mui/material';
+import { LoginFormToolbar } from './login-form-toolbar';
 import { confirmPasswordValidator } from '@/common/input-validator';
 
 export const SignupUi = () => {
@@ -21,22 +20,10 @@ export const SignupUi = () => {
       </Typography>
       <Typography fontSize="14px" mb={3}>
         Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
-        cillum sint consectetur cupidatat.
+        cillum sint consectetur.
       </Typography>
       <Box width="100%" maxWidth="400px">
-        <SimpleForm
-          pl={0}
-          toolbar={
-            <Toolbar sx={{ mt: 1 }}>
-              <Button
-                type="submit"
-                label="Signup"
-                size="small"
-                variant="contained"
-              />
-            </Toolbar>
-          }
-        >
+        <SimpleForm pl={0} toolbar={<LoginFormToolbar loginType="signup" />}>
           <TextInput
             variant="filled"
             fullWidth

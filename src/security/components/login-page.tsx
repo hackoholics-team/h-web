@@ -7,6 +7,7 @@ import { Typography, SxProps } from '@mui/material';
 import { GTranslate as GTranslateIcon } from '@mui/icons-material';
 import { FlexBox } from '@/common/components/box';
 import { SignupUi } from './signup-ui';
+import { LoginLoadingContext } from '../context';
 import { usePalette } from '@/common/hooks';
 import { SUPPORTED_LOCALES } from '@/providers/i18n';
 import loginIllustration from '@/assets/login-illustration.png';
@@ -27,7 +28,6 @@ const ILLUSTRATION_BOX_SX: SxProps = {
   borderBottomLeftRadius: '8px',
   p: 3,
   flexDirection: 'column',
-  justifyContent: 'end',
 };
 
 const ILLUSTRATION_HEADER_TEXT_SX: SxProps = {
@@ -61,47 +61,49 @@ export const LoginPage = () => {
   const translate = useTranslate();
 
   return (
-    <FlexBox
-      sx={{
-        bgcolor: palette.background.paper,
-        minHeight: '100vh',
-        width: '100%',
-      }}
-    >
-      <FlexBox sx={{ ...LOGIN_PAGE_SX, bgcolor: palette.background.default }}>
-        <FlexBox
-          sx={{
-            ...ILLUSTRATION_BOX_SX,
-            bgcolor: getPaletteColorValue(palette.primary, 200),
-          }}
-        >
-          <Typography sx={ILLUSTRATION_HEADER_TEXT_SX} variant="h2">
-            {translate('ha.login.illustration.header')}
-          </Typography>
-          <Typography
-            sx={{ fontSize: '15px', textAlign: 'center', color: 'white' }}
+    <LoginLoadingContext>
+      <FlexBox
+        sx={{
+          bgcolor: palette.background.paper,
+          minHeight: '100vh',
+          width: '100%',
+        }}
+      >
+        <FlexBox sx={{ ...LOGIN_PAGE_SX, bgcolor: palette.background.default }}>
+          <FlexBox
+            sx={{
+              ...ILLUSTRATION_BOX_SX,
+              bgcolor: getPaletteColorValue(palette.primary, 200),
+            }}
           >
-            Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
-            cillum sint consectetur cupidatat.
-          </Typography>
-          <img
-            width={250}
-            src={loginIllustration}
-            alt="hackoholics-login"
-            style={{ display: 'block' }}
-          />
-          <Typography
-            sx={{ textAlign: 'center', color: 'white', fontSize: '15px' }}
-          >
-            Trouver ici notre{' '}
-            <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-              Règle Génerale
-            </span>
-          </Typography>
+            <Typography sx={ILLUSTRATION_HEADER_TEXT_SX} variant="h2">
+              {translate('ha.login.illustration.header')}
+            </Typography>
+            <Typography
+              sx={{ fontSize: '15px', textAlign: 'center', color: 'white' }}
+            >
+              Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
+              sint cillum sint consectetur cupidatat.
+            </Typography>
+            <img
+              width={250}
+              src={loginIllustration}
+              alt="hackoholics-login"
+              style={{ display: 'block' }}
+            />
+            <Typography
+              sx={{ textAlign: 'center', color: 'white', fontSize: '15px' }}
+            >
+              Trouver ici notre{' '}
+              <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
+                Règle Génerale
+              </span>
+            </Typography>
+          </FlexBox>
+          <SignupUi />
+          <LoginActionOptions />
         </FlexBox>
-        <SignupUi />
-        <LoginActionOptions />
       </FlexBox>
-    </FlexBox>
+    </LoginLoadingContext>
   );
 };

@@ -1,16 +1,14 @@
 import { AuthProvider } from 'react-admin';
 import firebaseAuthProvider, {
-  FirebaseSigninType,
+  SigninProviderType,
 } from '@/security/firebase-auth-provider';
 
 export const authProvider: AuthProvider = {
-  login: async (_signinData: FirebaseSigninType) => {
-    // return firebaseAuthProvider.signIn(signinData);
-    return Promise.resolve();
+  login: async (provider: SigninProviderType) => {
+    return firebaseAuthProvider.signIn(provider);
   },
   logout: async () => {
-    // return firebaseAuthProvider.signOut();
-    return Promise.resolve();
+    return firebaseAuthProvider.signOut();
   },
   checkAuth: async () => Promise.reject(),
   // getIdentity: () => Promise.resolve(/* ... */),

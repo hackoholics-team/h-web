@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth';
 import { FIREBASE_AUTH } from '@/config/firebase-config';
 
-export type FirebaseSigninType =
+export type SigninProviderType =
   | {
       email: string;
       password: string;
@@ -32,7 +32,7 @@ const cacheCredential = async (credential: UserCredential) => {
   return credential;
 };
 
-const signIn = async (provider: FirebaseSigninType) => {
+const signIn = async (provider: SigninProviderType) => {
   if ('password' in provider) {
     const { email, password } = provider;
     return cacheCredential(
@@ -42,7 +42,7 @@ const signIn = async (provider: FirebaseSigninType) => {
   return cacheCredential(await signInWithPopup(FIREBASE_AUTH, new provider()));
 };
 
-const signup = async (provider: FirebaseSigninType) => {
+const signup = async (provider: SigninProviderType) => {
   if ('password' in provider) {
     const { email, password } = provider;
     return await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);

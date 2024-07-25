@@ -4,12 +4,19 @@ import frenchMessages from 'ra-language-french';
 export const haFrenchMessages: any = {
   ...frenchMessages,
   ha: {
+    words: {
+      or: 'Ou',
+    },
     login: {
       forms: {
         confirmPassword: {
           label: 'Confirmer votre mot de passe',
           error: 'Les mots de passe ne correspondent pas',
         },
+      },
+      buttons: {
+        signup: 'Créer',
+        signin: 'Connecter',
       },
       illustration: {
         header: 'Bienvenue à nouveau à votre travail',
