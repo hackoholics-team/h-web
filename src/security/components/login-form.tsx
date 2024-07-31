@@ -5,20 +5,31 @@ import {
   email,
   required,
   useTranslate,
+  useLogin as useRaLogin,
 } from 'react-admin';
 import { Button } from '@mui/material';
 import { FlexBox } from '@/common/components/box';
 import { LoginFormToolbar } from './login-form-toolbar';
+import { SigninProviderType } from '@/providers';
 import { useLogin } from '../hooks';
 import { confirmPasswordValidator } from '@/common/input-validator';
+import { NOOP_FN } from '@/common/utils/noop';
 
 export const LoginForm = () => {
   const translate = useTranslate();
+  const login = useRaLogin();
   const { view, setView } = useLogin();
 
   return (
     <>
-      <SimpleForm pl={0} toolbar={<LoginFormToolbar />}>
+      <SimpleForm
+        onInvalid={NOOP_FN}
+        onSubmit={(formValues: unknown) =>
+          login(formValues as SigninProviderType)
+        }
+        pl={0}
+        toolbar={<LoginFormToolbar />}
+      >
         <TextInput
           variant="filled"
           fullWidth
@@ -63,10 +74,8 @@ export const LoginForm = () => {
                 setView('signup');
               }}
             >
-              {translate('ha.text.doesNotHaveAccountYet')}
-              <span style={{ textDecoration: 'underline', marginLeft: 5 }}>
-                {translate(`ha.words.signup`)}
-              </span>
+              {translate('ha.text.doesNotHaveAccountYet')}{' '}
+              {translate(`ha.words.signup`)}
             </Button>
           </>
         )}
@@ -78,10 +87,8 @@ export const LoginForm = () => {
               setView('signin');
             }}
           >
-            {translate('ha.text.alreadyHaveAccount')}
-            <span style={{ textDecoration: 'underline', marginLeft: 5 }}>
-              {translate(`ha.words.signin`)}
-            </span>
+            {translate('ha.text.alreadyHaveAccount')}{' '}
+            {translate(`ha.words.signin`)}
           </Button>
         )}
       </FlexBox>
