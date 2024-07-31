@@ -1,11 +1,17 @@
-import { Button, Toolbar, useTranslate } from 'react-admin';
+import { Button, Toolbar, useAuthProvider, useTranslate } from 'react-admin';
 import { useCompleteInfo } from './use-complete-info';
 import { useLogin } from '../../hooks';
 
 export const CompleteInfoToolbar = () => {
+  const authProvider = useAuthProvider();
+  const { setView } = useLogin();
   const translate = useTranslate();
   const { currentStep, maxStep, setStep } = useCompleteInfo();
-  const { setView } = useLogin();
+
+  const redirectToSignin = async () => {
+    await authProvider?.logout({});
+    setView('signin');
+  };
 
   return (
     <Toolbar
@@ -17,16 +23,14 @@ export const CompleteInfoToolbar = () => {
     >
       {currentStep === 1 && (
         <Button
-          variant="contained"
+          variant="outlined"
           label={translate('ha.words.signin')}
-          onClick={() => {
-            setView('signin');
-          }}
+          onClick={redirectToSignin}
         />
       )}
       {currentStep > 1 && (
         <Button
-          variant="contained"
+          variant="outlined"
           label={translate('ha.words.prev')}
           onClick={() => {
             setStep((prev) => --prev);

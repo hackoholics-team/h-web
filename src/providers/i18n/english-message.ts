@@ -38,19 +38,17 @@ export const haEnglishMessages: any = {
       completeInfo: {
         title: 'Complete Your Information',
         description: 'Please provide the missing',
-        step0: 'Account',
-        step1: 'Lastname',
-        step2: 'Firstname',
-        step3: 'Username',
-        step4: 'Date of birth',
+        step0: 'Account creation',
+        step1: 'Name & Firstname',
+        step2: 'Username & Birthdate',
       },
-      locales: {
-        fr: {
-          name: 'French',
-        },
-        en: {
-          name: 'English',
-        },
+    },
+    locales: {
+      fr: {
+        name: 'French',
+      },
+      en: {
+        name: 'English',
       },
     },
   },

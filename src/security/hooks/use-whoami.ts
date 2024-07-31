@@ -1,5 +1,5 @@
-import authFirebase from '../firebase-auth-provider';
+import { firebaseAuthProvider } from '@/providers';
 
 export const useWhoami = () => {
-  return authFirebase.getCachedCredential();
+  return firebaseAuthProvider.getCachedCredential();
 };

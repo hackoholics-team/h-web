@@ -16,12 +16,14 @@ export type SigninProviderType =
     }
   | { new (): GoogleAuthProvider };
 
-const TOKEN_ID_CACHE_NAME = 'auth-token-id';
 const USER_ID_CACHE_NAME = 'auth-user-id';
+const TOKEN_ID_CACHE_NAME = 'auth-token-id';
+const USER_EMAIL_CACHE_NAME = 'auth-user-email';
 
 const getCachedCredential = () => ({
   token: localStorage.getItem(TOKEN_ID_CACHE_NAME),
   id: localStorage.getItem(USER_ID_CACHE_NAME),
+  email: localStorage.getItem(USER_EMAIL_CACHE_NAME),
 });
 
 const cacheCredential = async (credential: UserCredential) => {
@@ -29,6 +31,7 @@ const cacheCredential = async (credential: UserCredential) => {
   if (!user) return credential;
   localStorage.setItem(TOKEN_ID_CACHE_NAME, await user.getIdToken());
   localStorage.setItem(USER_ID_CACHE_NAME, user.uid);
+  localStorage.setItem(USER_EMAIL_CACHE_NAME, user.email!);
   return credential;
 };
 
@@ -59,7 +62,7 @@ const resetPassword = async (email: string) => {
   return sendPasswordResetEmail(FIREBASE_AUTH, email);
 };
 
-const firebaseAuthProvider = {
+export const firebaseAuthProvider = {
   signIn,
   signOut,
   signup,
@@ -67,5 +70,3 @@ const firebaseAuthProvider = {
   cacheCredential,
   getCachedCredential,
 };
-
-export default firebaseAuthProvider;

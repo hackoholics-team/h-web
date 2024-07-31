@@ -1,7 +1,8 @@
 import { AuthProvider } from 'react-admin';
-import firebaseAuthProvider, {
+import {
+  firebaseAuthProvider,
   SigninProviderType,
-} from '@/security/firebase-auth-provider';
+} from './firebase-auth-provider';
 
 export const authProvider: AuthProvider = {
   login: async (provider: SigninProviderType) => {

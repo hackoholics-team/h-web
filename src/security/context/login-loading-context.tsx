@@ -1,7 +1,7 @@
 import { FC, createContext } from 'react';
 import { useLogin as useRaLogin, useNotify } from 'react-admin';
-import { SigninProviderType } from '../firebase-auth-provider';
-import { useLoginStore, UseLoginStoreType } from '../stores';
+import { SigninProviderType } from '@/providers';
+import { UseLoginStoreType, useLoginStore } from '../stores';
 
 export type LoginLoadingContextType = UseLoginStoreType & {
   login: (provider: SigninProviderType, errorMessage: string) => Promise<void>;
@@ -30,6 +30,7 @@ export const LoginLoadingContext: FC<{ children: React.ReactNode }> = ({
         setIsLoading(false);
       });
   };
+
   return (
     <LOGIN_LOADING_CONTEXT.Provider
       value={{

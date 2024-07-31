@@ -41,11 +41,9 @@ export const haFrenchMessages: any = {
         title: 'Complétez vos informations',
         description:
           'Veuillez fournir les informations manquantes pour finaliser votre inscription.',
-        step0: 'Compte',
-        step1: 'Nom',
-        step2: 'Prénom',
-        step3: "Nom d'utilisateur",
-        step4: 'Date de naissance',
+        step0: 'Création de compte',
+        step1: 'Nom & Prénoms',
+        step2: "Nom d'utilisateur & Date D'anniversaire",
       },
     },
     locales: {
