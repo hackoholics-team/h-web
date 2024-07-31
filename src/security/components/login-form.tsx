@@ -5,30 +5,33 @@ import {
   email,
   required,
   useTranslate,
-  useLogin as useRaLogin,
 } from 'react-admin';
 import { Button } from '@mui/material';
 import { FlexBox } from '@/common/components/box';
 import { LoginFormToolbar } from './login-form-toolbar';
-import { SigninProviderType } from '@/providers';
+import { LoginDataType, SigninProviderType } from '@/providers';
 import { useLogin } from '../hooks';
 import { confirmPasswordValidator } from '@/common/input-validator';
-import { NOOP_FN } from '@/common/utils/noop';
 
 export const LoginForm = () => {
   const translate = useTranslate();
-  const login = useRaLogin();
-  const { view, setView } = useLogin();
+  const { view, setView, login } = useLogin();
 
   return (
     <>
       <SimpleForm
-        onInvalid={NOOP_FN}
-        onSubmit={(formValues: unknown) =>
-          login(formValues as SigninProviderType)
-        }
         pl={0}
         toolbar={<LoginFormToolbar />}
+        disableInvalidFormNotification
+        onSubmit={(formValues: unknown) =>
+          login(
+            {
+              provider: formValues as SigninProviderType,
+              type: view,
+            } as LoginDataType,
+            'Wrong Password or Email!'
+          )
+        }
       >
         <TextInput
           variant="filled"

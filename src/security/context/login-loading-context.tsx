@@ -1,10 +1,10 @@
 import { FC, createContext } from 'react';
 import { useLogin as useRaLogin, useNotify } from 'react-admin';
-import { SigninProviderType } from '@/providers';
+import { LoginDataType } from '@/providers';
 import { UseLoginStoreType, useLoginStore } from '../stores';
 
 export type LoginLoadingContextType = UseLoginStoreType & {
-  login: (provider: SigninProviderType, errorMessage: string) => Promise<void>;
+  login: (loginData: LoginDataType, errorMessage: string) => Promise<void>;
 };
 
 export const LOGIN_LOADING_CONTEXT =
@@ -17,12 +17,9 @@ export const LoginLoadingContext: FC<{ children: React.ReactNode }> = ({
   const login = useRaLogin();
   const notify = useNotify();
 
-  const doLogin = async (
-    provider: SigninProviderType,
-    errorMessage: string
-  ) => {
+  const doLogin = async (loginData: LoginDataType, errorMessage: string) => {
     setIsLoading(true);
-    login(provider)
+    login(loginData)
       .catch(() => {
         notify(errorMessage, { type: 'error' });
       })

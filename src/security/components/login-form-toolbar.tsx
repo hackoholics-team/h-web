@@ -23,7 +23,10 @@ export const LoginWithGoogleButton = () => {
       color="inherit"
       disabled={isLoading}
       onClick={() => {
-        login(GoogleAuthProvider, 'Unauthorized !!');
+        login(
+          { provider: GoogleAuthProvider, type: 'signin' },
+          'Unauthorized !!'
+        );
       }}
       sx={GOOGLE_LOGIN_SX}
     >
