@@ -35,7 +35,7 @@ export const authProvider: AuthProvider = {
     //       return Promise.resolve();
     //     }
     //   }
-    return Promise.resolve() // change to reject after fix;
+    return Promise.resolve(); // change to reject after fix;
     // })
   },
   checkError: async (error) => {
@@ -50,5 +50,5 @@ export const authProvider: AuthProvider = {
   },
   // getIdentity: () => Promise.resolve(/* ... */),
   handleCallback: () => Promise.resolve(/* ... */), // for third-party authentication only
-  getPermissions: () => Promise.resolve(/* ... */)
+  getPermissions: () => Promise.resolve(/* ... */),
 };

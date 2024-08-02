@@ -1,1 +1,1 @@
-export * from "./profile-layout"
+export * from './profile-layout';

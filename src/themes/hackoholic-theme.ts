@@ -14,10 +14,10 @@ export const hackoholicLightTheme: RaThemeOptions = {
     RaLayout: {
       styleOverrides: {
         root: {
-          '& #main-content': {backgroundColor: "#f2eded"}
-        }
-      }
-    }
+          '& #main-content': { backgroundColor: '#f2eded' },
+        },
+      },
+    },
   },
   palette: {
     ...defaultLightTheme.palette,

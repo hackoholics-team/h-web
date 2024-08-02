@@ -1,5 +1,5 @@
 import { Admin, CustomRoutes, Resource } from 'react-admin';
-import { Route } from "react-router-dom";
+import { Route } from 'react-router-dom';
 import { Layout } from './layout';
 import { LoginPage } from './security/components';
 import { hackoholicDarkTheme, hackoholicLightTheme } from './themes';

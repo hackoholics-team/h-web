@@ -1,1 +1,1 @@
-export * from "./profile-show"
+export * from './profile-show';
