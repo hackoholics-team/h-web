@@ -43,4 +43,14 @@ export const COMPONENT_THEME: Partial<RaThemeOptions['components']> = {
       },
     },
   },
+  RaShow: {
+    styleOverrides: {
+      root: {
+        '& .RaShow-card': {
+          boxShadow: 'none',
+          backgroundColor: 'transparent !important',
+        },
+      },
+    },
+  },
 };
