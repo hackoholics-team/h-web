@@ -1,4 +1,4 @@
-import { useTheme, PaletteColor } from '@mui/material';
+import { useTheme, Palette, PaletteColor } from '@mui/material';
 
 const getPaletteColorNumberValue = (
   paletteColor: PaletteColor,
@@ -10,7 +10,7 @@ const getPaletteColorNumberValue = (
 export const usePalette = () => {
   const theme = useTheme();
   return {
-    palette: theme.palette,
+    palette: theme.palette as Palette & Record<string, any>,
     getPaletteColorValue: getPaletteColorNumberValue,
   };
 };

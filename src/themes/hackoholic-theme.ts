@@ -11,6 +11,13 @@ export const hackoholicLightTheme: RaThemeOptions = {
   components: {
     ...defaultLightTheme.components,
     ...COMPONENT_THEME,
+    RaLayout: {
+      styleOverrides: {
+        root: {
+          '& #main-content': {backgroundColor: "#f2eded"}
+        }
+      }
+    }
   },
   palette: {
     ...defaultLightTheme.palette,
