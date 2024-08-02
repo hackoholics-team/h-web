@@ -1,12 +1,12 @@
-import { FC, ReactElement } from 'react';
+import { FC } from 'react';
 import { Button } from 'react-admin';
-import { Box, Typography } from '@mui/material';
-import { LocationOn, AccountCircle, Cake } from '@mui/icons-material';
+import { SocialIcon } from 'react-social-icons';
+import { Box, Typography, Avatar, Badge } from '@mui/material';
+import { LocationOn } from '@mui/icons-material';
 import { User } from '@/gen/client';
 import { FlexBox } from './box';
 import { useIsDarkTheme, usePalette } from '../hooks';
 import { PAPER_BOX_SX } from '../utils/common-props';
-import { SocialIcon } from 'react-social-icons';
 
 const Field = ({ label }: { label: string }) => {
   const { primaryColor } = usePalette();
@@ -50,15 +50,18 @@ export const ProfileLayout: FC<{ user: Required<User> }> = ({ user }) => {
       }}
     >
       <FlexBox sx={{ gap: 2, alignItems: 'start', justifyContent: 'start' }}>
-        <img
-          src={user.photoId}
-          style={{
-            display: 'block',
-            width: '130px',
-            height: '130px',
-            borderRadius: '50%',
-          }}
-        />
+        <Badge
+          overlap="circular"
+          badgeContent=" "
+          color="primary"
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        >
+          <Avatar
+            src={user.photoId}
+            alt={user.firstName}
+            sx={{ width: '120px', height: '120px', border: '2px solid white' }}
+          />
+        </Badge>
         <Box>
           <Typography
             variant="h2"

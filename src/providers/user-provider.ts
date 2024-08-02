@@ -18,7 +18,6 @@ export const userProvider: HackoholicDataProvider<User> = {
     throw new Error('Not Impelemented');
   },
   getOne: () => {
-    console.log('Hello world');
     return Promise.resolve(MOCK_USER);
   },
   saveOrUpdate: () => {
