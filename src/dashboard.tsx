@@ -2,11 +2,11 @@ import { Admin, CustomRoutes, Resource } from 'react-admin';
 import { Route } from 'react-router-dom';
 import { Layout } from './layout';
 import { LoginPage } from './security/components';
+import { ProfileShow } from './operations/profiles';
 import { hackoholicDarkTheme, hackoholicLightTheme } from './themes';
 import { dataProvider, authProvider } from './providers';
 import { i18nProvider } from './providers/i18n';
 import { DUMMY_UI } from './operations/dummies';
-import { ProfileShow } from './operations/profiles';
 
 const Dashboard = () => (
   <Admin

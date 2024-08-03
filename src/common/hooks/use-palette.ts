@@ -10,16 +10,15 @@ const getPaletteColorNumberValue = (
 
 export const usePalette = () => {
   const theme = useTheme();
-  const isDarkThem = useIsDarkTheme();
-
+  const isDarkTheme = useIsDarkTheme();
   const palette = theme.palette as Palette & Record<string, any>;
-  const bgcolor = isDarkThem
+  const bgcolor = isDarkTheme
     ? getPaletteColorNumberValue(palette.black, 700)
     : 'white';
-  const primaryColor = !isDarkThem
+  const primaryColor = !isDarkTheme
     ? getPaletteColorNumberValue(palette.black, 700)
     : 'white';
-  const secondaryColor = !isDarkThem ? 'gray' : '#b5b5ac';
+  const secondaryColor = !isDarkTheme ? 'gray' : '#b5b5ac';
 
   return {
     palette: theme.palette as Palette & Record<string, any>,
