@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Popover, IconButton, Box, Typography, Divider } from '@mui/material';
 import {
   Settings as SettingsIcon,
@@ -8,26 +7,18 @@ import { FlexBox } from '@/common/components';
 import { ChatbotMessage } from './chatbot-message';
 import { ChatbotForm } from './chatbot-form';
 import { usePalette } from '@/common/hooks';
+import { useDialogContext } from '@/common/services/dialog';
 import chatbotIcon from '@/assets/icons/chatbot.png';
 
-export type ChatbotDialogProps = {
-  open: boolean;
-  onClose: () => void;
-  anchorEl: HTMLElement | null;
-};
-
-export const ChatbotDialog: FC<ChatbotDialogProps> = ({
-  anchorEl,
-  onClose,
-  open,
-}) => {
+export const ChatbotDialog = () => {
   const { bgcolor } = usePalette();
+  const { anchorEl, status, close } = useDialogContext<true>();
 
   return (
     <Popover
-      open={open}
+      open={status}
       anchorEl={anchorEl}
-      onClose={onClose}
+      onClose={close}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'left',
@@ -57,7 +48,7 @@ export const ChatbotDialog: FC<ChatbotDialogProps> = ({
             <IconButton>
               <SettingsIcon />
             </IconButton>
-            <IconButton onClick={onClose}>
+            <IconButton onClick={close}>
               <CloseIcon />
             </IconButton>
           </FlexBox>

@@ -17,7 +17,7 @@ export const ProfileShow = () => {
 };
 
 const EditProfileButton = () => {
-  const { open: openEditDialog } = useDialogContext();
+  const { open: openEditDialog } = useDialogContext<false>();
   return (
     <Button
       size="medium"

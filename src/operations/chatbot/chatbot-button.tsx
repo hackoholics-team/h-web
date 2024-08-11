@@ -1,5 +1,8 @@
-import { MouseEvent, useState } from 'react';
 import { IconButton, SxProps } from '@mui/material';
+import {
+  DialogContextProvider,
+  useDialogContext,
+} from '@/common/services/dialog';
 import { ChatbotDialog } from './chatbot-dialog';
 import chatbotIcon from '@/assets/icons/chatbot.png';
 
@@ -17,23 +20,19 @@ const CHATBOT_BUTTON_SX: SxProps = {
 };
 
 export const ChatbotButton = () => {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  return (
+    <DialogContextProvider popover>
+      <ChatbotButtonContent />
+    </DialogContextProvider>
+  );
+};
 
-  const closePopover = () => {
-    setAnchorEl(null);
-  };
-
-  const openPopover = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+export const ChatbotButtonContent = () => {
+  const { open } = useDialogContext<true>();
 
   return (
     <>
-      <IconButton
-        size="large"
-        sx={{ ...CHATBOT_BUTTON_SX }}
-        onClick={openPopover}
-      >
+      <IconButton size="large" sx={{ ...CHATBOT_BUTTON_SX }} onClick={open}>
         <img
           alt="chatbot"
           src={chatbotIcon}
@@ -43,11 +42,7 @@ export const ChatbotButton = () => {
           }}
         />
       </IconButton>
-      <ChatbotDialog
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={closePopover}
-      />
+      <ChatbotDialog />
     </>
   );
 };

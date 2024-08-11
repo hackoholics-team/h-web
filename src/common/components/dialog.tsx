@@ -21,7 +21,7 @@ export const Dialog: FC<DialogProps> = ({
   ...dialogProps
 }) => {
   return (
-    <DialogContextProvider defaultValue={defaultValue}>
+    <DialogContextProvider popover={false} defaultValue={defaultValue}>
       {actionHandler}
       <DialogContent {...dialogProps}>{children}</DialogContent>
     </DialogContextProvider>
@@ -31,7 +31,7 @@ export const Dialog: FC<DialogProps> = ({
 export const DialogContent: FC<
   Omit<DialogProps, 'defaultValue' | 'actionHandler'>
 > = ({ children, ...dialogProps }) => {
-  const { status, close } = useDialogContext();
+  const { status, close } = useDialogContext<false>();
   return (
     <MuiDialog open={status} onClose={close} hideBackdrop {...dialogProps}>
       {children}
