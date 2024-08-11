@@ -1,11 +1,10 @@
 import { Button, Show, TabbedShowLayout, useShowContext } from 'react-admin';
 import { CircularProgress, Box } from '@mui/material';
 import { ProfileLayout } from '@/common/components';
+import { Dialog, useDialogContext } from '@/common/components/dialog';
 import { User } from '@/gen/client';
 import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
-import { useDialogContext } from '@/common/components/dialog/hooks';
-import { Dialog } from '@/common/components/dialog';
 // import { useWhoami } from "@/security/hooks"
 
 export const ProfileShow = () => {

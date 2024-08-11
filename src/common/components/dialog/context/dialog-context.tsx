@@ -1,17 +1,18 @@
-import { createContext, Dispatch, FC, ReactNode, SetStateAction } from 'react';
+import { createContext, FC, ReactNode } from 'react';
 import { useToggle } from '@/common/hooks';
+import { StateSetter } from '@/common/utils/types';
 
 export type DialogContextType = {
   status: boolean;
   open: () => void;
   close: () => void;
   toggle: () => void;
-  setStatus: Dispatch<SetStateAction<boolean>>;
+  setStatus: StateSetter<boolean>;
 };
 
 export const DIALOG_CONTEXT = createContext<DialogContextType | null>(null);
 
-export const DialogContext: FC<{
+export const DialogContextProvider: FC<{
   defaultValue?: boolean;
   children: ReactNode;
 }> = ({ defaultValue, children }) => {

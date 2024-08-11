@@ -1,8 +1,8 @@
 import {
   DateInput,
-  required,
   SimpleForm,
   TextInput,
+  required,
   useNotify,
   useRedirect,
   useTranslate,
@@ -10,23 +10,22 @@ import {
 import { Stepper, Step, StepLabel } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 
+import { StepperContextProvider, useStepperContext } from '@/common/stepper';
 import { CompleteInfoToolbar } from './complete-info-toolbar';
-import { CompleteInfoContextProvider } from './complete-info-context';
 import { User } from '@/gen/client';
 import { useLogin } from '../../hooks';
 import { useWhoami } from '@/security/hooks';
 import { securityApi } from '@/providers/api';
-import { useCompleteInfo } from './use-complete-info';
 
 const LOGIN_INFO_MAX_STEP = 3;
 export const LoginCompleteInfo = () => (
-  <CompleteInfoContextProvider maxStep={LOGIN_INFO_MAX_STEP}>
+  <StepperContextProvider maxStep={LOGIN_INFO_MAX_STEP}>
     <LoginCompleteInfoContent />
-  </CompleteInfoContextProvider>
+  </StepperContextProvider>
 );
 
 const LoginCompleteInfoContent = () => {
-  const { currentStep, setStep, maxStep } = useCompleteInfo();
+  const { currentStep, doNexStep, maxStep } = useStepperContext();
   const whoAmi = useWhoami();
   const { setIsLoading } = useLogin();
   const translate = useTranslate();
@@ -39,7 +38,7 @@ const LoginCompleteInfoContent = () => {
 
   const doNextStepOrSubmit = async (formValues: User) => {
     if (currentStep < maxStep) {
-      setStep((prev) => ++prev);
+      doNexStep();
       return;
     }
 

@@ -3,7 +3,7 @@ import {
   Dialog as MuiDialog,
   DialogProps as MuiDialogProps,
 } from '@mui/material';
-import { DialogContext } from './context';
+import { DialogContextProvider } from './context';
 import { useDialogContext } from './hooks';
 
 export type DialogProps = Partial<MuiDialogProps> & {
@@ -19,10 +19,10 @@ export const Dialog: FC<DialogProps> = ({
   ...dialogProps
 }) => {
   return (
-    <DialogContext defaultValue={defaultValue}>
+    <DialogContextProvider defaultValue={defaultValue}>
       {actionHandler}
       <DialogContent {...dialogProps}>{children}</DialogContent>
-    </DialogContext>
+    </DialogContextProvider>
   );
 };
 
