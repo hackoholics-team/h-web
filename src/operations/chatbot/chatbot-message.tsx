@@ -1,9 +1,9 @@
+import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
+import { FlexBox } from '@/common/components';
+import { usePalette } from '@/common/hooks';
 import chatbotIcon from '@/assets/icons/chatbot.png';
 import profileMe from '@/assets/profile-pic.jpg';
-import { FC } from 'react';
-import { usePalette } from '@/common/hooks';
-import { FlexBox } from '@/common/components';
 
 type Message = {
   isFromMe: boolean;

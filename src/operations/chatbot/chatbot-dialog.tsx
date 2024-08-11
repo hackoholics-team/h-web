@@ -1,24 +1,58 @@
-import { Popover, IconButton, Box, Typography, Divider } from '@mui/material';
+import { IconButton, SxProps, Box, Typography, Divider } from '@mui/material';
 import {
   Settings as SettingsIcon,
   Close as CloseIcon,
 } from '@mui/icons-material';
-import { FlexBox } from '@/common/components';
+import { FlexBox, Popover } from '@/common/components';
 import { ChatbotMessage } from './chatbot-message';
 import { ChatbotForm } from './chatbot-form';
 import { usePalette } from '@/common/hooks';
 import { useDialogContext } from '@/common/services/dialog';
 import chatbotIcon from '@/assets/icons/chatbot.png';
 
+const CHATBOT_BUTTON_SX: SxProps = {
+  'position': 'fixed !important',
+  'bottom': '20px',
+  'right': '20px',
+  'width': '20px',
+  'borderRadius': '50%',
+  'transition': 'all 0.5s linear',
+  'zIndex': 999999,
+  '&:hover': {
+    scale: '1.05 !important',
+  },
+};
+
+export const ChatbotCloseButton = () => {
+  const { close } = useDialogContext<true>();
+  return (
+    <IconButton onClick={close}>
+      <CloseIcon />
+    </IconButton>
+  );
+};
+
+export const ChatbotButton = () => {
+  const { open } = useDialogContext<true>();
+  return (
+    <IconButton size="large" sx={{ ...CHATBOT_BUTTON_SX }} onClick={open}>
+      <img
+        alt="chatbot"
+        src={chatbotIcon}
+        style={{
+          width: '45px',
+          height: '45px',
+        }}
+      />
+    </IconButton>
+  );
+};
+
 export const ChatbotDialog = () => {
   const { bgcolor } = usePalette();
-  const { anchorEl, status, close } = useDialogContext<true>();
-
   return (
     <Popover
-      open={status}
-      anchorEl={anchorEl}
-      onClose={close}
+      actionHandler={<ChatbotButton />}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'left',
@@ -27,7 +61,6 @@ export const ChatbotDialog = () => {
         vertical: 'bottom',
         horizontal: 'right',
       }}
-      sx={{ borderRadius: '15px' }}
     >
       <Box sx={{ px: 1, borderRadius: '15px', bgcolor, width: '350px' }}>
         <FlexBox sx={{ justifyContent: 'space-between' }}>
@@ -48,9 +81,7 @@ export const ChatbotDialog = () => {
             <IconButton>
               <SettingsIcon />
             </IconButton>
-            <IconButton onClick={close}>
-              <CloseIcon />
-            </IconButton>
+            <ChatbotCloseButton />
           </FlexBox>
         </FlexBox>
         <ChatbotMessage />

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Layout as RaLayout, LayoutProps } from 'react-admin';
 import { Menu } from './menu';
 import { AppBar } from './appbar';
-import { ChatbotButton } from '@/operations/chatbot';
+import { ChatbotDialog } from '@/operations/chatbot';
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
   return (
@@ -10,7 +10,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
       <RaLayout appBar={AppBar} menu={Menu}>
         {children}
       </RaLayout>
-      <ChatbotButton />
+      <ChatbotDialog />
     </>
   );
 };
