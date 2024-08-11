@@ -3,7 +3,7 @@ import { SocialIcon } from 'react-social-icons';
 import { Box, Typography, Avatar, Badge } from '@mui/material';
 import { LocationOn } from '@mui/icons-material';
 import { User } from '@/gen/client';
-import { FlexBox } from './box';
+import { FlexBox } from './flex-box';
 import { useIsDarkTheme, usePalette } from '../hooks';
 import { PAPER_BOX_SX } from '../utils/common-props';
 

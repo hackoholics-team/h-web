@@ -7,7 +7,7 @@ import {
   useTranslate,
 } from 'react-admin';
 import { Button } from '@mui/material';
-import { FlexBox } from '@/common/components/box';
+import { FlexBox } from '@/common/components';
 import { LoginFormToolbar } from './login-form-toolbar';
 import { LoginDataType, SigninProviderType } from '@/providers';
 import { useLogin } from '../hooks';

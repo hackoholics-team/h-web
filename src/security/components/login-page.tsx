@@ -11,7 +11,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { GTranslate as GTranslateIcon } from '@mui/icons-material';
-import { FlexBox } from '@/common/components/box';
+import { FlexBox } from '@/common/components';
 import { LoginForm } from './login-form';
 import { LoginLoadingContext } from '../context';
 import { LoginCompleteInfo } from './complete-info';

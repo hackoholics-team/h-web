@@ -1,4 +1,4 @@
-import { FlexBox } from '@/common/components/box';
+import { FlexBox } from '@/common/components';
 import { TextField, IconButton } from '@mui/material';
 import { Send as SendIcon } from '@mui/icons-material';
 

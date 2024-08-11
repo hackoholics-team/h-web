@@ -3,8 +3,10 @@ import {
   Dialog as MuiDialog,
   DialogProps as MuiDialogProps,
 } from '@mui/material';
-import { DialogContextProvider } from './context';
-import { useDialogContext } from './hooks';
+import {
+  DialogContextProvider,
+  useDialogContext,
+} from '@/common/services/dialog';
 
 export type DialogProps = Partial<MuiDialogProps> & {
   defaultValue?: boolean;

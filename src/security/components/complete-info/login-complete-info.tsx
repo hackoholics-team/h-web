@@ -10,7 +10,10 @@ import {
 import { Stepper, Step, StepLabel } from '@mui/material';
 import { v4 as uuid } from 'uuid';
 
-import { StepperContextProvider, useStepperContext } from '@/common/stepper';
+import {
+  StepperContextProvider,
+  useStepperContext,
+} from '@/common/services/stepper';
 import { CompleteInfoToolbar } from './complete-info-toolbar';
 import { User } from '@/gen/client';
 import { useLogin } from '../../hooks';

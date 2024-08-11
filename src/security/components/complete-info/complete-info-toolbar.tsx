@@ -1,6 +1,6 @@
 import { Button, Toolbar, useAuthProvider, useTranslate } from 'react-admin';
 import { useLogin } from '../../hooks';
-import { useStepperContext } from '@/common/stepper';
+import { useStepperContext } from '@/common/services/stepper';
 
 export const CompleteInfoToolbar = () => {
   const { setView } = useLogin();

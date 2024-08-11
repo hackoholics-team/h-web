@@ -1,13 +1,13 @@
+import { FC } from 'react';
 import { Popover, IconButton, Box, Typography, Divider } from '@mui/material';
 import {
   Settings as SettingsIcon,
   Close as CloseIcon,
 } from '@mui/icons-material';
-import { FlexBox } from '@/common/components/box';
+import { FlexBox } from '@/common/components';
 import { ChatbotMessage } from './chatbot-message';
 import { ChatbotForm } from './chatbot-form';
 import { usePalette } from '@/common/hooks';
-import { FC } from 'react';
 import chatbotIcon from '@/assets/icons/chatbot.png';
 
 export type ChatbotDialogProps = {

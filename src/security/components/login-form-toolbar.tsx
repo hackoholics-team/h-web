@@ -1,6 +1,6 @@
 import { Toolbar, useTranslate } from 'react-admin';
 import { Typography, CircularProgress, SxProps, Button } from '@mui/material';
-import { FlexBox } from '@/common/components/box';
+import { FlexBox } from '@/common/components';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { useLogin } from '../hooks';
 import googleIcon from '@/assets/google.svg';

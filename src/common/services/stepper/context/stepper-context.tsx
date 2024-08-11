@@ -1,5 +1,5 @@
 import { FC, createContext, useState } from 'react';
-import { StateSetter } from '../../utils/types';
+import { StateSetter } from '@/common/utils/types';
 
 export type StepperContextType = {
   currentStep: number;
