@@ -1,9 +1,11 @@
-import { Show, TabbedShowLayout, useShowContext } from 'react-admin';
+import { Button, Show, TabbedShowLayout, useShowContext } from 'react-admin';
 import { CircularProgress, Box } from '@mui/material';
 import { ProfileLayout } from '@/common/components';
 import { User } from '@/gen/client';
 import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
+import { useDialogContext } from '@/common/components/dialog/hooks';
+import { Dialog } from '@/common/components/dialog';
 // import { useWhoami } from "@/security/hooks"
 
 export const ProfileShow = () => {
@@ -11,6 +13,19 @@ export const ProfileShow = () => {
     <Show id="dummyId" resource="profiles">
       <ProfileShowContent />
     </Show>
+  );
+};
+
+const EditProfileButton = () => {
+  const { open: openEditDialog } = useDialogContext();
+  return (
+    <Button
+      size="medium"
+      label="Editer"
+      variant="outlined"
+      color="primary"
+      onClick={openEditDialog}
+    />
   );
 };
 
@@ -25,7 +40,22 @@ export const ProfileShowContent = () => {
 
   return (
     <>
-      <ProfileLayout user={user!} />
+      <ProfileLayout
+        user={user!}
+        actions={
+          <>
+            <Button
+              size="medium"
+              label="Contacter"
+              variant="contained"
+              color="primary"
+            />
+            <Dialog actionHandler={<EditProfileButton />}>
+              <p>Edit profile</p>
+            </Dialog>
+          </>
+        }
+      />
       <TabbedShowLayout>
         <TabbedShowLayout.Tab
           path=""

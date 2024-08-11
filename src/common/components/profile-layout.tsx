@@ -1,14 +1,16 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Button } from 'react-admin';
 import { SocialIcon } from 'react-social-icons';
 import { Box, Typography, Avatar, Badge } from '@mui/material';
 import { LocationOn } from '@mui/icons-material';
 import { User } from '@/gen/client';
 import { FlexBox } from './box';
+import { Dialog } from './dialog';
 import { useIsDarkTheme, usePalette } from '../hooks';
+import { useDialogContext } from './dialog/hooks';
 import { PAPER_BOX_SX } from '../utils/common-props';
 
-const Field = ({ label }: { label: string }) => {
+const FieldLabel = ({ label }: { label: string }) => {
   const { primaryColor } = usePalette();
   return (
     <Typography
@@ -28,7 +30,10 @@ const FieldValue = ({ value }: { value: string }) => {
   );
 };
 
-export const ProfileLayout: FC<{ user: Required<User> }> = ({ user }) => {
+export const ProfileLayout: FC<{
+  user: Required<User>;
+  actions: ReactNode;
+}> = ({ user, actions }) => {
   const isDarkTheme = useIsDarkTheme();
   const { bgcolor, primaryColor, secondaryColor } = usePalette();
 
@@ -85,18 +90,7 @@ export const ProfileLayout: FC<{ user: Required<User> }> = ({ user }) => {
             Nanisana, Antananarivo
           </Typography>
           <FlexBox sx={{ gap: 3, mt: 1, justifyContent: 'start' }}>
-            <Button
-              size="medium"
-              label="Contacter"
-              variant="contained"
-              color="primary"
-            />
-            <Button
-              size="medium"
-              label="Editer"
-              variant="outlined"
-              color="primary"
-            />
+            {actions}
           </FlexBox>
         </Box>
       </FlexBox>
@@ -110,9 +104,9 @@ export const ProfileLayout: FC<{ user: Required<User> }> = ({ user }) => {
           }}
         >
           <Box>
-            <Field label="Email" />
-            <Field label="Username" />
-            <Field label="Birthdate" />
+            <FieldLabel label="Email" />
+            <FieldLabel label="Username" />
+            <FieldLabel label="Birthdate" />
           </Box>
           <Box>
             <FieldValue value={user.email} />

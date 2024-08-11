@@ -6,6 +6,12 @@ export const useToggle = (defaultValue = false) => {
   return {
     value,
     setValue,
+    setTrue: () => {
+      setValue(true);
+    },
+    setFalse: () => {
+      setValue(false);
+    },
     toggleValue: () => {
       setValue((prev) => !prev);
     },
