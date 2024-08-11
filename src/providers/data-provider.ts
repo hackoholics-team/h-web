@@ -16,27 +16,34 @@ export const getProvider = (resource: string): HackoholicDataProvider<any> => {
 
 export const dataProvider: DataProvider = {
   create: async (resource, { meta, data: payload }) => {
-    const response = await getProvider(resource).saveOrUpdate(payload, {
-      ...meta,
-      mutationType: 'CREATE',
+    const response = await getProvider(resource).saveOrUpdate({
+      payload,
+      meta: {
+        ...meta,
+        mutationType: 'CREATE',
+      },
     });
     return { data: response };
   },
   update: async (resource, { data: payload, meta }) => {
-    const response = await getProvider(resource).saveOrUpdate(payload, {
-      ...meta,
-      mutationType: 'UPDATE',
+    const response = await getProvider(resource).saveOrUpdate({
+      payload,
+      meta: {
+        ...meta,
+        mutationType: 'UPDATE',
+      },
     });
     return { data: response };
   },
   getList: async (resource, { pagination, sort, filter, meta }) => {
-    const response = await getProvider(resource).getList(
-      pagination?.page || 1,
-      pagination?.perPage || 10,
+    const response = await getProvider(resource).getList({
+      page: pagination?.page || 1,
+      pageSize: pagination?.perPage || 10,
       filter,
       sort,
-      meta
-    );
+      meta,
+    });
+
     return {
       data: response,
       total: response.length,
@@ -48,17 +55,17 @@ export const dataProvider: DataProvider = {
     };
   },
   getOne: async (resource, { id: payloadId, meta }) => {
-    const response = await getProvider(resource).getOne(
-      payloadId as string,
-      meta
-    );
+    const response = await getProvider(resource).getOne({
+      id: payloadId as string,
+      meta,
+    });
     return { data: response };
   },
   delete: async (resource, { id: payloadId, meta }) => {
-    const response = await getProvider(resource).delete(
-      payloadId as string,
-      meta
-    );
+    const response = await getProvider(resource).delete({
+      id: payloadId as string,
+      meta,
+    });
     return { data: response };
   },
   deleteMany: () => {

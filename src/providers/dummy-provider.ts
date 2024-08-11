@@ -32,10 +32,10 @@ export const dummyProvider: HackoholicDataProvider<Dummy> = {
   getList: () => {
     return Promise.resolve(DUMMIES_MOCK);
   },
-  getOne: (id) => {
+  getOne: ({ id }) => {
     return Promise.resolve(DUMMIES_MOCK.find((dummy) => dummy.id == id)!);
   },
-  saveOrUpdate: (payload, meta) => {
+  saveOrUpdate: ({ payload, meta }) => {
     console.log(payload);
     const { mutationType } = meta;
     if (mutationType === 'CREATE') {
