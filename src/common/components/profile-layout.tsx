@@ -1,13 +1,10 @@
 import { FC, ReactNode } from 'react';
-import { Button } from 'react-admin';
 import { SocialIcon } from 'react-social-icons';
 import { Box, Typography, Avatar, Badge } from '@mui/material';
 import { LocationOn } from '@mui/icons-material';
 import { User } from '@/gen/client';
 import { FlexBox } from './box';
-import { Dialog } from './dialog';
 import { useIsDarkTheme, usePalette } from '../hooks';
-import { useDialogContext } from './dialog/hooks';
 import { PAPER_BOX_SX } from '../utils/common-props';
 
 const FieldLabel = ({ label }: { label: string }) => {
