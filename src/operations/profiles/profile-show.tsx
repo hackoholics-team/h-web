@@ -5,12 +5,14 @@ import { Dialog } from '@/common/components';
 import { User } from '@/gen/client';
 import { usePalette } from '@/common/hooks';
 import { useDialogContext } from '@/common/services/dialog';
+// import { useWhoami } from '@/security/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
-// import { useWhoami } from "@/security/hooks"
 
 export const ProfileShow = () => {
+  // const { id } = useWhoami(); // ignored as we use signin to fetch current profile and signin need only the firebaseToken
+
   return (
-    <Show id="dummyId" resource="profiles">
+    <Show id={'dummyId'} resource="profiles">
       <ProfileShowContent />
     </Show>
   );
@@ -30,7 +32,6 @@ const EditProfileButton = () => {
 };
 
 export const ProfileShowContent = () => {
-  // const { id } = useWhoami();
   const { record: user, isLoading } = useShowContext<Required<User>>();
   const { bgcolor } = usePalette();
 

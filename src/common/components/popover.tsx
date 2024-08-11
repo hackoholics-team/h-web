@@ -33,7 +33,11 @@ export const PopoverContent: FC<PopoverProps> = ({
         open={status}
         onClose={close}
         anchorEl={anchorEl}
-        sx={{ borderRadius: '15px', ...sx }}
+        sx={{
+          'borderRadius': '15px',
+          '& .MuiPaper-root': { borderRadius: '15px' },
+          ...sx,
+        }}
         {...popoverProps}
       >
         {children}
