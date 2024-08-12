@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { Layout } from './layout';
 import { LoginPage } from './security/components';
 import { ProfileShow } from './operations/profiles';
+import { PdfViewer } from './common/components';
 import { hackoholicDarkTheme, hackoholicLightTheme } from './themes';
 import { dataProvider, authProvider } from './providers';
 import { i18nProvider } from './providers/i18n';
@@ -26,6 +27,10 @@ const Dashboard = () => (
 
     <CustomRoutes>
       <Route element={<ProfileShow />} path="/profiles" />
+      <Route
+        element={<PdfViewer pdf={'http://localhost:5173/test.pdf'} />}
+        path="/pdf"
+      />
     </CustomRoutes>
   </Admin>
 );
