@@ -11,5 +11,5 @@ export const COLOR_PALETTE: Partial<
   },
   black: {
     '700': '#4f4f4d',
-  },
+  }
 };

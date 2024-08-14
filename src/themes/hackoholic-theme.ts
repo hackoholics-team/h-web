@@ -23,7 +23,7 @@ export const hackoholicLightTheme: RaThemeOptions = {
     ...defaultLightTheme.palette,
     ...COLOR_PALETTE,
     background: {
-      paper: '#d9ddde',
+      paper: '#e8eaeb',
       default: '#ffffff',
     },
   },
