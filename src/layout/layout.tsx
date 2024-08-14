@@ -6,7 +6,6 @@ import { AppBar } from './appbar'
 import { ChatbotDialog } from '@/operations/chatbot';
 import { usePalette } from '@/common/hooks';
 
-
 const MAIN_CONTENT_SX: SxProps = {
   m: 0,
   p: 2,

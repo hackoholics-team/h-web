@@ -22,11 +22,12 @@ const EditProfileButton = () => {
   const { open: openEditDialog } = useDialogContext<false>();
   return (
     <Button
-      size="medium"
+      size="small"
       label="Editer"
       variant="outlined"
       color="primary"
       onClick={openEditDialog}
+      sx={{ fontSize: '13px' }}
     />
   );
 };
@@ -46,10 +47,11 @@ export const ProfileShowContent = () => {
         actions={
           <>
             <Button
-              size="medium"
+              size="small"
               label="Contacter"
               variant="contained"
               color="primary"
+              sx={{ fontSize: '13px' }}
             />
             <Dialog actionHandler={<EditProfileButton />}>
               <p>Edit profile</p>

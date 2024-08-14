@@ -11,7 +11,7 @@ const FieldLabel = ({ label }: { label: string }) => {
   const { primaryColor } = usePalette();
   return (
     <Typography
-      sx={{ fontSize: '14px', mb: 1, color: primaryColor, fontWeight: 'bold' }}
+      sx={{ fontSize: '13px', mb: 1, color: primaryColor, fontWeight: 'bold' }}
     >
       {label}
     </Typography>
@@ -21,7 +21,7 @@ const FieldLabel = ({ label }: { label: string }) => {
 const FieldValue = ({ value }: { value: string }) => {
   const { secondaryColor } = usePalette();
   return (
-    <Typography sx={{ mb: 1, fontSize: '14px', color: secondaryColor }}>
+    <Typography sx={{ mb: 1, fontSize: '13px', color: secondaryColor }}>
       {value}
     </Typography>
   );
@@ -61,7 +61,7 @@ export const ProfileLayout: FC<{
           <Avatar
             src={user.photoId}
             alt={user.firstName}
-            sx={{ width: '120px', height: '120px', border: '2px solid white' }}
+            sx={{ width: '100px', height: '100px', border: '2px solid white' }}
           />
         </Badge>
         <Box>
@@ -69,19 +69,17 @@ export const ProfileLayout: FC<{
             variant="h2"
             sx={{
               color: primaryColor,
-              fontWeight: 'bold',
-              fontSize: '1.5rem',
-              mb: 1.2,
+              fontSize: '1.4rem',
             }}
           >
             {user.firstName + ' ' + user.lastName}
           </Typography>
-          <Typography sx={{ fontSize: '14px', color: secondaryColor }}>
+          <Typography sx={{ fontSize: '13px', color: secondaryColor }}>
             Web developper on stackoverflow, huh{' '}
           </Typography>
           <Typography
             color="primary"
-            sx={{ fontSize: '14px', display: 'inline-flex', alignItems: 'end' }}
+            sx={{ fontSize: '13px', display: 'inline-flex', alignItems: 'end' }}
           >
             <LocationOn />
             Nanisana, Antananarivo
@@ -113,22 +111,22 @@ export const ProfileLayout: FC<{
         </FlexBox>
         <FlexBox sx={{ gap: 2, justifyContent: 'start', mt: 1 }}>
           <SocialIcon
-            style={{ width: '30px', height: '30px' }}
+            style={{ width: '25px', height: '25px' }}
             network="whatsapp"
           />
           <SocialIcon
-            style={{ width: '30px', height: '30px' }}
+            style={{ width: '25px', height: '25px' }}
             network="facebook"
           />
           <SocialIcon
-            style={{ width: '30px', height: '30px' }}
+            style={{ width: '25px', height: '25px' }}
             network="twitter"
           />
           <SocialIcon
-            style={{ width: '30px', height: '30px' }}
+            style={{ width: '25px', height: '25px' }}
             network="linkedin"
           />
-          <SocialIcon style={{ width: '30px', height: '30px' }} network="x" />
+          <SocialIcon style={{ width: '25px', height: '25px' }} network="x" />
         </FlexBox>
       </Box>
     </FlexBox>
