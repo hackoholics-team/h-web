@@ -6,44 +6,44 @@ import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
 
 const MENU_SX: SxProps = {
-  top: '50px',
-  left: 0,
-  py: 2,
-  width: '250px',
-  height: 'calc(100vh - 50px)',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',
-  "& .RaMenu-open": {
+  'top': '50px',
+  'left': 0,
+  'py': 2,
+  'width': '250px',
+  'height': 'calc(100vh - 50px)',
+  'display': 'flex',
+  'flexDirection': 'column',
+  'justifyContent': 'space-between',
+  '& .RaMenu-open': {
     width: '96%',
-    mx: 'auto'
+    mx: 'auto',
   },
-  "& .MuiMenuItem-root": {
-    my: "1px",
-    alignItems: 'end',
-    transition: 'all linear .5s',
-    "&:hover": {
-      "& .RaMenuItemLink-icon": {
-        color: 'white'
+  '& .MuiMenuItem-root': {
+    'my': '1px',
+    'alignItems': 'end',
+    'transition': 'all linear .5s',
+    '&:hover': {
+      '& .RaMenuItemLink-icon': {
+        color: 'white',
       },
-      color: 'white',
-      bgcolor: '#a83d9c',
-      borderRadius: "8px",
-    }
-  },
-  "& .RaMenuItemLink-active": {
-    bgcolor: '#a83d9c',
-    color: 'white !important',
-    borderRadius: "8px",
-    "& .RaMenuItemLink-icon": {
-      color: 'white'
+      'color': 'white',
+      'bgcolor': '#a83d9c',
+      'borderRadius': '8px',
     },
   },
-  "& .MuiSvgIcon-root": {
+  '& .RaMenuItemLink-active': {
+    'bgcolor': '#a83d9c',
+    'color': 'white !important',
+    'borderRadius': '8px',
+    '& .RaMenuItemLink-icon': {
+      color: 'white',
+    },
+  },
+  '& .MuiSvgIcon-root': {
     transition: 'all linear .5s',
-    mb: .47
-  }
-}
+    mb: 0.47,
+  },
+};
 
 export function Menu() {
   const [open, setOpen] = useSidebarState();
@@ -55,11 +55,13 @@ export function Menu() {
       <MenuContent />
     </Drawer>
   ) : (
-    <MenuContent sx={{ position: "fixed" }} />
+    <MenuContent sx={{ position: 'fixed' }} />
   );
 }
 
-export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({ sx }) => {
+export const MenuContent: FC<{ sx?: Omit<SxProps, 'boxShadow'> }> = ({
+  sx,
+}) => {
   const { bgcolor } = usePalette();
 
   return (
@@ -71,10 +73,20 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({ sx }) => 
         </RaMenu>
       </Box>
       <Box>
-        <RaMenu>
-          <RaMenu.Item leftIcon={<SettingsIcon />} to='/settings' primaryText="Settings" />
+        <RaMenu
+          sx={{
+            '& .MuiSvgIcon-root': {
+              mb: 0.2,
+            },
+          }}
+        >
+          <RaMenu.Item
+            leftIcon={<SettingsIcon />}
+            to="/settings"
+            primaryText="Settings"
+          />
         </RaMenu>
       </Box>
-    </Box >
-  )
-}
+    </Box>
+  );
+};

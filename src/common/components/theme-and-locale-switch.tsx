@@ -1,11 +1,18 @@
 import { FC } from 'react';
-import { SxProps } from "@mui/material";
-import { LocalesMenuButton, ToggleThemeButton, useTranslate } from "react-admin";
-import { GTranslate as GTranslateIcon } from '@mui/icons-material'
-import { FlexBox } from "./flex-box";
-import { SUPPORTED_LOCALES } from "@/providers/i18n";
+import { SxProps } from '@mui/material';
+import {
+  LocalesMenuButton,
+  ToggleThemeButton,
+  useTranslate,
+} from 'react-admin';
+import { GTranslate as GTranslateIcon } from '@mui/icons-material';
+import { FlexBox } from './flex-box';
+import { SUPPORTED_LOCALES } from '@/providers/i18n';
 
-export const ThemeAndLocaleSwitch: FC<{ sx?: SxProps, locale?: boolean }> = ({ sx = {}, locale = true }) => {
+export const ThemeAndLocaleSwitch: FC<{ sx?: SxProps; locale?: boolean }> = ({
+  sx = {},
+  locale = true,
+}) => {
   const translate = useTranslate();
 
   const languages = SUPPORTED_LOCALES.map((locale) => {
@@ -23,10 +30,12 @@ export const ThemeAndLocaleSwitch: FC<{ sx?: SxProps, locale?: boolean }> = ({ s
         'top': 5,
         'right': 5,
         '& *': { textTransform: 'none !important' },
-        ...sx
+        ...sx,
       }}
     >
-      {locale && <LocalesMenuButton languages={languages} icon={<GTranslateIcon />} />}
+      {locale && (
+        <LocalesMenuButton languages={languages} icon={<GTranslateIcon />} />
+      )}
       <ToggleThemeButton />
     </FlexBox>
   );

@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Box, SxProps } from "@mui/material";
+import { Box, SxProps } from '@mui/material';
 import { LayoutProps } from 'react-admin';
-import { Menu } from './menu'
-import { AppBar } from './appbar'
+import { Menu } from './menu';
+import { AppBar } from './appbar';
 import { ChatbotDialog } from '@/operations/chatbot';
 import { usePalette } from '@/common/hooks';
 
@@ -11,9 +11,9 @@ const MAIN_CONTENT_SX: SxProps = {
   px: 2,
   ml: {
     xs: 0,
-    md: '250px'
-  }
-}
+    md: '250px',
+  },
+};
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
   const { bgcolorPaper } = usePalette();
@@ -25,14 +25,12 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         sx={{
           width: '100%',
           minHeight: '100vh',
-          bgcolor: bgcolorPaper
+          bgcolor: bgcolorPaper,
         }}
       >
         <Menu />
         <AppBar />
-        <Box sx={MAIN_CONTENT_SX}>
-          {children}
-        </Box>
+        <Box sx={MAIN_CONTENT_SX}>{children}</Box>
       </Box>
       <ChatbotDialog />
     </>

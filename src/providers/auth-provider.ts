@@ -24,7 +24,9 @@ export const authProvider: AuthProvider = {
     return firebaseAuthProvider.signIn(loginData.provider);
   },
   logout: async () => {
-    return firebaseAuthProvider.signOut();
+    await firebaseAuthProvider.signOut();
+    window.location.reload();
+    return Promise.resolve();
   },
   checkAuth: async () => {
     // return securityApi().signIn().then(NOOP_FN).catch((error) => {

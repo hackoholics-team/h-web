@@ -29,6 +29,6 @@ export const usePalette = () => {
     bgcolor,
     primaryColor,
     secondaryColor,
-    bgcolorPaper
+    bgcolorPaper,
   };
 };
