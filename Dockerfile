@@ -1,4 +1,4 @@
-FROM node:20-slim
+FROM node:20-slim AS build
 
 ARG API_URL
 ENV API_URL=$API_URL
@@ -17,11 +17,17 @@ ENV FIREBASE_APP_ID=$FIREBASE_APP_ID
 ARG FIREBASE_MEASUREMENT_ID
 ENV FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID
 
-COPY . ./
-
-RUN npm install -g serve
-
+COPY . /app
+WORKDIR /app
 RUN npm install
 RUN npm run build
 
-CMD ["serve", "-s", "./build"]
+FROM nginx:alpine as final
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]
