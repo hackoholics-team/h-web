@@ -19,6 +19,7 @@ ENV FIREBASE_MEASUREMENT_ID=$FIREBASE_MEASUREMENT_ID
 
 COPY . /app
 WORKDIR /app
+    
 RUN npm install
 RUN npm run build
 
