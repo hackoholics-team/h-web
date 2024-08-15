@@ -1,4 +1,4 @@
-import { TextField } from 'react-admin';
+import { DateInput, TextField, TextInput } from 'react-admin';
 import { List } from '@/common/components/list';
 import { TitledPage } from '@/common/components';
 
@@ -14,7 +14,14 @@ export const DummyList = () => {
         },
       ]}
     >
-      <List>
+      <List
+        sx={{ mt: 1 }}
+        filters={[
+          <DateInput source="debut" label="Begin" alwaysOn />,
+          <DateInput source="fin" label="End" alwaysOn />,
+          <TextInput source="name" label="Name" />,
+        ]}
+      >
         <TextField source="id" label="Id" />
         <TextField source="name" label="Name" />
       </List>

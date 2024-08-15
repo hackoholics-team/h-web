@@ -8,6 +8,7 @@ import { hackoholicDarkTheme, hackoholicLightTheme } from './themes';
 import { dataProvider, authProvider } from './providers';
 import { i18nProvider } from './providers/i18n';
 import { DUMMY_UI } from './operations/dummies';
+import { Settings } from './operations/settings';
 
 const Dashboard = () => (
   <Admin
@@ -27,7 +28,7 @@ const Dashboard = () => (
 
     <CustomRoutes>
       <Route element={<ProfileShow />} path="/profiles" />
-      <Route element={<h2>Hello from settings</h2>} path="/settings" />
+      <Route element={<Settings />} path="/settings" />
       <Route
         element={<PdfViewer pdf={'http://localhost:5173/test.pdf'} />}
         path="/pdf"
