@@ -17,7 +17,11 @@ export const ProfileShow = () => {
       description="Vous trouverez ici tous les informations à propos de vous"
       paths={[{ label: 'profile', href: '/profiles' }]}
     >
-      <Show id={'dummyId'} sx={{ mt: 0 }} resource="profiles">
+      <Show
+        id={'dummyId'}
+        sx={{ 'mt': 0, '& .RaShow-card': { bgcolor: 'transparent' } }}
+        resource="profiles"
+      >
         <ProfileShowContent />
       </Show>
     </TitledPage>

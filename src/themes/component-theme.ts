@@ -49,7 +49,6 @@ export const COMPONENT_THEME: Partial<RaThemeOptions['components']> = {
       root: {
         '& .RaShow-card': {
           boxShadow: 'none',
-          backgroundColor: 'transparent !important',
           backgroundImage: 'none',
         },
       },
