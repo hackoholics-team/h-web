@@ -27,6 +27,7 @@ const Dashboard = () => (
 
     <CustomRoutes>
       <Route element={<ProfileShow />} path="/profiles" />
+      <Route element={<h2>Hello from settings</h2>} path="/settings" />
       <Route
         element={<PdfViewer pdf={'http://localhost:5173/test.pdf'} />}
         path="/pdf"

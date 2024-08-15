@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { Menu as RaMenu, useSidebarState } from 'react-admin';
-import { Box, Typography, SxProps, Drawer, useTheme, useMediaQuery } from '@mui/material';
-import { FlexBox } from '@/common/components';
+import { Box, SxProps, Drawer, useTheme, useMediaQuery } from '@mui/material';
+import { Settings as SettingsIcon } from '@mui/icons-material';
 import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
 
 const MENU_SX: SxProps = {
-  top: 0,
+  top: '50px',
   left: 0,
   py: 2,
   width: '250px',
-  height: '100vh',
+  height: 'calc(100vh - 50px)',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -27,19 +27,19 @@ const MENU_SX: SxProps = {
         color: 'white'
       },
       color: 'white',
-      bgcolor: '#dda2eb',
+      bgcolor: '#a83d9c',
       borderRadius: "8px",
     }
   },
   "& .RaMenuItemLink-active": {
-    bgcolor: '#dda2eb',
+    bgcolor: '#a83d9c',
     color: 'white !important',
     borderRadius: "8px",
     "& .RaMenuItemLink-icon": {
       color: 'white'
     },
   },
-  "& .RaMenuItemLink-icon": {
+  "& .MuiSvgIcon-root": {
     transition: 'all linear .5s',
     mb: .47
   }
@@ -60,16 +60,11 @@ export function Menu() {
 }
 
 export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({ sx }) => {
-  const { palette, getPaletteColorValue, primaryColor, bgcolor } = usePalette();
+  const { bgcolor } = usePalette();
 
   return (
     <Box sx={{ ...MENU_SX, ...PAPER_BOX_SX, bgcolor, ...sx }}>
       <Box>
-        <FlexBox sx={{ justifyContent: 'space-between', px: 2, '& .MuiSvgIcon-root': { color: primaryColor } }}>
-          <Typography sx={{ fontSize: '1.2rem' }}>
-            <span style={{ fontSize: '1.5rem', color: getPaletteColorValue(palette.primary, 800) }}>H</span>ackoholics
-          </Typography>
-        </FlexBox>
         <RaMenu>
           <RaMenu.ResourceItem name="profiles" />
           <RaMenu.ResourceItem name="dummies" />
@@ -77,7 +72,7 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({ sx }) => 
       </Box>
       <Box>
         <RaMenu>
-          <RaMenu.ResourceItem name="dummies" />
+          <RaMenu.Item leftIcon={<SettingsIcon />} to='/settings' primaryText="Settings" />
         </RaMenu>
       </Box>
     </Box >

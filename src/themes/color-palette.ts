@@ -4,7 +4,7 @@ export const COLOR_PALETTE: Partial<
   RaThemeOptions['palette'] & Record<string, any>
 > = {
   primary: {
-    'main': '#d94ede',
+    'main': '#a83d9c',
     '900': '#9518ab',
     '800': '#d94ede',
     '200': '#d88ce6',

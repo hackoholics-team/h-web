@@ -17,7 +17,7 @@ export const usePalette = () => {
     : 'white';
   const bgcolorPaper = isDarkTheme
     ? getPaletteColorNumberValue(palette.black, 1000)
-    : '#dce3e6';
+    : '#edebe6';
   const primaryColor = !isDarkTheme
     ? getPaletteColorNumberValue(palette.black, 700)
     : 'white';

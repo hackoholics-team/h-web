@@ -5,7 +5,6 @@ import { required, SimpleForm, TextInput } from 'react-admin';
 export const ChatbotForm = () => {
   const sendMessage = (event: any) => {
     event.preventDefault();
-    console.log('Hello world');
   };
 
   return (

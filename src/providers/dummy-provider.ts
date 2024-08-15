@@ -35,8 +35,7 @@ export const dummyProvider: HackoholicDataProvider<Dummy> = {
   getOne: ({ id }) => {
     return Promise.resolve(DUMMIES_MOCK.find((dummy) => dummy.id == id)!);
   },
-  saveOrUpdate: ({ payload, meta }) => {
-    console.log(payload);
+  saveOrUpdate: ({ meta }) => {
     const { mutationType } = meta;
     if (mutationType === 'CREATE') {
       throw new Error('Not implemented');
