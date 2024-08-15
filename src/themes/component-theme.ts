@@ -25,6 +25,7 @@ export const COMPONENT_THEME: Partial<RaThemeOptions['components']> = {
         paddingBottom: 6,
         textTransform: 'none !important',
         fontSize: '15px',
+        borderRadius: '15px'
       },
     },
   },
@@ -49,8 +50,9 @@ export const COMPONENT_THEME: Partial<RaThemeOptions['components']> = {
         '& .RaShow-card': {
           boxShadow: 'none',
           backgroundColor: 'transparent !important',
+          backgroundImage: 'none',
         },
       },
     },
-  },
+  }
 };

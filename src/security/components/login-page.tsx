@@ -1,8 +1,4 @@
-import {
-  LocalesMenuButton,
-  ToggleThemeButton,
-  useTranslate,
-} from 'react-admin';
+import { useTranslate } from 'react-admin';
 import {
   Typography,
   SxProps,
@@ -10,14 +6,12 @@ import {
   Backdrop,
   CircularProgress,
 } from '@mui/material';
-import { GTranslate as GTranslateIcon } from '@mui/icons-material';
-import { FlexBox } from '@/common/components';
+import { FlexBox, ThemeAndLocaleSwitch } from '@/common/components';
 import { LoginForm } from './login-form';
 import { LoginLoadingContext } from '../context';
 import { LoginCompleteInfo } from './complete-info';
 import { useLogin } from '../hooks';
 import { usePalette } from '@/common/hooks';
-import { SUPPORTED_LOCALES } from '@/providers/i18n';
 import loginIllustration from '@/assets/login-illustration.png';
 
 const LOGIN_PAGE_SX: SxProps = {
@@ -44,32 +38,6 @@ const ILLUSTRATION_HEADER_TEXT_SX: SxProps = {
   color: 'white',
   mb: 2,
   fontWeight: 'bold',
-};
-
-const LoginActionOptions = () => {
-  const translate = useTranslate();
-
-  const languages = SUPPORTED_LOCALES.map((locale) => {
-    return {
-      locale,
-      name: translate(`ha.locales.${locale}.name`),
-    };
-  });
-
-  return (
-    <FlexBox
-      sx={{
-        'position': 'absolute',
-        'gap': 1,
-        'top': 5,
-        'right': 5,
-        '& *': { textTransform: 'none !important' },
-      }}
-    >
-      <LocalesMenuButton languages={languages} icon={<GTranslateIcon />} />
-      <ToggleThemeButton />
-    </FlexBox>
-  );
 };
 
 export const LoginPage = () => (
@@ -136,7 +104,7 @@ export const LoginPageContent = () => {
               {view === 'completeInfo' && <LoginCompleteInfo />}
             </Box>
           </Box>
-          <LoginActionOptions />
+          <ThemeAndLocaleSwitch />
         </FlexBox>
       </FlexBox>
       <Backdrop

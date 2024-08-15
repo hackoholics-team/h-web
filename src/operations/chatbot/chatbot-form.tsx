@@ -39,7 +39,7 @@ export const ChatbotForm = () => {
               '& textarea': { maxHeight: '80px', overflowY: 'scroll' },
             }}
             InputProps={{
-              sx: { borderRadius: '15px' },
+              sx: { borderRadius: '15px', fontSize: '13px' },
             }}
           />
           <TooltipIconButton title="Upload an image" color="primary">

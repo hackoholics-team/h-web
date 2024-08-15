@@ -10,6 +10,8 @@ export const COLOR_PALETTE: Partial<
     '200': '#d88ce6',
   },
   black: {
+    '1000': '#121212',
+    '900': '#2e2d2d',
     '700': '#4f4f4d',
   }
 };

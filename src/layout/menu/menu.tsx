@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import { SidebarToggleButton, useSidebarState } from 'react-admin';
-import { Box, Typography, SxProps, Drawer, Divider, Avatar, useTheme, useMediaQuery } from '@mui/material';
+import { Menu as RaMenu, useSidebarState } from 'react-admin';
+import { Box, Typography, SxProps, Drawer, useTheme, useMediaQuery } from '@mui/material';
 import { FlexBox } from '@/common/components';
 import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
-import profilePic from '@/assets/profile-pic.jpg'
 
 const MENU_SX: SxProps = {
   top: 0,
@@ -12,25 +11,37 @@ const MENU_SX: SxProps = {
   py: 2,
   width: '250px',
   height: '100vh',
-}
-
-const USER_INFO_SX: SxProps = {
-  py: 1,
-  px: 2,
-  mt: 1,
-  gap: 2,
-  width: '100%',
-  justifyContent: 'start',
-}
-
-const ACTIVATED_SX: SxProps = {
-  cursor: 'pointer',
-  transition: 'all linear .6s',
-  "&:hover": {
-    bgcolor: '#dda2eb',
-    "& *": {
-      color: 'white !important'
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  "& .RaMenu-open": {
+    width: '96%',
+    mx: 'auto'
+  },
+  "& .MuiMenuItem-root": {
+    my: "1px",
+    alignItems: 'end',
+    transition: 'all linear .5s',
+    "&:hover": {
+      "& .RaMenuItemLink-icon": {
+        color: 'white'
+      },
+      color: 'white',
+      bgcolor: '#dda2eb',
+      borderRadius: "8px",
     }
+  },
+  "& .RaMenuItemLink-active": {
+    bgcolor: '#dda2eb',
+    color: 'white !important',
+    borderRadius: "8px",
+    "& .RaMenuItemLink-icon": {
+      color: 'white'
+    },
+  },
+  "& .RaMenuItemLink-icon": {
+    transition: 'all linear .5s',
+    mb: .47
   }
 }
 
@@ -49,29 +60,26 @@ export function Menu() {
 }
 
 export const MenuContent: FC<{ sx?: Omit<SxProps, "boxShadow"> }> = ({ sx }) => {
-  const { palette, bgcolor, getPaletteColorValue, secondaryColor, primaryColor } = usePalette();
+  const { palette, getPaletteColorValue, primaryColor, bgcolor } = usePalette();
 
   return (
-    <Box sx={{ bgcolor, ...MENU_SX, ...PAPER_BOX_SX, ...sx }}>
-      <FlexBox sx={{ justifyContent: 'space-between', px: 2, '& .MuiSvgIcon-root': { color: primaryColor } }}>
-        <Typography sx={{ fontSize: '1.2rem' }}>
-          <span style={{ fontSize: '1.5rem', color: getPaletteColorValue(palette.primary, 800) }}>H</span>ackoholics
-        </Typography>
-        <SidebarToggleButton />
-      </FlexBox>
-      <Divider />
-      <FlexBox sx={{ ...USER_INFO_SX, ...ACTIVATED_SX }} >
-        <Avatar alt='John Doe' src={profilePic} sx={{ width: '35px', height: '35px' }} />
-        <Box>
-          <Typography sx={{ fontSize: '14px', color: primaryColor }}>
-            John Doe
+    <Box sx={{ ...MENU_SX, ...PAPER_BOX_SX, bgcolor, ...sx }}>
+      <Box>
+        <FlexBox sx={{ justifyContent: 'space-between', px: 2, '& .MuiSvgIcon-root': { color: primaryColor } }}>
+          <Typography sx={{ fontSize: '1.2rem' }}>
+            <span style={{ fontSize: '1.5rem', color: getPaletteColorValue(palette.primary, 800) }}>H</span>ackoholics
           </Typography>
-          <Typography sx={{ fontSize: '13px', color: secondaryColor }}>
-            john@gmail.com
-          </Typography>
-        </Box>
-      </FlexBox>
-      <Divider />
+        </FlexBox>
+        <RaMenu>
+          <RaMenu.ResourceItem name="profiles" />
+          <RaMenu.ResourceItem name="dummies" />
+        </RaMenu>
+      </Box>
+      <Box>
+        <RaMenu>
+          <RaMenu.ResourceItem name="dummies" />
+        </RaMenu>
+      </Box>
     </Box >
   )
 }
