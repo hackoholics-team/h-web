@@ -41,8 +41,8 @@ import { useFormContext, useWatch } from 'react-hook-form';
 import { usePalette } from '@/common/hooks';
 import { NOOP_FN } from '@/common/utils/noop';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
-import profilePic from '@/assets/profile-pic.jpg';
 import { SUPPORTED_LOCALES } from '@/providers/i18n';
+import profilePic from '@/assets/profile-pic.jpg';
 
 const APPBAR_SX: SxProps = {
   display: 'flex',

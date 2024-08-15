@@ -5,7 +5,6 @@ import { LocationOn } from '@mui/icons-material';
 import { User } from '@/gen/client';
 import { FlexBox } from './flex-box';
 import { useIsDarkTheme, usePalette } from '../hooks';
-import { PAPER_BOX_SX } from '../utils/common-props';
 
 const FieldLabel = ({ label }: { label: string }) => {
   const { primaryColor } = usePalette();
@@ -41,13 +40,11 @@ export const ProfileLayout: FC<{
   return (
     <FlexBox
       sx={{
-        ...PAPER_BOX_SX,
-        mt: 1,
         p: 5,
         width: 'fit-content',
         alignItems: 'stretch',
         gap: 2,
-        borderRadius: '15px',
+        borderRadius: '8px',
         bgcolor,
       }}
     >

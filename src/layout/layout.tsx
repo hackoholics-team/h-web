@@ -8,7 +8,7 @@ import { usePalette } from '@/common/hooks';
 
 const MAIN_CONTENT_SX: SxProps = {
   m: 0,
-  px: 2,
+  px: 1,
   ml: {
     xs: 0,
     md: '250px',

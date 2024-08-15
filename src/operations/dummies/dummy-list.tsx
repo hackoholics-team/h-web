@@ -1,12 +1,23 @@
-import { Datagrid, List, TextField } from 'react-admin';
+import { TextField } from 'react-admin';
+import { List } from '@/common/components/list';
+import { TitledPage } from '@/common/components';
 
 export const DummyList = () => {
   return (
-    <List>
-      <Datagrid>
+    <TitledPage
+      title="List of all Dummies"
+      description="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim ."
+      paths={[
+        {
+          label: 'dummies',
+          href: '/dummies',
+        },
+      ]}
+    >
+      <List>
         <TextField source="id" label="Id" />
         <TextField source="name" label="Name" />
-      </Datagrid>
-    </List>
+      </List>
+    </TitledPage>
   );
 };
