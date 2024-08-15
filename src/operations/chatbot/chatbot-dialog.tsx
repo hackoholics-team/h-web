@@ -47,8 +47,8 @@ export const ChatbotButton = () => {
         alt="chatbot"
         src={chatbotIcon}
         style={{
-          width: '45px',
-          height: '45px',
+          width: '38px',
+          height: '38px',
         }}
       />
     </TooltipIconButton>
@@ -88,7 +88,7 @@ export const ChatbotDialog = () => {
               alt="chatbot"
             />
             <Typography
-              sx={{ p: 0, m: 0, fontSize: '14px', fontWeight: 'bold' }}
+              sx={{ p: 0, m: 0, fontSize: '13px', fontWeight: 'bold' }}
             >
               Assistant IA
             </Typography>

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { Box, Typography } from '@mui/material';
+
 import { FlexBox } from '@/common/components';
 import { usePalette } from '@/common/hooks';
 import chatbotIcon from '@/assets/icons/chatbot.png';
@@ -80,7 +81,7 @@ export const MessageContent: FC<{ message: Message }> = (props) => {
       <Typography
         sx={{
           py: 1,
-          fontSize: '14px',
+          fontSize: '13px',
           color: !isFromMe ? 'white' : bgcolor,
           px: 2,
           borderRadius: '15px',

@@ -1,6 +1,6 @@
 import { Button, Show, TabbedShowLayout, useShowContext } from 'react-admin';
 import { CircularProgress, Box } from '@mui/material';
-import { ProfileLayout } from '@/common/components';
+import { ProfileLayout, TitledPage } from '@/common/components';
 import { Dialog } from '@/common/components';
 import { User } from '@/gen/client';
 import { usePalette } from '@/common/hooks';
@@ -12,9 +12,19 @@ export const ProfileShow = () => {
   // const { id } = useWhoami(); // ignored as we use signin to fetch current profile and signin need only the firebaseToken
 
   return (
-    <Show id={'dummyId'} resource="profiles">
-      <ProfileShowContent />
-    </Show>
+    <TitledPage
+      title="Mon Profil"
+      description="Vous trouverez ici tous les informations à propos de vous"
+      paths={[{ label: 'profile', href: '/profiles' }]}
+    >
+      <Show
+        id={'dummyId'}
+        sx={{ 'mt': 0, '& .RaShow-card': { bgcolor: 'transparent' } }}
+        resource="profiles"
+      >
+        <ProfileShowContent />
+      </Show>
+    </TitledPage>
   );
 };
 
@@ -22,11 +32,12 @@ const EditProfileButton = () => {
   const { open: openEditDialog } = useDialogContext<false>();
   return (
     <Button
-      size="medium"
+      size="small"
       label="Editer"
       variant="outlined"
       color="primary"
       onClick={openEditDialog}
+      sx={{ fontSize: '13px' }}
     />
   );
 };
@@ -46,10 +57,11 @@ export const ProfileShowContent = () => {
         actions={
           <>
             <Button
-              size="medium"
+              size="small"
               label="Contacter"
               variant="contained"
               color="primary"
+              sx={{ fontSize: '13px' }}
             />
             <Dialog actionHandler={<EditProfileButton />}>
               <p>Edit profile</p>
@@ -63,7 +75,15 @@ export const ProfileShowContent = () => {
           label="Informations"
           sx={{ textTransform: 'none' }}
         >
-          <Box sx={{ borderRadius: '15px', bgcolor, p: 5, ...PAPER_BOX_SX }}>
+          <Box
+            sx={{
+              borderRadius: '8px',
+              fontSize: '14px',
+              bgcolor,
+              p: 2,
+              ...PAPER_BOX_SX,
+            }}
+          >
             Hello world
           </Box>
         </TabbedShowLayout.Tab>

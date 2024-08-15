@@ -26,6 +26,30 @@ const DUMMIES_MOCK: Dummy[] = [
     id: '5',
     name: 'name5',
   },
+  {
+    id: '6',
+    name: 'name2',
+  },
+  {
+    id: '7',
+    name: 'name3',
+  },
+  {
+    id: '8',
+    name: 'name5',
+  },
+  {
+    id: '9',
+    name: 'name5',
+  },
+  {
+    id: '10',
+    name: 'name5',
+  },
+  {
+    id: '11',
+    name: 'name6',
+  },
 ];
 
 export const dummyProvider: HackoholicDataProvider<Dummy> = {
@@ -35,8 +59,7 @@ export const dummyProvider: HackoholicDataProvider<Dummy> = {
   getOne: ({ id }) => {
     return Promise.resolve(DUMMIES_MOCK.find((dummy) => dummy.id == id)!);
   },
-  saveOrUpdate: ({ payload, meta }) => {
-    console.log(payload);
+  saveOrUpdate: ({ meta }) => {
     const { mutationType } = meta;
     if (mutationType === 'CREATE') {
       throw new Error('Not implemented');

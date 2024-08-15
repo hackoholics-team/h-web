@@ -13,8 +13,11 @@ export const usePalette = () => {
   const isDarkTheme = useIsDarkTheme();
   const palette = theme.palette as Palette & Record<string, any>;
   const bgcolor = isDarkTheme
-    ? getPaletteColorNumberValue(palette.black, 700)
+    ? getPaletteColorNumberValue(palette.black, 900)
     : 'white';
+  const bgcolorPaper = isDarkTheme
+    ? getPaletteColorNumberValue(palette.black, 1000)
+    : '#edebe6';
   const primaryColor = !isDarkTheme
     ? getPaletteColorNumberValue(palette.black, 700)
     : 'white';
@@ -26,5 +29,6 @@ export const usePalette = () => {
     bgcolor,
     primaryColor,
     secondaryColor,
+    bgcolorPaper,
   };
 };
