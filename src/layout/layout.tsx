@@ -3,7 +3,6 @@ import { Box, SxProps } from '@mui/material';
 import { LayoutProps } from 'react-admin';
 import { Menu } from './menu';
 import { AppBar } from './appbar';
-import { ChatbotDialog } from '@/operations/chatbot';
 import { usePalette } from '@/common/hooks';
 
 const MAIN_CONTENT_SX: SxProps = {
@@ -32,7 +31,6 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         <AppBar />
         <Box sx={MAIN_CONTENT_SX}>{children}</Box>
       </Box>
-      <ChatbotDialog />
     </>
   );
 };
