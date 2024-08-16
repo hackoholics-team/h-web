@@ -31,7 +31,11 @@ import {
   AccountCircle,
   ArrowRight,
 } from '@mui/icons-material';
-import { FlexBox, HackoholicsLogo, ThemeAndLocaleSwitch } from '@/common/components';
+import {
+  FlexBox,
+  HackoholicsLogo,
+  ThemeAndLocaleSwitch,
+} from '@/common/components';
 import {
   DialogContextProvider,
   useDialogContext,
@@ -184,12 +188,7 @@ const SelectLocalMenuContent: FC<{ closeMainMenu: () => void }> = ({
 };
 
 export const AppBarContent = () => {
-  const {
-    primaryColor,
-    secondaryColor,
-    bgcolor,
-    bgcolorPaper,
-  } = usePalette();
+  const { primaryColor, secondaryColor, bgcolor, bgcolorPaper } = usePalette();
   const {
     status,
     anchorEl,

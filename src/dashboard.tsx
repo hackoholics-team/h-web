@@ -36,11 +36,14 @@ const Dashboard = () => (
       />
     </CustomRoutes>
     <CustomRoutes noLayout>
-      <Route element={(
-        <NoLayout>
-          <Preferencies />
-        </NoLayout>
-      )} path="/preferencies" />
+      <Route
+        element={
+          <NoLayout>
+            <Preferencies />
+          </NoLayout>
+        }
+        path="/preferencies"
+      />
     </CustomRoutes>
   </Admin>
 );

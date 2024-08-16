@@ -11,5 +11,5 @@ export const NoLayout: FC<{ children: ReactNode }> = ({ children }) => {
       <NoLayoutAppbar />
       {children}
     </Box>
-  )
-}
+  );
+};
