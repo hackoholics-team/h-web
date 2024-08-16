@@ -55,7 +55,9 @@ const signup = async (provider: SigninProviderType) => {
 
 const signOut = async () => {
   await firebaseSignOut(FIREBASE_AUTH);
-  localStorage.clear();
+  localStorage.removeItem(TOKEN_ID_CACHE_NAME);
+  localStorage.removeItem(USER_ID_CACHE_NAME);
+  localStorage.removeItem(USER_EMAIL_CACHE_NAME);
 };
 
 const resetPassword = async (email: string) => {

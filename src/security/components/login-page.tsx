@@ -6,36 +6,31 @@ import {
   Backdrop,
   CircularProgress,
 } from '@mui/material';
-import { FlexBox, ThemeAndLocaleSwitch } from '@/common/components';
+import { FlexBox } from '@/common/components';
 import { LoginForm } from './login-form';
 import { LoginLoadingContext } from '../context';
 import { LoginCompleteInfo } from './complete-info';
+import { NoLayout } from '@/layout';
 import { useLogin } from '../hooks';
-import { usePalette } from '@/common/hooks';
+import { useIsDarkTheme, usePalette } from '@/common/hooks';
 import loginIllustration from '@/assets/login-illustration.png';
 
 const LOGIN_PAGE_SX: SxProps = {
   alignItems: 'start',
-  minHeight: '85vh',
-  width: '850px',
-  boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
+  width: '100%',
+  px: 7,
   position: 'relative',
-  borderRadius: '8px',
 };
 
 const ILLUSTRATION_BOX_SX: SxProps = {
   flex: 1,
-  minHeight: '85vh',
-  borderTopLeftRadius: '8px',
-  borderBottomLeftRadius: '8px',
   p: 3,
   flexDirection: 'column',
+  alignItems: 'start',
 };
 
 const ILLUSTRATION_HEADER_TEXT_SX: SxProps = {
-  textAlign: 'center',
   fontSize: '1.7rem',
-  color: 'white',
   mb: 2,
   fontWeight: 'bold',
 };
@@ -47,45 +42,45 @@ export const LoginPage = () => (
 );
 
 export const LoginPageContent = () => {
-  const { palette } = usePalette();
+  const { palette, primaryColor, secondaryColor } = usePalette();
   const { view, isLoading } = useLogin();
   const translate = useTranslate();
+  const isDarkTheme = useIsDarkTheme();
 
   return (
-    <>
+    <NoLayout>
       <FlexBox
         sx={{
           bgcolor: palette.background.paper,
           minHeight: '100vh',
-          position: 'relative',
           width: '100%',
+          justifyContent: 'center',
+          alignItems: 'start',
+          position: 'relative',
         }}
       >
-        <FlexBox sx={{ ...LOGIN_PAGE_SX, bgcolor: palette.background.default }}>
-          <FlexBox
-            sx={{
-              ...ILLUSTRATION_BOX_SX,
-              bgcolor: palette.primary.main,
-            }}
-          >
-            <Typography sx={ILLUSTRATION_HEADER_TEXT_SX} variant="h2">
+        <FlexBox sx={{ ...LOGIN_PAGE_SX }}>
+          <FlexBox sx={ILLUSTRATION_BOX_SX}>
+            <Typography
+              sx={{
+                ...ILLUSTRATION_HEADER_TEXT_SX,
+                color: isDarkTheme ? '#9CC5A1' : '#49A078',
+              }}
+              variant="h2"
+            >
               {translate('ha.login.illustration.header')}
             </Typography>
-            <Typography
-              sx={{ fontSize: '15px', textAlign: 'center', color: 'white' }}
-            >
+            <Typography sx={{ fontSize: '15px', color: secondaryColor }}>
               Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
               sint cillum sint consectetur cupidatat.
             </Typography>
             <img
               width={250}
-              src={loginIllustration}
               alt="hackoholics-login"
+              src={loginIllustration}
               style={{ display: 'block' }}
             />
-            <Typography
-              sx={{ textAlign: 'center', color: 'white', fontSize: '15px' }}
-            >
+            <Typography sx={{ color: secondaryColor, fontSize: '15px' }}>
               Trouver ici notre{' '}
               <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
                 Règle Génerale
@@ -104,7 +99,6 @@ export const LoginPageContent = () => {
               {view === 'completeInfo' && <LoginCompleteInfo />}
             </Box>
           </Box>
-          <ThemeAndLocaleSwitch />
         </FlexBox>
       </FlexBox>
       <Backdrop
@@ -113,6 +107,6 @@ export const LoginPageContent = () => {
       >
         <CircularProgress color="primary" />
       </Backdrop>
-    </>
+    </NoLayout>
   );
 };
