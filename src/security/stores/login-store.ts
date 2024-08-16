@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type LoginViewType = 'signin' | 'signup' | 'completeInfo';
+export type LoginViewType = 'signin' | 'signup';
 
 export type UseLoginStoreType = {
   view: LoginViewType;
@@ -10,7 +10,7 @@ export type UseLoginStoreType = {
 };
 
 export const useLoginStore = create<UseLoginStoreType>((set) => ({
-  view: 'completeInfo',
+  view: 'signin',
   isLoading: false,
   setView: (newValue) => set({ view: newValue }),
   setIsLoading: (status) => set({ isLoading: status }),

@@ -2,6 +2,7 @@ import { ChangeEvent, FC } from 'react';
 import {
   SimpleForm,
   useAuthProvider,
+  useGetOne,
   useLocale,
   useRedirect,
   useSetLocale,
@@ -12,6 +13,7 @@ import {
   Divider,
   Menu as MuiMenu,
   MenuList as MuiMenuList,
+  CircularProgress,
   ListItemIcon,
   ListItemText,
   MenuItem as MuiMenuItem,
@@ -46,7 +48,8 @@ import { usePalette } from '@/common/hooks';
 import { NOOP_FN } from '@/common/utils/noop';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
 import { SUPPORTED_LOCALES } from '@/providers/i18n';
-import profilePic from '@/assets/profile-pic.jpg';
+import { useWhoami } from '@/security/hooks';
+import { User } from '@/gen/client';
 
 const APPBAR_SX: SxProps = {
   display: 'flex',
@@ -189,6 +192,10 @@ const SelectLocalMenuContent: FC<{ closeMainMenu: () => void }> = ({
 
 export const AppBarContent = () => {
   const { primaryColor, secondaryColor, bgcolor, bgcolorPaper } = usePalette();
+  const { id } = useWhoami();
+  const { isLoading, data: user } = useGetOne<Required<User>>('profiles', {
+    id: id!,
+  });
   const {
     status,
     anchorEl,
@@ -231,17 +238,21 @@ export const AppBarContent = () => {
           }}
           onClick={openMenu}
         >
-          <Avatar
-            alt="John Doe"
-            src={profilePic}
-            sx={{ width: '35px', height: '35px' }}
-          />
+          {!isLoading ? (
+            <Avatar
+              alt="John Doe"
+              src={user?.photoId || ''}
+              sx={{ width: '35px', height: '35px' }}
+            />
+          ) : (
+            <CircularProgress />
+          )}
           <Box>
             <Typography sx={{ fontSize: '14px', color: primaryColor }}>
-              John Doe
+              {user?.username}
             </Typography>
             <Typography sx={{ fontSize: '13px', color: secondaryColor }}>
-              john@gmail.com
+              {user?.email}
             </Typography>
           </Box>
           {status ? <ExpandLess /> : <ExpandMore />}

@@ -9,28 +9,40 @@ import {
 } from 'react-admin';
 import { Stepper, Step, StepLabel } from '@mui/material';
 import { v4 as uuid } from 'uuid';
-
 import {
   StepperContextProvider,
   useStepperContext,
 } from '@/common/services/stepper';
 import { CompleteInfoToolbar } from './complete-info-toolbar';
 import { User } from '@/gen/client';
-import { useLogin } from '../../hooks';
 import { useWhoami } from '@/security/hooks';
 import { securityApi } from '@/providers/api';
+import { StateSetter } from '@/common/utils/types';
 
 const LOGIN_INFO_MAX_STEP = 3;
-export const LoginCompleteInfo = () => (
+export const LoginCompleteInfo = ({
+  setIsLoading,
+  isLoading,
+}: {
+  setIsLoading: StateSetter<boolean>;
+  isLoading: boolean;
+}) => (
   <StepperContextProvider maxStep={LOGIN_INFO_MAX_STEP}>
-    <LoginCompleteInfoContent />
+    <LoginCompleteInfoContent
+      setIsLoading={setIsLoading}
+      isLoading={isLoading}
+    />
   </StepperContextProvider>
 );
 
-const LoginCompleteInfoContent = () => {
+const LoginCompleteInfoContent = ({
+  setIsLoading,
+}: {
+  setIsLoading: StateSetter<boolean>;
+  isLoading: boolean;
+}) => {
   const { currentStep, doNexStep, maxStep } = useStepperContext();
   const whoAmi = useWhoami();
-  const { setIsLoading } = useLogin();
   const translate = useTranslate();
   const notify = useNotify();
   const redirect = useRedirect();
@@ -45,15 +57,19 @@ const LoginCompleteInfoContent = () => {
       return;
     }
 
-    setIsLoading(true);
     const userToCreate: User = {
       ...formValues,
       id: uuid(),
       firebaseId: whoAmi.id!,
       email: whoAmi.email!,
     };
+
+    setIsLoading(true);
     await securityApi()
-      .signUp(userToCreate)
+      .signUp({
+        ...userToCreate,
+        birthDate: new Date(userToCreate.birthDate!).toISOString(),
+      })
       .then(() => {
         redirect('show', 'profiles');
       })

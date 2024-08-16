@@ -6,11 +6,9 @@ import {
   Backdrop,
   CircularProgress,
 } from '@mui/material';
+import { useState } from 'react';
 import { FlexBox } from '@/common/components';
-import { LoginForm } from './login-form';
-import { LoginLoadingContext } from '../context';
-import { NoLayout } from '@/layout';
-import { useLogin } from '../hooks';
+import { LoginCompleteInfo } from './login-complete-info';
 import { useIsDarkTheme, usePalette } from '@/common/hooks';
 import loginIllustration from '@/assets/login-illustration.png';
 
@@ -25,7 +23,7 @@ const ILLUSTRATION_BOX_SX: SxProps = {
   flex: 1,
   p: 3,
   flexDirection: 'column',
-  alignItems: 'start',
+  alignItems: 'center',
 };
 
 const ILLUSTRATION_HEADER_TEXT_SX: SxProps = {
@@ -34,20 +32,14 @@ const ILLUSTRATION_HEADER_TEXT_SX: SxProps = {
   fontWeight: 'bold',
 };
 
-export const LoginPage = () => (
-  <LoginLoadingContext>
-    <LoginPageContent />
-  </LoginLoadingContext>
-);
-
-export const LoginPageContent = () => {
+export const CompleteInfoPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { palette, secondaryColor } = usePalette();
-  const { view, isLoading } = useLogin();
   const translate = useTranslate();
   const isDarkTheme = useIsDarkTheme();
 
   return (
-    <NoLayout>
+    <>
       <FlexBox
         sx={{
           bgcolor: palette.background.paper,
@@ -88,13 +80,16 @@ export const LoginPageContent = () => {
           </FlexBox>
           <Box flex={1} mt={1} py={5} px={4}>
             <Typography fontWeight="bold" fontSize="1.2rem">
-              {translate(`ha.login.${view}.title`)}
+              {translate(`ha.login.completeInfo.title`)}
             </Typography>
             <Typography fontSize="14px" mb={2}>
-              {translate(`ha.login.${view}.description`)}
+              {translate(`ha.login.completeInfo.description`)}
             </Typography>
             <Box width="100%" maxWidth="400px">
-              <LoginForm />
+              <LoginCompleteInfo
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
+              />
             </Box>
           </Box>
         </FlexBox>
@@ -105,6 +100,6 @@ export const LoginPageContent = () => {
       >
         <CircularProgress color="primary" />
       </Backdrop>
-    </NoLayout>
+    </>
   );
 };

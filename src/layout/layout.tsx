@@ -1,9 +1,15 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Box, SxProps } from '@mui/material';
-import { LayoutProps } from 'react-admin';
+import {
+  LayoutProps,
+  LoadingPage,
+  useAuthState,
+  useRedirect,
+} from 'react-admin';
 import { Menu } from './menu';
 import { AppBar } from './appbar';
-import { usePalette } from '@/common/hooks';
+import { useGetConnectedId, usePalette } from '@/common/hooks';
+import { userApi } from '@/providers/api';
 
 const MAIN_CONTENT_SX: SxProps = {
   m: 0,
@@ -16,6 +22,50 @@ const MAIN_CONTENT_SX: SxProps = {
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
   const { bgcolorPaper } = usePalette();
+  const { isLoading } = useAuthState();
+  const [isPrefLoading, setIsPrefLoading] = useState(true);
+  const getId = useGetConnectedId();
+  const redirect = useRedirect();
+
+  useEffect(() => {
+    const shouldRedirects = async () => {
+      const requirements = await userApi()
+        .getRequirements(getId())
+        .then((response) => response.data)
+        .finally(() => {
+          setIsPrefLoading(false);
+        });
+
+      if (requirements.length === 0) {
+        redirect('/preferencies');
+      }
+    };
+
+    if (!isLoading) {
+      shouldRedirects();
+    }
+  }, [isLoading]);
+
+  if (isLoading || isPrefLoading) {
+    return (
+      <Box
+        sx={{
+          width: '100vw',
+          height: '100vh',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 99999,
+        }}
+      >
+        {' '}
+        <LoadingPage
+          loadingPrimary="Chargment"
+          loadingSecondary="En crous de chargement"
+        />
+      </Box>
+    );
+  }
 
   return (
     <>
