@@ -47,7 +47,7 @@ export const LoginPage = () => (
 );
 
 export const LoginPageContent = () => {
-  const { palette, getPaletteColorValue } = usePalette();
+  const { palette } = usePalette();
   const { view, isLoading } = useLogin();
   const translate = useTranslate();
 
@@ -65,7 +65,7 @@ export const LoginPageContent = () => {
           <FlexBox
             sx={{
               ...ILLUSTRATION_BOX_SX,
-              bgcolor: getPaletteColorValue(palette.primary, 200),
+              bgcolor: palette.primary.main,
             }}
           >
             <Typography sx={ILLUSTRATION_HEADER_TEXT_SX} variant="h2">

@@ -27,12 +27,12 @@ const MENU_SX: SxProps = {
         color: 'white',
       },
       'color': 'white',
-      'bgcolor': '#a83d9c',
+      'bgcolor': '#49A078',
       'borderRadius': '8px',
     },
   },
   '& .RaMenuItemLink-active': {
-    'bgcolor': '#a83d9c',
+    'bgcolor': '#49A078',
     'color': 'white !important',
     'borderRadius': '8px',
     '& .RaMenuItemLink-icon': {
