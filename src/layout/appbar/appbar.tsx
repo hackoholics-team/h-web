@@ -31,7 +31,7 @@ import {
   AccountCircle,
   ArrowRight,
 } from '@mui/icons-material';
-import { FlexBox, ThemeAndLocaleSwitch } from '@/common/components';
+import { FlexBox, HackoholicsLogo, ThemeAndLocaleSwitch } from '@/common/components';
 import {
   DialogContextProvider,
   useDialogContext,
@@ -185,8 +185,6 @@ const SelectLocalMenuContent: FC<{ closeMainMenu: () => void }> = ({
 
 export const AppBarContent = () => {
   const {
-    palette,
-    getPaletteColorValue,
     primaryColor,
     secondaryColor,
     bgcolor,
@@ -208,21 +206,7 @@ export const AppBarContent = () => {
       sx={{ ...APPBAR_SX, ...PAPER_BOX_SX, bgcolor, backgroundImage: 'none' }}
     >
       <FlexBox sx={{ gap: 5 }}>
-        <FlexBox
-          sx={{ justifyContent: 'space-between', width: '200px', px: 2 }}
-        >
-          <Typography sx={{ fontSize: '1.2rem', color: primaryColor }}>
-            <span
-              style={{
-                fontSize: '1.5rem',
-                color: getPaletteColorValue(palette.primary, 800),
-              }}
-            >
-              H
-            </span>
-            ackoholics
-          </Typography>
-        </FlexBox>
+        <HackoholicsLogo />
         <SimpleForm
           sx={{ pb: '0 !important' }}
           toolbar={false}

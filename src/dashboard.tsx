@@ -1,14 +1,15 @@
 import { Admin, CustomRoutes, Resource } from 'react-admin';
 import { Route } from 'react-router-dom';
-import { Layout } from './layout';
+import { Layout, NoLayout } from './layout';
 import { LoginPage } from './security/components';
 import { ProfileShow } from './operations/profiles';
 import { PdfViewer } from './common/components';
+import { Settings } from './operations/settings';
+import { Preferencies } from './operations/preferencies';
 import { hackoholicDarkTheme, hackoholicLightTheme } from './themes';
 import { dataProvider, authProvider } from './providers';
 import { i18nProvider } from './providers/i18n';
 import { DUMMY_UI } from './operations/dummies';
-import { Settings } from './operations/settings';
 
 const Dashboard = () => (
   <Admin
@@ -33,6 +34,13 @@ const Dashboard = () => (
         element={<PdfViewer pdf={'http://localhost:5173/test.pdf'} />}
         path="/pdf"
       />
+    </CustomRoutes>
+    <CustomRoutes noLayout>
+      <Route element={(
+        <NoLayout>
+          <Preferencies />
+        </NoLayout>
+      )} path="/preferencies" />
     </CustomRoutes>
   </Admin>
 );
