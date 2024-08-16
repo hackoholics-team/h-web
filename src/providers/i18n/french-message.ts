@@ -23,7 +23,7 @@ export const haFrenchMessages: any = {
           label: 'Confirmer votre mot de passe',
           error: 'Les mots de passe ne correspondent pas',
         },
-        password: 'Password'
+        password: 'Password',
       },
       illustration: {
         header: 'Bienvenue à nouveau à votre travail',
@@ -53,7 +53,7 @@ export const haFrenchMessages: any = {
         birthdate: 'Date de Naissance',
         lastName: 'Prénom',
         firstName: 'Nom',
-        username: 'Nom d\'Utilisateur'
+        username: "Nom d'Utilisateur",
       },
     },
     locales: {

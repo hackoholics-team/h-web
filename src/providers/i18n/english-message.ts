@@ -23,7 +23,7 @@ export const haEnglishMessages: any = {
           label: 'Confirm your password',
           error: 'The passwords do not match',
         },
-        password: 'Mot de passe'
+        password: 'Mot de passe',
       },
       illustration: {
         header: 'Welcome back',
@@ -49,7 +49,7 @@ export const haEnglishMessages: any = {
         birthdate: 'Birthdate',
         lastName: 'Last Name',
         firstName: 'First Name',
-        username: 'Username'
+        username: 'Username',
       },
     },
     locales: {
