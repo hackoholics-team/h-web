@@ -5,11 +5,11 @@ import { Dialog } from '@/common/components';
 import { User } from '@/gen/client';
 import { usePalette } from '@/common/hooks';
 import { useDialogContext } from '@/common/services/dialog';
-// import { useWhoami } from '@/security/hooks';
+import { useWhoami } from '@/security/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
 
 export const ProfileShow = () => {
-  // const { id } = useWhoami(); // ignored as we use signin to fetch current profile and signin need only the firebaseToken
+  const { id } = useWhoami(); // ignored as we use signin to fetch current profile and signin need only the firebaseToken
 
   return (
     <TitledPage
@@ -18,7 +18,7 @@ export const ProfileShow = () => {
       paths={[{ label: 'profile', href: '/profiles' }]}
     >
       <Show
-        id={'dummyId'}
+        id={id!}
         sx={{ 'mt': 0, '& .RaShow-card': { bgcolor: 'transparent' } }}
         resource="profiles"
       >
