@@ -43,9 +43,13 @@ export const Preferencies = () => {
 const PreferenciesStepContent = ({
   setSelectedPreferencies,
   selectedPreferencies,
+  anotherPref,
+  setAnotherPref,
 }: {
   selectedPreferencies: ParkPref[];
   setSelectedPreferencies: StateSetter<ParkPref[]>;
+  anotherPref: { types: string[]; activities: string[] };
+  setAnotherPref: StateSetter<{ types: string[]; activities: string[] }>;
 }) => {
   const { currentStep } = useStepperContext();
 
@@ -55,17 +59,23 @@ const PreferenciesStepContent = ({
         <ShowPref
           title="Choose what types of park you want"
           prefs={PARK_DEFAULT_DATA.types}
+          type="types"
           setSelectedPreferencies={setSelectedPreferencies}
           selectedPreferencies={selectedPreferencies}
+          anotherPref={anotherPref}
+          setAnotherPref={setAnotherPref}
         />
       );
     case 1:
       return (
         <ShowPref
           title="Choose what king of park activities you want"
+          type="activities"
           prefs={PARK_DEFAULT_DATA.activities}
           setSelectedPreferencies={setSelectedPreferencies}
           selectedPreferencies={selectedPreferencies}
+          anotherPref={anotherPref}
+          setAnotherPref={setAnotherPref}
         />
       );
     default:
@@ -83,14 +93,22 @@ const PreferenciesContent = () => {
   );
   const getId = useGetConnectedId();
   const redirect = useRedirect();
+  const [anotherPref, setAnotherPref] = useState<{
+    types: string[];
+    activities: string[];
+  }>({
+    types: [],
+    activities: [],
+  });
 
   const updateRequirements = async () => {
     setIsLoading(true);
     await userApi()
-      .crupdateRequirements(
-        getId(),
-        selectedPreferencies.map((pref) => pref[locale])
-      )
+      .crupdateRequirements(getId(), [
+        ...selectedPreferencies.map((pref) => pref[locale]),
+        ...anotherPref.types,
+        ...anotherPref.activities,
+      ])
       .then(() => {
         redirect('/profiles');
       })
@@ -123,7 +141,7 @@ const PreferenciesContent = () => {
             activeStep={currentStep}
           >
             {PREFERENCIES_LABEL.map((label, step) => (
-              <Step key={step} completed={step === currentStep}>
+              <Step key={step} completed={step === currentStep - 1}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
@@ -131,6 +149,8 @@ const PreferenciesContent = () => {
           <PreferenciesStepContent
             setSelectedPreferencies={setSelectedPreferencies}
             selectedPreferencies={selectedPreferencies}
+            anotherPref={anotherPref}
+            setAnotherPref={setAnotherPref}
           />
           <FlexBox
             sx={{
