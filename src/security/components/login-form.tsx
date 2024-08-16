@@ -46,7 +46,7 @@ export const LoginForm = () => {
           validate={required()}
           variant="filled"
           source="password"
-          label="Password"
+          label={translate('ha.login.password')}
         />
         {view === 'signup' && (
           <PasswordInput

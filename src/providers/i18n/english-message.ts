@@ -23,13 +23,18 @@ export const haEnglishMessages: any = {
           label: 'Confirm your password',
           error: 'The passwords do not match',
         },
+        password: 'Mot de passe'
       },
       illustration: {
-        header: 'Welcome back to your job',
+        header: 'Welcome back',
+        description: 'This will be a yuur new eco-friendly comp',
+        find_our: 'Find here our ',
+        general_rules: 'General rules',
       },
       signin: {
         title: 'Sign In',
         description: 'Enter your login details to access your account.',
+        wrong_credentials: 'Wrong Password or Email',
       },
       signup: {
         title: 'Sign Up',
@@ -41,6 +46,10 @@ export const haEnglishMessages: any = {
         step0: 'Account creation',
         step1: 'Name & Firstname',
         step2: 'Username & Birthdate',
+        birthdate: 'Birthdate',
+        lastName: 'Last Name',
+        firstName: 'First Name',
+        username: 'Username'
       },
     },
     locales: {

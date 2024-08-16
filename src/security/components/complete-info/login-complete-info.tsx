@@ -101,14 +101,34 @@ const LoginCompleteInfoContent = ({
       >
         {currentStep === 1 && (
           <>
-            <TextInput validate={required()} source="lastName" fullWidth />
-            <TextInput validate={required()} source="firstName" fullWidth />
+            <TextInput
+              label={translate('ha.login.completeInfo.lastName')}
+              validate={required()}
+              source="lastName"
+              fullWidth
+            />
+            <TextInput
+              label={translate('ha.login.completeInfo.firstName')}
+              validate={required()}
+              source="firstName"
+              fullWidth
+            />
           </>
         )}
         {currentStep === 2 && (
           <>
-            <TextInput validate={required()} source="username" fullWidth />
-            <DateInput validate={required()} source="birthDate" fullWidth />
+            <TextInput
+              label={translate('ha.login.completeInfo.username')}
+              validate={required()}
+              source="username"
+              fullWidth
+            />
+            <DateInput
+              label={translate('ha.login.completeInfo.birthdate')}
+              validate={required()}
+              source="birthDate"
+              fullWidth
+            />
           </>
         )}
       </SimpleForm>
