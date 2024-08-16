@@ -9,11 +9,11 @@ import {
 } from '@mui/material';
 import { StarBorder, Star } from '@mui/icons-material';
 import { useDialogContext } from '@/common/services/dialog';
+import { prefixImageUrl } from '..';
 
 const CARD_STYLE: SxProps = {
-  maxWidth: '49%',
+  maxWidth: '45%',
   overflow: 'hidden',
-  // maxHeight: '300px',
 };
 
 const CARD_CONTENT_STYLE: SxProps = {
@@ -25,28 +25,27 @@ const CARD_CONTENT_STYLE: SxProps = {
 
 const CARD_MEDIA_STYLE: SxProps = {
   borderRadius: 1,
-  maxHeight: '250px',
+  width: 'calc(100% - 15px)',
+  mx: 'auto',
+  height: '250px',
   transition: '2s',
 };
 
 export type ParkCardProps = {
   name: string;
-  desc: string;
   imageSrc: string;
   rating: number;
 };
 
-export const ParkCard = ({ name, desc, imageSrc, rating}: ParkCardProps) => {
+export const ParkCard = ({ name, imageSrc, rating }: ParkCardProps) => {
   const { toggleStatus } = useDialogContext<false>();
 
   return (
     <Card sx={CARD_STYLE} onClick={toggleStatus}>
       <CardMedia
-        sx={{
-          ...CARD_MEDIA_STYLE,
-        }}
         component={'img'}
-        image={imageSrc}
+        sx={CARD_MEDIA_STYLE}
+        image={prefixImageUrl(imageSrc)}
       />
       <Box sx={CARD_CONTENT_STYLE}>
         <CardContent
@@ -70,9 +69,6 @@ export const ParkCard = ({ name, desc, imageSrc, rating}: ParkCardProps) => {
             Emplacement
           </Typography>
           <Divider variant="middle" />
-          <Typography variant="body1" marginTop={1}>
-            {desc}
-          </Typography>
           <Box
             flexWrap={'nowrap'}
             color={'#ebeb4b'}

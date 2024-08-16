@@ -1,23 +1,22 @@
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { FlexBox } from '@/common/components';
+import { PlaceDetails } from '@/gen/client';
 
-export type ParkMapProps = {
-  lat: number;
-  lng: number;
-};
-
-export const ParkMap = (props: ParkMapProps) => {
+export const ParkMap = ({ geometry }: Pick<PlaceDetails, 'geometry'>) => {
   return (
     <>
-      {props.lat && props.lng ? (
+      {geometry?.lat && geometry?.lon ? (
         <APIProvider
           apiKey={process.env.GOOGLE_MAP_API_KEY!}
           onLoad={() => console.log('loaded credentials')}
         >
           <Map
             defaultZoom={13}
-            defaultCenter={{ ...props }}
+            defaultCenter={{
+              lat: geometry.lat,
+              lng: geometry.lon,
+            }}
           />
         </APIProvider>
       ) : (

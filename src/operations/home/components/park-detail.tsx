@@ -2,41 +2,19 @@ import { Dialog, FlexBox } from '@/common/components';
 import {
   Box,
   Paper,
-  SxProps,
-  AppBar,
-  Toolbar,
   Typography,
+  CircularProgress,
+  DialogContent,
   Divider,
-  Button,
 } from '@mui/material';
 import { ParkCard } from './park-card';
 import { FC } from 'react';
 import { ParkMap } from './park-map';
-import Carousel from 'react-material-ui-carousel';
 import { CloseDialogButton } from './park-detail-close-button';
-import { Phone, Pin } from '@mui/icons-material';
-
-const PAPER_STYLE: SxProps = {
-  minHeight: '250px',
-  minWidth: '250px',
-};
-
-export type ParkCardProps = {
-  name: string;
-  desc: string;
-  rating: number;
-  imageSrc: string;
-  address: string;
-  contacts: {
-    international: string;
-    local: string;
-  };
-  reason: string;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-};
+import { PlaceDetails, PlacesSearchResult } from '@/gen/client';
+import Carousel from 'react-material-ui-carousel';
+import { useGetOne } from 'react-admin';
+import { prefixImageUrl } from '..';
 
 type ParkImageProps = {
   src: string;
@@ -52,66 +30,53 @@ const ParkImage = (props: ParkImageProps) => {
         justifyContent: 'center',
       }}
     >
-      <img src={props.src} title={props.title} alt={''} />
+      <img
+        src={prefixImageUrl(props.src)}
+        style={{ width: '400px', height: '300px', display: 'block' }}
+        title={props.title}
+        alt={''}
+      />
     </Paper>
   );
 };
 
-export const ParkDetail: FC<ParkCardProps> = (props) => {
+export const ParkDetailContent = ({ placeId }: { placeId: string }) => {
+  const { data: placeAbout, isLoading } = useGetOne<
+    Required<PlaceDetails> & { id: string }
+  >('places', { id: placeId });
+
+  if (isLoading || !placeAbout) {
+    return <CircularProgress />;
+  }
+
   return (
-    <Dialog
-      actionHandler={
-        <ParkCard
-          desc={props.desc}
-          name={props.name}
-          imageSrc={props.imageSrc}
-          rating={props.rating}
-        />
-      }
-      fullScreen
-    >
-      <Paper sx={PAPER_STYLE}>
-        <Box flexDirection={'row'} justifyContent={'space-between'} flexWrap={'nowrap'} >
-          <Box height={'100vh'} width={'50%'} sx={{ overflow: 'hidden' }}>
-            <AppBar
-              sx={{
-                height: 50,
-                justifyContent: 'center',
-              }}
-            >
-              <Toolbar>
-                <CloseDialogButton />
-                <Typography
-                  variant="h6"
-                  component={'div'}
-                  noWrap
-                  sx={{ maxWidth: '500px' }}
-                >
-                  {props.name}
-                </Typography>
-              </Toolbar>
-            </AppBar>
+    <DialogContent sx={{ p: 0 }}>
+      <Paper sx={{ position: 'relative' }}>
+        <CloseDialogButton />
+        <FlexBox sx={{ width: '98%', alignItems: 'start' }}>
+          <Box width={'50%'} sx={{ overflow: 'hidden' }}>
             <Box padding={5}>
-              <Carousel cycleNavigation>
-                <ParkImage src={props.imageSrc} title="" />
-                <ParkImage src={props.imageSrc} title="" />
-                <ParkImage src={props.imageSrc} title="" />
-                <ParkImage src={props.imageSrc} title="" />
-                <ParkImage src={props.imageSrc} title="" />
-                <ParkImage src={props.imageSrc} title="" />
-              </Carousel>
-              <Paper sx={{
-                padding: 2
-              }}>
+              <Box sx={{ width: '100%', minHeight: '250px' }}>
+                <Carousel cycleNavigation>
+                  {placeAbout.photos.map((photo, index) => (
+                    <ParkImage
+                      key={photo}
+                      src={photo}
+                      title={`${placeAbout} ${index}`}
+                    />
+                  ))}
+                </Carousel>
+              </Box>
+              <Paper sx={{ p: 2 }}>
                 <Typography variant={'h4'} noWrap>
-                  {props.name}
+                  {placeAbout.name}
                 </Typography>
                 <Typography variant={'body2'} color={'text.secondary'}>
-                  {props.address}
+                  {placeAbout.address}
                 </Typography>
-                {props.contacts && (
+                {placeAbout.localPhone && (
                   <Typography color={'green'}>
-                    {props.contacts.local}
+                    {placeAbout.localPhone}
                   </Typography>
                 )}
                 <Divider variant={'fullWidth'} />
@@ -121,27 +86,49 @@ export const ParkDetail: FC<ParkCardProps> = (props) => {
                     overflow: 'auto',
                   }}
                 >
-                  <Typography variant={'h6'} color={'text.secondary'}>Description</Typography>
-                  <Typography>{props.desc}</Typography>
-                  <Box sx={{
-                    marginTop: '8px',
-                    marginBottom: '8px'
-                  }}/>
+                  <Typography variant={'h6'} color={'text.secondary'}>
+                    Description
+                  </Typography>
+                  <Typography>{placeAbout.overview}</Typography>
+                  <Box
+                    sx={{
+                      marginTop: '8px',
+                      marginBottom: '8px',
+                    }}
+                  />
                   <Typography variant={'h6'} color={'text.secondary'}>
                     Why is this recommended to me ?
                   </Typography>
-                  <Typography>
-                    {props.reason}
-                  </Typography>
+                  <Typography>{placeAbout.reason}</Typography>
                 </Box>
               </Paper>
             </Box>
           </Box>
-          <Box height={'100vh'} width={'50%'}>
-            <ParkMap {...props.coordinates} />
+          <Box height={'450px'} sx={{ mt: 7, flex: 1 }}>
+            <ParkMap geometry={placeAbout.geometry} />
           </Box>
-        </Box>
+        </FlexBox>
       </Paper>
+    </DialogContent>
+  );
+};
+
+export const ParkDetail: FC<{
+  place: Required<PlacesSearchResult> & { id: string };
+}> = ({ place }) => {
+  return (
+    <Dialog
+      actionHandler={
+        <ParkCard
+          name={place.name}
+          imageSrc={place.photo}
+          rating={place.rating}
+        />
+      }
+      fullWidth
+      maxWidth="lg"
+    >
+      <ParkDetailContent placeId={place.id} />
     </Dialog>
   );
 };
