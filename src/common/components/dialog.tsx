@@ -33,7 +33,7 @@ export const DialogContent: FC<
 > = ({ children, ...dialogProps }) => {
   const { status, close } = useDialogContext<false>();
   return (
-    <MuiDialog open={status} onClose={close} hideBackdrop {...dialogProps}>
+    <MuiDialog open={status} onClose={close} {...dialogProps}>
       {children}
     </MuiDialog>
   );

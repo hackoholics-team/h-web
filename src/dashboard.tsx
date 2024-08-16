@@ -1,16 +1,16 @@
 import { Admin, Authenticated, CustomRoutes, Resource } from 'react-admin';
 import { Route } from 'react-router-dom';
-import { Layout, NoLayout } from './layout';
+import { Layout } from './layout';
 import { LoginPage } from './security/components';
 import { ProfileShow } from './operations/profiles';
 import { PdfViewer } from './common/components';
-import { Settings } from './operations/settings';
-import { Preferencies } from './operations/preferencies';
 import { hackoholicDarkTheme, hackoholicLightTheme } from './themes';
 import { dataProvider, authProvider } from './providers';
 import { i18nProvider } from './providers/i18n';
 import { DUMMY_UI } from './operations/dummies';
 import { CompleteInfoPage } from './security/components/complete-info/complete-info-page';
+import { Settings } from './operations/settings';
+import { Home } from './operations/home';
 
 const Dashboard = () => (
   <Admin
@@ -18,6 +18,7 @@ const Dashboard = () => (
     title="hackoholic"
     defaultTheme="light"
     layout={Layout}
+    dashboard={Home}
     loginPage={LoginPage}
     i18nProvider={i18nProvider}
     lightTheme={hackoholicLightTheme}
