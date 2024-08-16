@@ -118,6 +118,196 @@ export interface NotAuthorizedException {
 /**
  *
  * @export
+ * @interface PlaceDetails
+ */
+export interface PlaceDetails {
+  /**
+   *
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  name?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  address?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  placeId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  reason?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  overview?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  localPhone?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  internationalPhone?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof PlaceDetails
+   */
+  photos?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  website?: string;
+  /**
+   *
+   * @type {PlacesSearchResultGeometry}
+   * @memberof PlaceDetails
+   */
+  geometry?: PlacesSearchResultGeometry;
+  /**
+   * photo url
+   * @type {string}
+   * @memberof PlaceDetails
+   */
+  photo?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof PlaceDetails
+   */
+  rating?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlaceDetails
+   */
+  totalRate?: number;
+}
+/**
+ *
+ * @export
+ * @interface PlacesSearchResult
+ */
+export interface PlacesSearchResult {
+  /**
+   *
+   * @type {string}
+   * @memberof PlacesSearchResult
+   */
+  name?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlacesSearchResult
+   */
+  address?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlacesSearchResult
+   */
+  placeId?: string;
+  /**
+   *
+   * @type {PlacesSearchResultGeometry}
+   * @memberof PlacesSearchResult
+   */
+  geometry?: PlacesSearchResultGeometry;
+  /**
+   * photo url
+   * @type {string}
+   * @memberof PlacesSearchResult
+   */
+  photo?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof PlacesSearchResult
+   */
+  rating?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlacesSearchResult
+   */
+  totalRate?: number;
+  /**
+   *
+   * @type {PlacesSearchResultOpeningHours}
+   * @memberof PlacesSearchResult
+   */
+  openingHours?: PlacesSearchResultOpeningHours;
+}
+/**
+ *
+ * @export
+ * @interface PlacesSearchResultGeometry
+ */
+export interface PlacesSearchResultGeometry {
+  /**
+   *
+   * @type {number}
+   * @memberof PlacesSearchResultGeometry
+   */
+  lat?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PlacesSearchResultGeometry
+   */
+  lon?: number;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof PlacesSearchResultGeometry
+   */
+  bounds?: Array<number>;
+}
+/**
+ *
+ * @export
+ * @interface PlacesSearchResultOpeningHours
+ */
+export interface PlacesSearchResultOpeningHours {
+  /**
+   *
+   * @type {string}
+   * @memberof PlacesSearchResultOpeningHours
+   */
+  open?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PlacesSearchResultOpeningHours
+   */
+  close?: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof PlacesSearchResultOpeningHours
+   */
+  isOpenNow?: boolean;
+}
+/**
+ *
+ * @export
  * @interface ResourceNotFoundException
  */
 export interface ResourceNotFoundException {
@@ -207,178 +397,6 @@ export interface User {
    * @memberof User
    */
   photoId?: string;
-}
-
-/**
- * ChatApi - axios parameter creator
- * @export
- */
-export const ChatApiAxiosParamCreator = function (
-  configuration?: Configuration
-) {
-  return {
-    /**
-     *
-     * @summary Chat with ai
-     * @param {File} body
-     * @param {string} [message]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    sendMessage: async (
-      body: File,
-      message?: string,
-      options: RawAxiosRequestConfig = {}
-    ): Promise<RequestArgs> => {
-      // verify required parameter 'body' is not null or undefined
-      assertParamExists('sendMessage', 'body', body);
-      const localVarPath = `/chat`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = {
-        method: 'POST',
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      // authentication BearerAuth required
-      // http bearer authentication required
-      await setBearerAuthToObject(localVarHeaderParameter, configuration);
-
-      if (message !== undefined) {
-        localVarQueryParameter['message'] = message;
-      }
-
-      localVarHeaderParameter['Content-Type'] = 'image/*';
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-      localVarRequestOptions.data = serializeDataIfNeeded(
-        body,
-        localVarRequestOptions,
-        configuration
-      );
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-  };
-};
-
-/**
- * ChatApi - functional programming interface
- * @export
- */
-export const ChatApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = ChatApiAxiosParamCreator(configuration);
-  return {
-    /**
-     *
-     * @summary Chat with ai
-     * @param {File} body
-     * @param {string} [message]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async sendMessage(
-      body: File,
-      message?: string,
-      options?: RawAxiosRequestConfig
-    ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>
-    > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.sendMessage(
-        body,
-        message,
-        options
-      );
-      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-      const localVarOperationServerBasePath =
-        operationServerMap['ChatApi.sendMessage']?.[
-          localVarOperationServerIndex
-        ]?.url;
-      return (axios, basePath) =>
-        createRequestFunction(
-          localVarAxiosArgs,
-          globalAxios,
-          BASE_PATH,
-          configuration
-        )(axios, localVarOperationServerBasePath || basePath);
-    },
-  };
-};
-
-/**
- * ChatApi - factory interface
- * @export
- */
-export const ChatApiFactory = function (
-  configuration?: Configuration,
-  basePath?: string,
-  axios?: AxiosInstance
-) {
-  const localVarFp = ChatApiFp(configuration);
-  return {
-    /**
-     *
-     * @summary Chat with ai
-     * @param {File} body
-     * @param {string} [message]
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    sendMessage(
-      body: File,
-      message?: string,
-      options?: any
-    ): AxiosPromise<Array<string>> {
-      return localVarFp
-        .sendMessage(body, message, options)
-        .then((request) => request(axios, basePath));
-    },
-  };
-};
-
-/**
- * ChatApi - object-oriented interface
- * @export
- * @class ChatApi
- * @extends {BaseAPI}
- */
-export class ChatApi extends BaseAPI {
-  /**
-   *
-   * @summary Chat with ai
-   * @param {File} body
-   * @param {string} [message]
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof ChatApi
-   */
-  public sendMessage(
-    body: File,
-    message?: string,
-    options?: RawAxiosRequestConfig
-  ) {
-    return ChatApiFp(this.configuration)
-      .sendMessage(body, message, options)
-      .then((request) => request(this.axios, this.basePath));
-  }
 }
 
 /**
@@ -582,7 +600,7 @@ export const FileApiFp = function (configuration?: Configuration) {
       fId: string,
       options?: RawAxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.downloadFile(
         fId,
@@ -684,7 +702,7 @@ export const FileApiFactory = function (
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    downloadFile(fId: string, options?: any): AxiosPromise<string> {
+    downloadFile(fId: string, options?: any): AxiosPromise<File> {
       return localVarFp
         .downloadFile(fId, options)
         .then((request) => request(axios, basePath));
@@ -906,6 +924,271 @@ export class HealthApi extends BaseAPI {
   public ping(options?: RawAxiosRequestConfig) {
     return HealthApiFp(this.configuration)
       .ping(options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * PlaceApi - axios parameter creator
+ * @export
+ */
+export const PlaceApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     *
+     * @summary Get place description
+     * @param {string} placeId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    aboutParksOrReserve: async (
+      placeId: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'placeId' is not null or undefined
+      assertParamExists('aboutParksOrReserve', 'placeId', placeId);
+      const localVarPath = `/places/about`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (placeId !== undefined) {
+        localVarQueryParameter['placeId'] = placeId;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get parks and naturel reserve around a specific place
+     * @param {string} location
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getParkAndNReserve: async (
+      location: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'location' is not null or undefined
+      assertParamExists('getParkAndNReserve', 'location', location);
+      const localVarPath = `/places`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (location !== undefined) {
+        localVarQueryParameter['location'] = location;
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * PlaceApi - functional programming interface
+ * @export
+ */
+export const PlaceApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = PlaceApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @summary Get place description
+     * @param {string} placeId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async aboutParksOrReserve(
+      placeId: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<PlacesSearchResult>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.aboutParksOrReserve(placeId, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['PlaceApi.aboutParksOrReserve']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get parks and naturel reserve around a specific place
+     * @param {string} location
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getParkAndNReserve(
+      location: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<PlacesSearchResult>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getParkAndNReserve(location, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['PlaceApi.getParkAndNReserve']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * PlaceApi - factory interface
+ * @export
+ */
+export const PlaceApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance
+) {
+  const localVarFp = PlaceApiFp(configuration);
+  return {
+    /**
+     *
+     * @summary Get place description
+     * @param {string} placeId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    aboutParksOrReserve(
+      placeId: string,
+      options?: any
+    ): AxiosPromise<PlacesSearchResult> {
+      return localVarFp
+        .aboutParksOrReserve(placeId, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get parks and naturel reserve around a specific place
+     * @param {string} location
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getParkAndNReserve(
+      location: string,
+      options?: any
+    ): AxiosPromise<Array<PlacesSearchResult>> {
+      return localVarFp
+        .getParkAndNReserve(location, options)
+        .then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * PlaceApi - object-oriented interface
+ * @export
+ * @class PlaceApi
+ * @extends {BaseAPI}
+ */
+export class PlaceApi extends BaseAPI {
+  /**
+   *
+   * @summary Get place description
+   * @param {string} placeId
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PlaceApi
+   */
+  public aboutParksOrReserve(placeId: string, options?: RawAxiosRequestConfig) {
+    return PlaceApiFp(this.configuration)
+      .aboutParksOrReserve(placeId, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get parks and naturel reserve around a specific place
+   * @param {string} location
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PlaceApi
+   */
+  public getParkAndNReserve(location: string, options?: RawAxiosRequestConfig) {
+    return PlaceApiFp(this.configuration)
+      .getParkAndNReserve(location, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }
@@ -1149,6 +1432,284 @@ export class SecurityApi extends BaseAPI {
   public signUp(user: User, options?: RawAxiosRequestConfig) {
     return SecurityApiFp(this.configuration)
       .signUp(user, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+}
+
+/**
+ * UserApi - axios parameter creator
+ * @export
+ */
+export const UserApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     *
+     * @summary Crupdate user requirements
+     * @param {string} uId
+     * @param {Array<string>} [requestBody]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateRequirements: async (
+      uId: string,
+      requestBody?: Array<string>,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'uId' is not null or undefined
+      assertParamExists('crupdateRequirements', 'uId', uId);
+      const localVarPath = `/users/{uId}/requirements`.replace(
+        `{${'uId'}}`,
+        encodeURIComponent(String(uId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'PUT',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        requestBody,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get user requirements
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getRequirements: async (
+      uId: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'uId' is not null or undefined
+      assertParamExists('getRequirements', 'uId', uId);
+      const localVarPath = `/users/{uId}/requirements`.replace(
+        `{${'uId'}}`,
+        encodeURIComponent(String(uId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * UserApi - functional programming interface
+ * @export
+ */
+export const UserApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = UserApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @summary Crupdate user requirements
+     * @param {string} uId
+     * @param {Array<string>} [requestBody]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateRequirements(
+      uId: string,
+      requestBody?: Array<string>,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.crupdateRequirements(
+          uId,
+          requestBody,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['UserApi.crupdateRequirements']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get user requirements
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getRequirements(
+      uId: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getRequirements(
+        uId,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['UserApi.getRequirements']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * UserApi - factory interface
+ * @export
+ */
+export const UserApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance
+) {
+  const localVarFp = UserApiFp(configuration);
+  return {
+    /**
+     *
+     * @summary Crupdate user requirements
+     * @param {string} uId
+     * @param {Array<string>} [requestBody]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateRequirements(
+      uId: string,
+      requestBody?: Array<string>,
+      options?: any
+    ): AxiosPromise<Array<string>> {
+      return localVarFp
+        .crupdateRequirements(uId, requestBody, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get user requirements
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getRequirements(uId: string, options?: any): AxiosPromise<Array<string>> {
+      return localVarFp
+        .getRequirements(uId, options)
+        .then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * UserApi - object-oriented interface
+ * @export
+ * @class UserApi
+ * @extends {BaseAPI}
+ */
+export class UserApi extends BaseAPI {
+  /**
+   *
+   * @summary Crupdate user requirements
+   * @param {string} uId
+   * @param {Array<string>} [requestBody]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UserApi
+   */
+  public crupdateRequirements(
+    uId: string,
+    requestBody?: Array<string>,
+    options?: RawAxiosRequestConfig
+  ) {
+    return UserApiFp(this.configuration)
+      .crupdateRequirements(uId, requestBody, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get user requirements
+   * @param {string} uId
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UserApi
+   */
+  public getRequirements(uId: string, options?: RawAxiosRequestConfig) {
+    return UserApiFp(this.configuration)
+      .getRequirements(uId, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }
