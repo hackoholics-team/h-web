@@ -23,14 +23,20 @@ export const haFrenchMessages: any = {
           label: 'Confirmer votre mot de passe',
           error: 'Les mots de passe ne correspondent pas',
         },
+        password: 'Password',
       },
       illustration: {
         header: 'Bienvenue à nouveau à votre travail',
+        description:
+          'Votre nouveau compagnon eco-responsable pour vos destinations',
+        find_our: 'Trouver ici notre ',
+        general_rules: 'Règles générale',
       },
       signin: {
         title: 'Se connecter',
         description:
           'Entrez vos informations de connexion pour accéder à votre compte.',
+        wrong_credentials: 'Mauvais mot de passe ou email',
       },
       signup: {
         title: 'Créer un compte',
@@ -44,6 +50,10 @@ export const haFrenchMessages: any = {
         step0: 'Création de compte',
         step1: 'Nom & Prénoms',
         step2: "Nom d'utilisateur & Date D'anniversaire",
+        birthdate: 'Date de Naissance',
+        lastName: 'Prénom',
+        firstName: 'Nom',
+        username: "Nom d'Utilisateur",
       },
     },
     locales: {

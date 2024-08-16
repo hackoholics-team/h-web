@@ -2,11 +2,14 @@ import { DataProvider } from 'react-admin';
 import { HackoholicDataProvider } from './types';
 import { dummyProvider } from './dummy-provider';
 import { userProvider } from './user-provider';
+import { placeProvider } from './place-provider';
 
 export const getProvider = (resource: string): HackoholicDataProvider<any> => {
   switch (resource) {
     case 'profiles':
       return userProvider;
+    case 'places':
+      return placeProvider;
     case 'dummies':
       return dummyProvider;
     default:
