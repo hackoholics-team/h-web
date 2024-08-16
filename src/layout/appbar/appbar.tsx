@@ -203,6 +203,7 @@ export const AppBarContent = () => {
     close: closeMenu,
   } = useDialogContext<true>();
   const redirect = useRedirect();
+  const translate = useTranslate();
   const authProvider = useAuthProvider();
 
   return (
@@ -270,7 +271,7 @@ export const AppBarContent = () => {
             <ListItemIcon>
               <AccountCircle />
             </ListItemIcon>
-            <ListItemText>Profile</ListItemText>
+            <ListItemText>{translate('ha.words.profil')}</ListItemText>
           </MuiMenuItem>
           <Divider sx={{ my: 0 }} />
           <MuiMenuItem
@@ -283,7 +284,7 @@ export const AppBarContent = () => {
             <ListItemIcon>
               <Settings />
             </ListItemIcon>
-            <ListItemText>Settings</ListItemText>
+            <ListItemText>{translate('ha.words.settings')}</ListItemText>
           </MuiMenuItem>
           <SelectLocalMenu closeMainMenu={closeMenu} />
           <MuiMenuItem
@@ -296,7 +297,7 @@ export const AppBarContent = () => {
             <ListItemIcon>
               <Logout />
             </ListItemIcon>
-            <ListItemText>Se deconnecter</ListItemText>
+            <ListItemText>{translate('ha.words.signout')}</ListItemText>
           </MuiMenuItem>
         </MuiMenuList>
       </MuiMenu>

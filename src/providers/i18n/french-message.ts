@@ -7,15 +7,25 @@ export const haFrenchMessages: any = {
     words: {
       or: 'Ou',
       signin: 'Se connecter',
+      lang: 'Langues',
+      settings: 'Paramètres',
+      profil: 'Profil',
       signup: "S'inscrire",
       next: 'Suivant',
+      home: 'Accueil',
+      light: 'Clair',
+      dark: 'Sombre',
       prev: 'Précédent',
+      edit: 'Editer',
       finish: 'Terminer',
+      signout: 'Se Déconnecter',
+      requirement: 'Mes exigences',
     },
     text: {
       forgotPassword: 'Mot de passe oublié ?',
       alreadyHaveAccount: 'Vous avez déjà un compte ?',
       doesNotHaveAccountYet: "Vous n'avez pas encore de compte ?",
+      settings: "Modifiez la configuration de l'application pour qu'elle corresponde à votre configuration"
     },
     login: {
       forms: {

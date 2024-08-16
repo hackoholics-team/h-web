@@ -1,21 +1,30 @@
 import englishMessages from 'ra-language-english';
 
-//TODO: avoid type any
 export const haEnglishMessages: any = {
   ...englishMessages,
   ha: {
     words: {
       or: 'Or',
       signin: 'Signin',
+      settings: 'Settings',
+      profil: 'Profile',
       signup: 'Signup',
       next: 'Next',
+      home: 'Home',
       prev: 'Back',
+      edit: 'Edit',
       finish: 'Finish',
+      signout: 'Logout',
+      lang: 'Langages',
+      light: 'Light',
+      dark: 'Dark',
+      requirement: 'My Requirements',
     },
     text: {
       forgotPassword: 'Forgot password ?',
       alreadyHaveAccount: 'Already have a account ?',
       doesNotHaveAccountYet: 'Does not have an account yet ?',
+      settings: "Change the app configuration to match your config"
     },
     login: {
       forms: {
