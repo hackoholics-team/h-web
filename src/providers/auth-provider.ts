@@ -28,16 +28,19 @@ export const authProvider: AuthProvider = {
     return Promise.resolve();
   },
   checkAuth: async () => {
-    return securityApi().signIn().then(NOOP_FN).catch((error) => {
-      if (error instanceof AxiosError) {
-        if (error.status === REDIRECTION_STATUS_CODE) {
-          window.location.href = COMPLETE_INFO_URL;
-          window.location.reload();
-          return Promise.resolve();
+    return securityApi()
+      .signIn()
+      .then(NOOP_FN)
+      .catch((error) => {
+        if (error instanceof AxiosError) {
+          if (error.status === REDIRECTION_STATUS_CODE) {
+            window.location.href = COMPLETE_INFO_URL;
+            window.location.reload();
+            return Promise.resolve();
+          }
         }
-      }
-      return Promise.reject(); // change to reject after fix;
-    })
+        return Promise.resolve(); // change to reject after fix;
+      });
   },
   checkError: async (error) => {
     if (!(error instanceof AxiosError)) {

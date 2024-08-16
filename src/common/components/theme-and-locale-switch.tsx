@@ -8,12 +8,14 @@ import {
 import { GTranslate as GTranslateIcon } from '@mui/icons-material';
 import { FlexBox } from './flex-box';
 import { SUPPORTED_LOCALES } from '@/providers/i18n';
+import { usePalette } from '../hooks';
 
 export const ThemeAndLocaleSwitch: FC<{ sx?: SxProps; locale?: boolean }> = ({
   sx = {},
   locale = true,
 }) => {
   const translate = useTranslate();
+  const { primaryColor } = usePalette();
 
   const languages = SUPPORTED_LOCALES.map((locale) => {
     return {
@@ -29,7 +31,10 @@ export const ThemeAndLocaleSwitch: FC<{ sx?: SxProps; locale?: boolean }> = ({
         'gap': 1,
         'top': 5,
         'right': 5,
-        '& *': { textTransform: 'none !important' },
+        '& *': {
+          textTransform: 'none !important',
+          color: primaryColor,
+        },
         ...sx,
       }}
     >

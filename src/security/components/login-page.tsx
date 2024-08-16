@@ -12,13 +12,13 @@ import { LoginLoadingContext } from '../context';
 import { LoginCompleteInfo } from './complete-info';
 import { NoLayout } from '@/layout';
 import { useLogin } from '../hooks';
-import { usePalette } from '@/common/hooks';
+import { useIsDarkTheme, usePalette } from '@/common/hooks';
 import loginIllustration from '@/assets/login-illustration.png';
 
 const LOGIN_PAGE_SX: SxProps = {
   alignItems: 'start',
   width: '100%',
-  px: 5,
+  px: 7,
   position: 'relative',
 };
 
@@ -26,7 +26,7 @@ const ILLUSTRATION_BOX_SX: SxProps = {
   flex: 1,
   p: 3,
   flexDirection: 'column',
-  alignItems: 'start'
+  alignItems: 'start',
 };
 
 const ILLUSTRATION_HEADER_TEXT_SX: SxProps = {
@@ -42,9 +42,10 @@ export const LoginPage = () => (
 );
 
 export const LoginPageContent = () => {
-  const { palette } = usePalette();
+  const { palette, primaryColor, secondaryColor } = usePalette();
   const { view, isLoading } = useLogin();
   const translate = useTranslate();
+  const isDarkTheme = useIsDarkTheme();
 
   return (
     <NoLayout>
@@ -60,24 +61,26 @@ export const LoginPageContent = () => {
       >
         <FlexBox sx={{ ...LOGIN_PAGE_SX }}>
           <FlexBox sx={ILLUSTRATION_BOX_SX}>
-            <Typography sx={{ ...ILLUSTRATION_HEADER_TEXT_SX, color: '#9CC5A1' }} variant="h2">
+            <Typography
+              sx={{
+                ...ILLUSTRATION_HEADER_TEXT_SX,
+                color: isDarkTheme ? '#9CC5A1' : '#49A078',
+              }}
+              variant="h2"
+            >
               {translate('ha.login.illustration.header')}
             </Typography>
-            <Typography
-              sx={{ fontSize: '15px', color: 'white' }}
-            >
+            <Typography sx={{ fontSize: '15px', color: secondaryColor }}>
               Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
               sint cillum sint consectetur cupidatat.
             </Typography>
             <img
               width={250}
-              src={loginIllustration}
               alt="hackoholics-login"
+              src={loginIllustration}
               style={{ display: 'block' }}
             />
-            <Typography
-              sx={{ color: 'white', fontSize: '15px' }}
-            >
+            <Typography sx={{ color: secondaryColor, fontSize: '15px' }}>
               Trouver ici notre{' '}
               <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
                 Règle Génerale

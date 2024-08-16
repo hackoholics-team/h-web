@@ -11,10 +11,10 @@ import { FIREBASE_AUTH } from '@/config/firebase-config';
 
 export type SigninProviderType =
   | {
-    email: string;
-    password: string;
-  }
-  | { new(): GoogleAuthProvider };
+      email: string;
+      password: string;
+    }
+  | { new (): GoogleAuthProvider };
 
 const USER_ID_CACHE_NAME = 'auth-user-id';
 const TOKEN_ID_CACHE_NAME = 'auth-token-id';
