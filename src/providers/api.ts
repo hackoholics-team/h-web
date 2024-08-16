@@ -1,4 +1,5 @@
-import { SecurityApi } from '@/gen/client';
-import { createClientApi } from './utils';
+import { SecurityApi, UserApi } from '@/gen/client';
+import { getConfiguration } from './utils';
 
-export const securityApi = createClientApi(SecurityApi);
+export const securityApi = () => new SecurityApi(getConfiguration());
+export const userApi = () => new UserApi(getConfiguration());

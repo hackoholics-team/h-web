@@ -1,14 +1,13 @@
-import { Button, Toolbar, useTranslate } from 'react-admin';
-import { useLogin } from '../../hooks';
+import { Button, Toolbar, useAuthProvider, useTranslate } from 'react-admin';
 import { useStepperContext } from '@/common/services/stepper';
 
 export const CompleteInfoToolbar = () => {
-  const { setView } = useLogin();
   const { currentStep, maxStep, doPrevStep } = useStepperContext();
+  const authProvider = useAuthProvider();
   const translate = useTranslate();
 
   const redirectToSignin = async () => {
-    setView('signin');
+    authProvider?.logout({});
   };
 
   return (

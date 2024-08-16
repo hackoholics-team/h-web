@@ -99,6 +99,25 @@ export interface InternalServerException {
 /**
  *
  * @export
+ * @interface IsSignupStillProcessedRequest
+ */
+export interface IsSignupStillProcessedRequest {
+  /**
+   *
+   * @type {string}
+   * @memberof IsSignupStillProcessedRequest
+   */
+  email?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof IsSignupStillProcessedRequest
+   */
+  uid?: string;
+}
+/**
+ *
+ * @export
  * @interface NotAuthorizedException
  */
 export interface NotAuthorizedException {
@@ -1203,6 +1222,64 @@ export const SecurityApiAxiosParamCreator = function (
   return {
     /**
      *
+     * @summary Check if user successfully finished signup
+     * @param {IsSignupStillProcessedRequest} isSignupStillProcessedRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    isSignupStillProcessed: async (
+      isSignupStillProcessedRequest: IsSignupStillProcessedRequest,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'isSignupStillProcessedRequest' is not null or undefined
+      assertParamExists(
+        'isSignupStillProcessed',
+        'isSignupStillProcessedRequest',
+        isSignupStillProcessedRequest
+      );
+      const localVarPath = `/processing`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        isSignupStillProcessedRequest,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
      * @summary Login user.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1310,6 +1387,37 @@ export const SecurityApiFp = function (configuration?: Configuration) {
   return {
     /**
      *
+     * @summary Check if user successfully finished signup
+     * @param {IsSignupStillProcessedRequest} isSignupStillProcessedRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async isSignupStillProcessed(
+      isSignupStillProcessedRequest: IsSignupStillProcessedRequest,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<boolean>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.isSignupStillProcessed(
+          isSignupStillProcessedRequest,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['SecurityApi.isSignupStillProcessed']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
      * @summary Login user.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1377,6 +1485,21 @@ export const SecurityApiFactory = function (
   return {
     /**
      *
+     * @summary Check if user successfully finished signup
+     * @param {IsSignupStillProcessedRequest} isSignupStillProcessedRequest
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    isSignupStillProcessed(
+      isSignupStillProcessedRequest: IsSignupStillProcessedRequest,
+      options?: any
+    ): AxiosPromise<boolean> {
+      return localVarFp
+        .isSignupStillProcessed(isSignupStillProcessedRequest, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
      * @summary Login user.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1408,6 +1531,23 @@ export const SecurityApiFactory = function (
  * @extends {BaseAPI}
  */
 export class SecurityApi extends BaseAPI {
+  /**
+   *
+   * @summary Check if user successfully finished signup
+   * @param {IsSignupStillProcessedRequest} isSignupStillProcessedRequest
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof SecurityApi
+   */
+  public isSignupStillProcessed(
+    isSignupStillProcessedRequest: IsSignupStillProcessedRequest,
+    options?: RawAxiosRequestConfig
+  ) {
+    return SecurityApiFp(this.configuration)
+      .isSignupStillProcessed(isSignupStillProcessedRequest, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
   /**
    *
    * @summary Login user.

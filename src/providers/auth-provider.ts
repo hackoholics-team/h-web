@@ -5,15 +5,14 @@ import {
   firebaseAuthProvider,
 } from './firebase-auth-provider';
 import { securityApi } from './api';
-import { NOOP_FN } from '@/common/utils/noop';
+import { saveConnectedId } from '@/common/hooks';
 
 export type LoginDataType = {
   provider: SigninProviderType;
   type: 'signin' | 'signup';
 };
 
-const COMPLETE_INFO_URL = '#/login';
-const REDIRECTION_STATUS_CODE = 102;
+const COMPLETE_INFO_URL = '#/register';
 const TO_SIGNOUT_STATUS_CODES = [403, 401];
 export const authProvider: AuthProvider = {
   login: async (loginData: LoginDataType) => {
@@ -24,23 +23,36 @@ export const authProvider: AuthProvider = {
   },
   logout: async () => {
     await firebaseAuthProvider.signOut();
-    window.location.reload();
+    window.location.href = '#/login';
     return Promise.resolve();
   },
   checkAuth: async () => {
-    return securityApi()
-      .signIn()
-      .then(NOOP_FN)
-      .catch((error) => {
-        if (error instanceof AxiosError) {
-          if (error.status === REDIRECTION_STATUS_CODE) {
-            window.location.href = COMPLETE_INFO_URL;
-            window.location.reload();
-            return Promise.resolve();
-          }
-        }
-        return Promise.resolve(); // change to reject after fix;
-      });
+    const credentials = firebaseAuthProvider.getCachedCredential();
+    const isCompeltedUser = await securityApi()
+      .isSignupStillProcessed({
+        uid: credentials.id!,
+        email: credentials.email!,
+      })
+      .then((response) => response.data);
+
+    try {
+      const { id } = await securityApi()
+        .signIn()
+        .then((response) => response.data);
+      saveConnectedId(id!);
+      return Promise.resolve();
+    } catch {
+      if (
+        !isCompeltedUser &&
+        credentials.token &&
+        credentials.email &&
+        credentials.id
+      ) {
+        window.location.href = COMPLETE_INFO_URL;
+        return Promise.resolve();
+      }
+    }
+    return Promise.reject();
   },
   checkError: async (error) => {
     if (!(error instanceof AxiosError)) {
