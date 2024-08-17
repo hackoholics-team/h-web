@@ -19,20 +19,21 @@ export const PaymentDialog = () => {
 
   const doSubscription = async () => {
     setIsLoading(true);
-    await subscribeApi().crupdateSubscription(getId(), {
-      id: uuid(),
-      creationDatetime: new Date().toISOString(),
-      subscribeType: "PREMIUM"
-    })
+    await subscribeApi()
+      .crupdateSubscription(getId(), {
+        id: uuid(),
+        creationDatetime: new Date().toISOString(),
+        subscribeType: 'PREMIUM',
+      })
       .then(() => {
-        redirect("/payments/methods");
+        redirect('/payments/methods');
       })
       .catch(NOOP_FN)
       .finally(() => {
         setIsLoading(false);
         toggleStatus();
-      })
-  }
+      });
+  };
 
   return (
     <Box>

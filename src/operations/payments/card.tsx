@@ -11,7 +11,7 @@ export type CardProps = {
   price: string;
   disabled: boolean;
   description: string;
-  onClick?: () => void
+  onClick?: () => void;
   isLoading: boolean;
 };
 

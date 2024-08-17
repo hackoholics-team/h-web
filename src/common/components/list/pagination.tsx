@@ -16,7 +16,7 @@ export const Pagination = () => {
         sx={{
           '& .MuiSvgIcon-root': { fontSize: '17px' },
           'px': 2,
-          'borderRadius': '8px',
+          'borderRadius': '10px',
         }}
       >
         <ArrowBackIos />
@@ -54,7 +54,7 @@ export const Pagination = () => {
         sx={{
           '& .MuiSvgIcon-root': { fontSize: '17px' },
           'px': 2,
-          'borderRadius': '8px',
+          'borderRadius': '10px',
         }}
       >
         <ArrowForwardIos />

@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { FC } from 'react';
 import {
   useAuthProvider,
   useGetOne,
@@ -22,7 +22,6 @@ import {
   Box,
 } from '@mui/material';
 import {
-  Search as SearchIcon,
   Logout,
   Check,
   GTranslate,
@@ -41,8 +40,6 @@ import {
   DialogContextProvider,
   useDialogContext,
 } from '@/common/services/dialog';
-import { NativeStyle } from '@/common/utils/types';
-import { useFormContext, useWatch } from 'react-hook-form';
 import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
 import { SUPPORTED_LOCALES } from '@/providers/i18n';
@@ -74,46 +71,6 @@ export const AppBar = () => {
     <DialogContextProvider popover>
       <AppBarContent />
     </DialogContextProvider>
-  );
-};
-
-const SEARCH_NAME = 'search';
-const SEARCH_INPUT_STYLE: NativeStyle = {
-  width: '100%',
-  padding: '5px',
-  border: 'none',
-  outline: 'none',
-  backgroundColor: 'transparent',
-};
-const SEARCH_INPUT_SX: SxProps = {
-  width: '250px',
-  px: 1,
-  py: 0.5,
-  borderRadius: '15px',
-};
-const SearchInput = () => {
-  const { primaryColor, bgcolorPaper } = usePalette();
-  const { setValue } = useFormContext();
-  const searchValue = useWatch({ name: 'search' });
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(SEARCH_NAME, event.target.value);
-  };
-
-  return (
-    <FlexBox
-      sx={{ ...SEARCH_INPUT_SX, color: primaryColor, bgcolor: bgcolorPaper }}
-    >
-      <input
-        type="text"
-        name="search"
-        placeholder="Search"
-        onChange={handleChange}
-        value={searchValue || ''}
-        style={SEARCH_INPUT_STYLE}
-      />
-      <SearchIcon />
-    </FlexBox>
   );
 };
 

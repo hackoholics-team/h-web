@@ -4,11 +4,14 @@ import { dummyProvider } from './dummy-provider';
 import { userProvider } from './user-provider';
 import { placeProvider } from './place-provider';
 import { favoritesProvider } from './favorites-provider';
+import { paymentMethodProvider } from './paymentMethodProvider';
 
 export const getProvider = (resource: string): HackoholicDataProvider<any> => {
   switch (resource) {
     case 'profiles':
       return userProvider;
+    case 'paymentMethods':
+      return paymentMethodProvider;
     case 'places':
       return placeProvider;
     case 'dummies':

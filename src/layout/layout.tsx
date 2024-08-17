@@ -9,7 +9,7 @@ import {
 import { Menu } from './menu';
 import { AppBar } from './appbar';
 import { useGetConnectedId, usePalette } from '@/common/hooks';
-import { payingApi, subscribeApi, userApi } from '@/providers/api';
+import { subscribeApi, userApi } from '@/providers/api';
 import {
   DialogContextProvider,
   useDialogContext,
@@ -43,6 +43,7 @@ export const LayoutContent: FC<LayoutProps> = ({ children }) => {
   const getId = useGetConnectedId();
   const redirect = useRedirect();
 
+  console.log(isPayemenntMethodLoading);
   useEffect(() => {
     const shouldRedirects = async () => {
       const requirements = await userApi()
