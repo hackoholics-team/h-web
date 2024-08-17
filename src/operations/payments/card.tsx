@@ -11,13 +11,17 @@ export type CardProps = {
   price: string;
   disabled: boolean;
   description: string;
+  onClick?: () => void
+  isLoading: boolean;
 };
 
 export const Card: FC<CardProps> = ({
   description,
+  isLoading,
   features,
   title,
   price,
+  onClick,
   disabled,
 }) => {
   const { bgcolorPaper, primaryColor, secondaryColor } = usePalette();
@@ -61,7 +65,8 @@ export const Card: FC<CardProps> = ({
         label="Choose this plan"
         sx={{ mt: 'auto', ml: 'auto' }}
         variant="contained"
-        disabled={disabled}
+        disabled={disabled || isLoading}
+        onClick={onClick}
       />
     </FlexBox>
   );

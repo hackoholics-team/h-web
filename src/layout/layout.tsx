@@ -9,7 +9,7 @@ import {
 import { Menu } from './menu';
 import { AppBar } from './appbar';
 import { useGetConnectedId, usePalette } from '@/common/hooks';
-import { payingApi, userApi } from '@/providers/api';
+import { payingApi, subscribeApi, userApi } from '@/providers/api';
 import {
   DialogContextProvider,
   useDialogContext,
@@ -64,14 +64,14 @@ export const LayoutContent: FC<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     const shouldRedirects = async () => {
-      const requirements = await payingApi()
-        .getPaymentMethods(getId())
+      const requirements = await subscribeApi()
+        .getSubscription(getId())
         .then((response) => response.data)
         .finally(() => {
           setIsPayemenntMethodLoading(false);
         });
 
-      if (requirements.length === 0) {
+      if (requirements === null) {
         toggleStatus();
       }
     };
