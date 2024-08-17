@@ -63,7 +63,7 @@ export const TitledPage: FC<TitledPageProps> = ({
             'justifyContent': 'start',
           }}
         >
-          <Link to="/profiles">
+          <Link to="/">
             <Home sx={{ fontSize: '21px !important' }} />
           </Link>
           {paths.length > 0 && (

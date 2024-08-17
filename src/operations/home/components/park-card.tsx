@@ -35,9 +35,15 @@ export type ParkCardProps = {
   name: string;
   imageSrc: string;
   rating: number;
+  address: string;
 };
 
-export const ParkCard = ({ name, imageSrc, rating }: ParkCardProps) => {
+export const ParkCard = ({
+  name,
+  imageSrc,
+  rating,
+  address,
+}: ParkCardProps) => {
   const { toggleStatus } = useDialogContext<false>();
 
   return (
@@ -66,7 +72,7 @@ export const ParkCard = ({ name, imageSrc, rating }: ParkCardProps) => {
             {name}
           </Typography>
           <Typography variant="body2" color={'text.secondary'} marginBottom={1}>
-            Emplacement
+            Emplacement : {address}
           </Typography>
           <Divider variant="middle" />
           <Box
@@ -75,8 +81,14 @@ export const ParkCard = ({ name, imageSrc, rating }: ParkCardProps) => {
             sx={{ width: 'max-content' }}
           >
             {Array(5)
-              .fill(<StarBorder />)
-              .map((el, index) => (index < rating ? <Star key={index} /> : el))}
+              .fill(0)
+              .map((_el, index) =>
+                index < rating ? (
+                  <Star key={index} />
+                ) : (
+                  <StarBorder key={index} />
+                )
+              )}
           </Box>
         </CardContent>
       </Box>

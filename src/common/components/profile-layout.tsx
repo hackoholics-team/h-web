@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { SocialIcon } from 'react-social-icons';
-import { Box, Typography, Avatar, Badge } from '@mui/material';
+import { Box, Typography, Avatar } from '@mui/material';
 import { LocationOn } from '@mui/icons-material';
 import { User } from '@/gen/client';
 import { FlexBox } from './flex-box';
@@ -31,7 +31,7 @@ export const ProfileLayout: FC<{
   actions: ReactNode;
 }> = ({ user, actions }) => {
   const isDarkTheme = useIsDarkTheme();
-  const { bgcolor, primaryColor, secondaryColor } = usePalette();
+  const { bgcolor, primaryColor } = usePalette();
 
   const borderSeparator = isDarkTheme
     ? '1px solid rgba(255, 255, 255, .2)'
@@ -49,18 +49,11 @@ export const ProfileLayout: FC<{
       }}
     >
       <FlexBox sx={{ gap: 2, alignItems: 'start', justifyContent: 'start' }}>
-        <Badge
-          overlap="circular"
-          badgeContent=" "
-          color="primary"
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        >
-          <Avatar
-            src={user.photoId}
-            alt={user.firstName}
-            sx={{ width: '100px', height: '100px', border: '2px solid white' }}
-          />
-        </Badge>
+        <Avatar
+          src={user.photoId}
+          alt={user.firstName}
+          sx={{ width: '100px', height: '100px', border: '2px solid white' }}
+        />
         <Box>
           <Typography
             variant="h2"
@@ -70,9 +63,6 @@ export const ProfileLayout: FC<{
             }}
           >
             {user.firstName + ' ' + user.lastName}
-          </Typography>
-          <Typography sx={{ fontSize: '13px', color: secondaryColor }}>
-            Web developper on stackoverflow, huh{' '}
           </Typography>
           <Typography
             color="primary"

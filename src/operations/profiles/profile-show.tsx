@@ -1,5 +1,5 @@
-import { Button, Show, TabbedShowLayout, useShowContext } from 'react-admin';
-import { CircularProgress, Chip, Box, Typography } from '@mui/material';
+import { Button, Show, useShowContext, useTranslate } from 'react-admin';
+import { CircularProgress, Chip, Typography } from '@mui/material';
 import { FlexBox, ProfileLayout } from '@/common/components';
 import { Dialog } from '@/common/components';
 import { User } from '@/gen/client';
@@ -7,7 +7,6 @@ import { useGetConnectedId, usePalette } from '@/common/hooks';
 import { useDialogContext } from '@/common/services/dialog';
 import { useWhoami } from '@/security/hooks';
 import { useAuthenticated } from 'react-admin';
-import { PAPER_BOX_SX } from '@/common/utils/common-props';
 import { useEffect, useState } from 'react';
 import { userApi } from '@/providers/api';
 import { NOOP_FN } from '@/common/utils/noop';
@@ -29,11 +28,13 @@ export const ProfileShow = () => {
 
 const EditProfileButton = () => {
   const { open: openEditDialog } = useDialogContext<false>();
+  const translate = useTranslate();
+
   return (
     <Button
       size="small"
-      label="Editer"
-      variant="outlined"
+      label={translate('ha.words.edit')}
+      variant="contained"
       color="primary"
       onClick={openEditDialog}
       sx={{ fontSize: '13px' }}
@@ -44,7 +45,8 @@ const EditProfileButton = () => {
 export const ProfileShowContent = () => {
   const { record: user, isLoading } = useShowContext<Required<User>>();
   const getId = useGetConnectedId();
-  const { bgcolor, primaryColor } = usePalette();
+  const { primaryColor } = usePalette();
+  const translate = useTranslate();
   const [requirements, setRequirements] = useState<string[]>([]);
 
   useEffect(() => {
@@ -65,18 +67,9 @@ export const ProfileShowContent = () => {
       <ProfileLayout
         user={user!}
         actions={
-          <>
-            <Button
-              size="small"
-              label="Contacter"
-              variant="contained"
-              color="primary"
-              sx={{ fontSize: '13px' }}
-            />
-            <Dialog actionHandler={<EditProfileButton />}>
-              <p>Edit profile</p>
-            </Dialog>
-          </>
+          <Dialog actionHandler={<EditProfileButton />}>
+            <div>Hello</div>
+          </Dialog>
         }
       />
       <Typography
@@ -89,32 +82,13 @@ export const ProfileShowContent = () => {
           color: primaryColor,
         }}
       >
-        My Requirements
+        {translate('ha.words.requirement')}
       </Typography>
       <FlexBox sx={{ justifyContent: 'start', ml: 2, width: '90%', gap: 2 }}>
-        {requirements.map((requirement) => (
+        {requirements.slice(0, 7).map((requirement) => (
           <Chip key={requirement} label={requirement} variant="filled" />
         ))}
       </FlexBox>
-      <TabbedShowLayout>
-        <TabbedShowLayout.Tab
-          path=""
-          label="Informations"
-          sx={{ textTransform: 'none' }}
-        >
-          <Box
-            sx={{
-              borderRadius: '8px',
-              fontSize: '14px',
-              bgcolor,
-              p: 2,
-              ...PAPER_BOX_SX,
-            }}
-          >
-            Hello world
-          </Box>
-        </TabbedShowLayout.Tab>
-      </TabbedShowLayout>
     </>
   );
 };

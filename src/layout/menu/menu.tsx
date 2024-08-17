@@ -1,7 +1,11 @@
 import { FC } from 'react';
-import { Menu as RaMenu, useSidebarState } from 'react-admin';
+import { Menu as RaMenu, useSidebarState, useTranslate } from 'react-admin';
 import { Box, SxProps, Drawer, useTheme, useMediaQuery } from '@mui/material';
-import { Settings as SettingsIcon } from '@mui/icons-material';
+import {
+  Settings as SettingsIcon,
+  Home,
+  AccountCircle,
+} from '@mui/icons-material';
 import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
 
@@ -63,27 +67,26 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, 'boxShadow'> }> = ({
   sx,
 }) => {
   const { bgcolor } = usePalette();
+  const translate = useTranslate();
 
   return (
     <Box sx={{ ...MENU_SX, ...PAPER_BOX_SX, bgcolor, ...sx }}>
       <Box>
         <RaMenu>
-          <RaMenu.ResourceItem name="profiles" />
-          <RaMenu.ResourceItem name="dummies" />
-        </RaMenu>
-      </Box>
-      <Box>
-        <RaMenu
-          sx={{
-            '& .MuiSvgIcon-root': {
-              mb: 0.2,
-            },
-          }}
-        >
+          <RaMenu.Item
+            to="/"
+            primaryText={translate('ha.words.home')}
+            leftIcon={<Home />}
+          />
+          <RaMenu.Item
+            to="/profiles"
+            primaryText={translate('ha.words.profil')}
+            leftIcon={<AccountCircle />}
+          />
           <RaMenu.Item
             leftIcon={<SettingsIcon />}
             to="/settings"
-            primaryText="Settings"
+            primaryText={translate('ha.words.settings')}
           />
         </RaMenu>
       </Box>
