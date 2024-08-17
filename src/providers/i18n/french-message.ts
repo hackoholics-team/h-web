@@ -25,7 +25,11 @@ export const haFrenchMessages: any = {
       forgotPassword: 'Mot de passe oublié ?',
       alreadyHaveAccount: 'Vous avez déjà un compte ?',
       doesNotHaveAccountYet: "Vous n'avez pas encore de compte ?",
-      settings: "Modifiez la configuration de l'application pour qu'elle corresponde à votre configuration"
+      settings:
+        "Modifiez la configuration de l'application pour qu'elle corresponde à votre configuration",
+      recommendedQuestion: "Pourquoi cela m'est-il recommandé ?",
+      recommended1: 'Parcs recommandés',
+      recommended2: 'pour vous',
     },
     login: {
       forms: {

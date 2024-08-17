@@ -1,4 +1,4 @@
-import { Typography, Box, Divider, MenuItem, Select } from '@mui/material'
+import { Typography, Box, Divider, MenuItem, Select } from '@mui/material';
 import { FlexBox, TitledPage } from '@/common/components';
 import { useIsDarkTheme, usePalette } from '@/common/hooks';
 import { useLocale, useSetLocale, useTheme, useTranslate } from 'react-admin';
@@ -20,17 +20,20 @@ export const Settings = () => {
   });
 
   const handleLocaleChange = (event: any) => {
-    setLocale(event.target.value)
-  }
+    setLocale(event.target.value);
+  };
 
   const handleThemeChange = (event: any) => {
-    setTheme(event.target.value)
-  }
+    setTheme(event.target.value);
+  };
 
   return (
     <TitledPage
-      title={translate("ha.words.settings")[0].toUpperCase() + translate("ha.words.settings").slice(1)}
-      description={translate("ha.text.settings")}
+      title={
+        translate('ha.words.settings')[0].toUpperCase() +
+        translate('ha.words.settings').slice(1)
+      }
+      description={translate('ha.text.settings')}
       paths={[
         {
           label: 'settings',
@@ -38,38 +41,52 @@ export const Settings = () => {
         },
       ]}
     >
-      <Box sx={{ width: '100%', bgcolor: isDarkTheme ? bgcolorPaper : bgcolor, p: 2 }}>
+      <Box
+        sx={{
+          width: '100%',
+          bgcolor: isDarkTheme ? bgcolorPaper : bgcolor,
+          p: 2,
+        }}
+      >
         <Divider sx={{ mb: 2 }} />
-        <FlexBox sx={{ justifyContent: "space-between", width: '600px' }}>
+        <FlexBox sx={{ justifyContent: 'space-between', width: '600px' }}>
           <Typography sx={{ color: primaryColor, fontSize: '1.3rem' }}>
-            {translate("ha.words.lang")}
+            {translate('ha.words.lang')}
           </Typography>
           <Select
             value={currentLocale}
             label=""
-            size='small'
+            size="small"
             sx={{ width: '200px' }}
-            variant='standard'
+            variant="standard"
             onChange={handleLocaleChange}
           >
-            {languages.map(el => (<MenuItem key={el.locale} value={el.locale}>{el.name}</MenuItem>))}
+            {languages.map((el) => (
+              <MenuItem key={el.locale} value={el.locale}>
+                {el.name}
+              </MenuItem>
+            ))}
           </Select>
         </FlexBox>
         <Divider sx={{ my: 2 }} />
-        <FlexBox sx={{ justifyContent: "space-between", width: '600px' }}>
+        <FlexBox sx={{ justifyContent: 'space-between', width: '600px' }}>
           <Typography sx={{ color: primaryColor, fontSize: '1.3rem' }}>
             Themes
           </Typography>
           <Select
             value={theme}
             label=""
-            size='small'
+            size="small"
             sx={{ width: '200px' }}
-            variant='standard'
+            variant="standard"
             onChange={handleThemeChange}
           >
-            <MenuItem key={"light"} value={"light"}>{translate(`ha.words.light`)}</MenuItem>
-            <MenuItem key={"dark"} value={"dark"}>{translate(`ha.words.dark`)}</MenuItem>
+            <MenuItem key={'light'} value={'light'}>
+              {translate(`ha.words.light`)}
+            </MenuItem>
+            <MenuItem key={'dark'} value={'dark'}>
+              {translate(`ha.words.dark`)}
+            </MenuItem>
           </Select>
         </FlexBox>
       </Box>

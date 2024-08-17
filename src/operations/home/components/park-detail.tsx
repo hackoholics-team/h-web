@@ -13,7 +13,7 @@ import { ParkMap } from './park-map';
 import { CloseDialogButton } from './park-detail-close-button';
 import { PlaceDetails, PlacesSearchResult } from '@/gen/client';
 import Carousel from 'react-material-ui-carousel';
-import { useGetOne } from 'react-admin';
+import { useGetOne, useTranslate } from 'react-admin';
 import { prefixImageUrl } from '..';
 
 type ParkImageProps = {
@@ -44,9 +44,14 @@ export const ParkDetailContent = ({ placeId }: { placeId: string }) => {
   const { data: placeAbout, isLoading } = useGetOne<
     Required<PlaceDetails> & { id: string }
   >('places', { id: placeId });
-
+  const translate = useTranslate();
   if (isLoading || !placeAbout) {
-    return <CircularProgress />;
+    return (
+      <FlexBox sx={{ p: 5 }}>
+        {' '}
+        <CircularProgress />
+      </FlexBox>
+    );
   }
 
   return (
@@ -97,7 +102,7 @@ export const ParkDetailContent = ({ placeId }: { placeId: string }) => {
                     }}
                   />
                   <Typography variant={'h6'} color={'text.secondary'}>
-                    Why is this recommended to me ?
+                    {translate('ha.text.recommendedQuestion')}
                   </Typography>
                   <Typography>{placeAbout.reason}</Typography>
                 </Box>
@@ -123,6 +128,7 @@ export const ParkDetail: FC<{
           name={place.name}
           imageSrc={place.photo}
           rating={place.rating}
+          address={place.address}
         />
       }
       fullWidth

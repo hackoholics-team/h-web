@@ -1,7 +1,11 @@
 import { FC } from 'react';
 import { Menu as RaMenu, useSidebarState, useTranslate } from 'react-admin';
 import { Box, SxProps, Drawer, useTheme, useMediaQuery } from '@mui/material';
-import { Settings as SettingsIcon, Home, AccountCircle } from '@mui/icons-material';
+import {
+  Settings as SettingsIcon,
+  Home,
+  AccountCircle,
+} from '@mui/icons-material';
 import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
 
@@ -86,6 +90,6 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, 'boxShadow'> }> = ({
           />
         </RaMenu>
       </Box>
-    </Box >
+    </Box>
   );
 };

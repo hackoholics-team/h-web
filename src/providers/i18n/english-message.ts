@@ -21,10 +21,13 @@ export const haEnglishMessages: any = {
       requirement: 'My Requirements',
     },
     text: {
+      recommendedQuestion: 'Why is this recommended to me ?',
       forgotPassword: 'Forgot password ?',
       alreadyHaveAccount: 'Already have a account ?',
       doesNotHaveAccountYet: 'Does not have an account yet ?',
-      settings: "Change the app configuration to match your config"
+      settings: 'Change the app configuration to match your config',
+      recommended1: 'Recommended parks',
+      recommended2: 'for you',
     },
     login: {
       forms: {

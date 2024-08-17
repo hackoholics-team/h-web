@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { List } from 'react-admin';
+import { List, useTranslate } from 'react-admin';
 import { RecomendationsList } from './components/recomendations';
 import { FlexBox } from '@/common/components';
 import AutocompletePlaces from 'react-google-places-autocomplete';
@@ -13,6 +13,7 @@ export const prefixImageUrl = (image: string) => {
 
 export const Home = () => {
   const [location, setLocation] = useState('Antananarivo, Madagascar');
+  const translate = useTranslate();
   const { palette } = usePalette();
 
   const onLocationChange = ({ label = 'Antananarivo, Madagascar' }: any) => {
@@ -26,8 +27,11 @@ export const Home = () => {
           variant="h3"
           sx={{ fontWeight: 'bold', fontSize: '1.7rem' }}
         >
-          Recomended parks{' '}
-          <span style={{ color: palette.primary.main }}>for you</span>
+          {translate('ha.text.recommended1')}
+          <span style={{ color: palette.primary.main }}>
+            {' '}
+            {translate('ha.text.recommended2')}
+          </span>
         </Typography>
         <AutocompletePlaces
           apiKey={process.env.GOOGLE_MAP_API_KEY!}
@@ -48,6 +52,7 @@ export const Home = () => {
         sx={{
           width: '100%',
         }}
+        pagination={false}
       >
         <RecomendationsList />
       </List>

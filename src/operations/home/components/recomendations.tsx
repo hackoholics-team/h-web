@@ -6,7 +6,7 @@ import { PlacesSearchResult } from '@/gen/client';
 import { useListContext } from 'react-admin';
 
 const CONTAINER_SX: SxProps = {
-  justifyContent: 'flex-start',
+  justifyContent: 'start',
   flexWrap: 'wrap',
   gap: 2,
   padding: 2,

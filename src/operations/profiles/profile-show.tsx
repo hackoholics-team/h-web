@@ -1,5 +1,5 @@
 import { Button, Show, useShowContext, useTranslate } from 'react-admin';
-import { CircularProgress, Chip, Box, Typography } from '@mui/material';
+import { CircularProgress, Chip, Typography } from '@mui/material';
 import { FlexBox, ProfileLayout } from '@/common/components';
 import { Dialog } from '@/common/components';
 import { User } from '@/gen/client';
