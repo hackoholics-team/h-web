@@ -1,7 +1,6 @@
-import { TitledPage } from '@/common/components';
+import { Button, TextField, Toolbar } from 'react-admin';
 import { List } from '@/common/components/list';
 import { useGetConnectedId } from '@/common/hooks';
-import { Button, TextField, Toolbar } from 'react-admin';
 
 export const PaymentMethodsList = () => {
   const getId = useGetConnectedId();
@@ -11,28 +10,36 @@ export const PaymentMethodsList = () => {
   }
 
   return (
-    <TitledPage title="All of my payement methods" description="" paths={[]}>
-      <List
-        empty={false}
-        resource="paymentMethods"
-        queryOptions={{
-          meta: {
-            userId: getId(),
-          },
-        }}
-        actions={
-          <Toolbar>
-            <Button
-              href="#/payments/methods"
-              label="Create"
-              variant="contained"
-              size="small"
-            />
-          </Toolbar>
-        }
-      >
-        <TextField source="brand" label="Card Type" />
-      </List>
-    </TitledPage>
+    <List
+      empty={false}
+      resource="paymentMethods"
+      datagridProps={{
+        rowClick: (id) => `/payments/${id}/submit`,
+      }}
+      queryOptions={{
+        meta: {
+          userId: getId(),
+        },
+      }}
+      actions={
+        <Toolbar>
+          <Button
+            href="#/payments/methods"
+            label="Create"
+            variant="outlined"
+            size="small"
+          />
+          <Button
+            href="#/pays"
+            label="Do Payment"
+            variant="contained"
+            size="small"
+            sx={{ ml: 2 }}
+          />
+        </Toolbar>
+      }
+    >
+      <TextField source="brand" label="Card Type" />
+    </List>
   );
 };

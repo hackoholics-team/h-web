@@ -13,6 +13,7 @@ import { i18nProvider } from './providers/i18n';
 import { DUMMY_UI } from './operations/dummies';
 import { CreateMethods } from './operations/payments';
 import { PaymentMethodsList } from './operations/payments/payment.methods.list';
+import { DoPayment } from './operations/payments/doPayment';
 
 const Dashboard = () => (
   <Admin
@@ -36,6 +37,14 @@ const Dashboard = () => (
         element={
           <Authenticated>
             <PaymentMethodsList />
+          </Authenticated>
+        }
+      />
+      <Route
+        path="/pays"
+        element={
+          <Authenticated>
+            <DoPayment />
           </Authenticated>
         }
       />

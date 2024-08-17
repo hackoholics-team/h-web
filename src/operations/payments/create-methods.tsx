@@ -11,12 +11,13 @@ import {
   SelectInput,
   SimpleForm,
   TextInput,
+  useRedirect,
 } from 'react-admin';
 import { useState } from 'react';
 import { payingApi } from '@/providers/api';
 import { NOOP_FN } from '@/common/utils/noop';
 
-const CARD_TYPES = [
+export const CARD_TYPES = [
   { id: 'pm_card_visa', name: 'Visa' },
   { id: 'pm_card_visa_debit', name: 'Visa (débit)' },
   { id: 'pm_card_mastercard', name: 'Mastercard' },
@@ -33,6 +34,7 @@ export const CreateMethods = () => {
   const { bgcolor, primaryColor } = usePalette();
   const [isLoading, setIsLoading] = useState(false);
   const getId = useGetConnectedId();
+  const redirect = useRedirect();
 
   if (!getId()) {
     return (window.location.href = '#/login');
@@ -45,7 +47,9 @@ export const CreateMethods = () => {
         ...values,
         brand: CARD_TYPES.find((el) => el.id === values.id)?.name,
       })
-      .then()
+      .then(() => {
+        redirect('/pays');
+      })
       .catch(NOOP_FN)
       .finally(() => {
         setIsLoading(false);
