@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { List, useTranslate } from 'react-admin';
+import { List, useAuthenticated, useTranslate } from 'react-admin';
 import { RecomendationsList } from './components/recomendations';
 import { FlexBox } from '@/common/components';
 import AutocompletePlaces from 'react-google-places-autocomplete';
-import { usePalette } from '@/common/hooks';
+import { useGetConnectedId, usePalette } from '@/common/hooks';
 import { useState } from 'react';
 
 export const prefixImageUrl = (image: string) => {
@@ -12,6 +12,8 @@ export const prefixImageUrl = (image: string) => {
 };
 
 export const Home = () => {
+  useAuthenticated();
+  const getId = useGetConnectedId();
   const [location, setLocation] = useState('Antananarivo, Madagascar');
   const translate = useTranslate();
   const { palette } = usePalette();
@@ -19,6 +21,10 @@ export const Home = () => {
   const onLocationChange = ({ label = 'Antananarivo, Madagascar' }: any) => {
     setLocation(label);
   };
+
+  if (!getId()) {
+    return (window.location.href = '#/login');
+  }
 
   return (
     <Box sx={{ p: 3 }} width={'100%'}>

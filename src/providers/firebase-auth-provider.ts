@@ -11,10 +11,10 @@ import { FIREBASE_AUTH } from '@/config/firebase-config';
 
 export type SigninProviderType =
   | {
-    email: string;
-    password: string;
-  }
-  | { new(): GoogleAuthProvider };
+      email: string;
+      password: string;
+    }
+  | { new (): GoogleAuthProvider };
 
 const USER_ID_CACHE_NAME = 'auth-user-id';
 const TOKEN_ID_CACHE_NAME = 'auth-token-id';
@@ -48,16 +48,18 @@ const signIn = async (provider: SigninProviderType) => {
 const signup = async (provider: SigninProviderType) => {
   if ('password' in provider) {
     const { email, password } = provider;
-    return await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
+    return cacheCredential(
+      await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password)
+    );
   }
-  return await signIn(provider);
+  return cacheCredential(await signIn(provider));
 };
 
 const signOut = async () => {
   await firebaseSignOut(FIREBASE_AUTH);
-  const currentTheme = localStorage.getItem("RaStore.theme");
+  const currentTheme = localStorage.getItem('RaStore.theme');
   localStorage.clear();
-  localStorage.setItem("RaStore.theme", currentTheme || "dark");
+  localStorage.setItem('RaStore.theme', currentTheme || 'dark');
 };
 
 const resetPassword = async (email: string) => {

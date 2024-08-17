@@ -8,7 +8,7 @@ export const haEnglishMessages: any = {
       signin: 'Signin',
       settings: 'Settings',
       profil: 'Profile',
-      more: "More",
+      more: 'More',
       signup: 'Signup',
       next: 'Next',
       home: 'Home',
@@ -40,7 +40,8 @@ export const haEnglishMessages: any = {
       },
       illustration: {
         header: 'Welcome to Hackoholics, your application for finding parks',
-        description: 'This will be your new eco-friendly companion, helping you make sustainable choices and reduce your environmental impact.',
+        description:
+          'This will be your new eco-friendly companion, helping you make sustainable choices and reduce your environmental impact.',
         find_our: 'Find here our',
         general_rules: 'General rules',
       },
@@ -74,11 +75,11 @@ export const haEnglishMessages: any = {
       },
     },
     pref: {
-      chooseActivities: "Choose what kind of park activities you want",
-      chooseTypes: "Choose what kind of park types you want",
+      chooseActivities: 'Choose what kind of park activities you want',
+      chooseTypes: 'Choose what kind of park types you want',
       title: "Choose all of your preferences, and we'll find your ",
-      validate: "You confirm that all the preferences you choose are final",
-      titlePrefix: "dream park"
-    }
+      validate: 'You confirm that all the preferences you choose are final',
+      titlePrefix: 'dream park',
+    },
   },
 };

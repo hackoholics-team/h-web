@@ -11,7 +11,7 @@ export const Review = ({ selectedPref }: { selectedPref: ParkPref[] }) => {
   return (
     <Box sx={{ mx: 'auto', width: '80%' }}>
       <Typography sx={{ mb: 2, fontWeight: 'bold', fontSize: '1.2rem' }}>
-        {translate("ha.pref.validate")} ?
+        {translate('ha.pref.validate')} ?
       </Typography>
       <FlexBox sx={{ flexWrap: 'wrap', justifyContent: 'start', gap: 2 }}>
         {selectedPref.map((pref) => (

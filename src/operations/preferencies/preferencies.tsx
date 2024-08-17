@@ -51,14 +51,19 @@ const PreferenciesStepContent = ({
   anotherPref: { types: string[]; activities: string[] };
   setAnotherPref: StateSetter<{ types: string[]; activities: string[] }>;
 }) => {
+  const getId = useGetConnectedId();
   const { currentStep } = useStepperContext();
   const translate = useTranslate();
+
+  if (!getId()) {
+    return (window.location.href = '#/login');
+  }
 
   switch (currentStep) {
     case 0:
       return (
         <ShowPref
-          title={translate("ha.pref.chooseTypes")}
+          title={translate('ha.pref.chooseTypes')}
           prefs={PARK_DEFAULT_DATA.types}
           type="types"
           setSelectedPreferencies={setSelectedPreferencies}
@@ -70,7 +75,7 @@ const PreferenciesStepContent = ({
     case 1:
       return (
         <ShowPref
-          title={translate("ha.pref.chooseActivities")}
+          title={translate('ha.pref.chooseActivities')}
           type="activities"
           prefs={PARK_DEFAULT_DATA.activities}
           setSelectedPreferencies={setSelectedPreferencies}
@@ -122,7 +127,12 @@ const PreferenciesContent = () => {
 
   return (
     <>
-      <FlexBox sx={{ ...PREFERENCIES_SX, bgcolor: isDarkTheme ? bgcolorPaper : bgcolor }}>
+      <FlexBox
+        sx={{
+          ...PREFERENCIES_SX,
+          bgcolor: isDarkTheme ? bgcolorPaper : bgcolor,
+        }}
+      >
         <Typography
           sx={{
             fontSize: '1.8rem',
@@ -133,9 +143,9 @@ const PreferenciesContent = () => {
             color: primaryColor,
           }}
         >
-          {translate("ha.pref.title")}
+          {translate('ha.pref.title')}
           <span style={{ color: palette.primary.main }}>
-            {translate("ha.pref.titlePrefix")}
+            {translate('ha.pref.titlePrefix')}
           </span>
         </Typography>
         <Box sx={{ width: '80%' }}>
@@ -169,21 +179,21 @@ const PreferenciesContent = () => {
             <Button
               disabled={currentStep === 0}
               onClick={doPrevStep}
-              label={translate("ha.words.prev")}
+              label={translate('ha.words.prev')}
               variant="outlined"
             />
             {currentStep !== maxStep && (
               <Button
                 disabled={selectedPreferencies.length === 0}
                 onClick={doNexStep}
-                label={translate("ha.words.next")}
+                label={translate('ha.words.next')}
                 variant="contained"
               />
             )}
             {currentStep === maxStep && (
               <Button
                 onClick={updateRequirements}
-                label={translate("ha.words.finish")}
+                label={translate('ha.words.finish')}
                 variant="contained"
               />
             )}

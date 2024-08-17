@@ -7,7 +7,7 @@ export const haFrenchMessages: any = {
     words: {
       or: 'Ou',
       signin: 'Se connecter',
-      more: "Plus",
+      more: 'Plus',
       lang: 'Langues',
       settings: 'Paramètres',
       profil: 'Profil',
@@ -41,7 +41,8 @@ export const haFrenchMessages: any = {
         password: 'Mot de passe',
       },
       illustration: {
-        header: 'Bienvenue chez Hackoholics, votre application pour trouver des parcs',
+        header:
+          'Bienvenue chez Hackoholics, votre application pour trouver des parcs',
         description:
           'Ce sera votre nouveau compagnon écologique, vous aidant à faire des choix durables et à réduire votre impact environnemental.',
         find_our: 'Trouver ici notre',
@@ -80,11 +81,13 @@ export const haFrenchMessages: any = {
       },
     },
     pref: {
-      chooseActivities: "Choisissez le type d'activités de parc que vous souhaitez",
-      chooseTypes: "Choisissez le type de parcs que vous souhaitez",
-      validate: "Vous confirmez que toutes les préférences que vous choisissez sont finales",
-      title: "Choisissez toutes vos préférences, et nous trouverons votre ",
-      titlePrefix: "parc idéal"
-    }
+      chooseActivities:
+        "Choisissez le type d'activités de parc que vous souhaitez",
+      chooseTypes: 'Choisissez le type de parcs que vous souhaitez',
+      validate:
+        'Vous confirmez que toutes les préférences que vous choisissez sont finales',
+      title: 'Choisissez toutes vos préférences, et nous trouverons votre ',
+      titlePrefix: 'parc idéal',
+    },
   },
 };

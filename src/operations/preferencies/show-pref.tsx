@@ -70,7 +70,7 @@ export const ChipAddition = () => {
       clickable
       component="div"
       onClick={toggleStatus}
-      label={translate("ha.words.more")}
+      label={translate('ha.words.more')}
       variant={'filled'}
       icon={<AddIcon />}
     />
