@@ -15,9 +15,9 @@ export const HackoholicsLogo = () => {
             marginLeft: 9,
           }}
         >
-          H
+          Naturo{' '}
         </span>
-        ackoholics
+        Match
       </Typography>
     </FlexBox>
   );

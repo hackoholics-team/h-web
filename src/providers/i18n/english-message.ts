@@ -39,7 +39,7 @@ export const haEnglishMessages: any = {
         password: 'Password',
       },
       illustration: {
-        header: 'Welcome to Hackoholics, your application for finding parks',
+        header: 'Welcome to Naturo Match, your application for finding parks',
         description:
           'This will be your new eco-friendly companion, helping you make sustainable choices and reduce your environmental impact.',
         find_our: 'Find here our',
