@@ -7,6 +7,7 @@ export const haFrenchMessages: any = {
     words: {
       or: 'Ou',
       signin: 'Se connecter',
+      more: 'Plus',
       lang: 'Langues',
       settings: 'Paramètres',
       profil: 'Profil',
@@ -37,13 +38,14 @@ export const haFrenchMessages: any = {
           label: 'Confirmer votre mot de passe',
           error: 'Les mots de passe ne correspondent pas',
         },
-        password: 'Password',
+        password: 'Mot de passe',
       },
       illustration: {
-        header: 'Bienvenue à nouveau à votre travail',
+        header:
+          'Bienvenue chez Hackoholics, votre application pour trouver des parcs',
         description:
-          'Votre nouveau compagnon eco-responsable pour vos destinations',
-        find_our: 'Trouver ici notre ',
+          'Ce sera votre nouveau compagnon écologique, vous aidant à faire des choix durables et à réduire votre impact environnemental.',
+        find_our: 'Trouver ici notre',
         general_rules: 'Règles générale',
       },
       signin: {
@@ -77,6 +79,15 @@ export const haFrenchMessages: any = {
       en: {
         name: 'Anglais',
       },
+    },
+    pref: {
+      chooseActivities:
+        "Choisissez le type d'activités de parc que vous souhaitez",
+      chooseTypes: 'Choisissez le type de parcs que vous souhaitez',
+      validate:
+        'Vous confirmez que toutes les préférences que vous choisissez sont finales',
+      title: 'Choisissez toutes vos préférences, et nous trouverons votre ',
+      titlePrefix: 'parc idéal',
     },
   },
 };

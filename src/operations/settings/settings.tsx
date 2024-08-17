@@ -1,6 +1,6 @@
 import { Typography, Box, Divider, MenuItem, Select } from '@mui/material';
 import { FlexBox, TitledPage } from '@/common/components';
-import { useIsDarkTheme, usePalette } from '@/common/hooks';
+import { useGetConnectedId, useIsDarkTheme, usePalette } from '@/common/hooks';
 import { useLocale, useSetLocale, useTheme, useTranslate } from 'react-admin';
 import { SUPPORTED_LOCALES } from '@/providers/i18n';
 
@@ -11,6 +11,11 @@ export const Settings = () => {
   const isDarkTheme = useIsDarkTheme();
   const translate = useTranslate();
   const [theme, setTheme] = useTheme();
+  const getId = useGetConnectedId();
+
+  if (!getId()) {
+    return (window.location.href = '#/login');
+  }
 
   const languages = SUPPORTED_LOCALES.map((locale) => {
     return {

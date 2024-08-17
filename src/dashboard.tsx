@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import { Layout, NoLayout } from './layout';
 import { LoginPage } from './security/components';
 import { ProfileShow } from './operations/profiles';
-import { PdfViewer } from './common/components';
 import { CompleteInfoPage } from './security/components/complete-info/complete-info-page';
 import { Settings } from './operations/settings';
 import { Home } from './operations/home';
@@ -15,7 +14,6 @@ import { DUMMY_UI } from './operations/dummies';
 
 const Dashboard = () => (
   <Admin
-    requireAuth={false}
     title="hackoholic"
     defaultTheme="light"
     layout={Layout}
@@ -45,10 +43,6 @@ const Dashboard = () => (
           </Authenticated>
         }
         path="/settings"
-      />
-      <Route
-        element={<PdfViewer pdf={'http://localhost:5173/test.pdf'} />}
-        path="/pdf"
       />
     </CustomRoutes>
     <CustomRoutes noLayout>

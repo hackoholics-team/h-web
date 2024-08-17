@@ -48,14 +48,18 @@ const signIn = async (provider: SigninProviderType) => {
 const signup = async (provider: SigninProviderType) => {
   if ('password' in provider) {
     const { email, password } = provider;
-    return await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
+    return cacheCredential(
+      await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password)
+    );
   }
-  return await signIn(provider);
+  return cacheCredential(await signIn(provider));
 };
 
 const signOut = async () => {
   await firebaseSignOut(FIREBASE_AUTH);
+  const currentTheme = localStorage.getItem('RaStore.theme');
   localStorage.clear();
+  localStorage.setItem('RaStore.theme', currentTheme || 'dark');
 };
 
 const resetPassword = async (email: string) => {

@@ -15,9 +15,13 @@ export const ProfileShow = () => {
   useAuthenticated();
   const { id } = useWhoami(); // ignored as we use signin to fetch current profile and signin need only the firebaseToken
 
+  if (!id) {
+    return (window.location.href = '#/login');
+  }
+
   return (
     <Show
-      id={id!}
+      id={id}
       sx={{ 'mt': 0, '& .RaShow-card': { bgcolor: 'transparent' } }}
       resource="profiles"
     >

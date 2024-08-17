@@ -10,6 +10,7 @@ import {
   SimpleForm,
   TextInput,
   useLocale,
+  useTranslate,
 } from 'react-admin';
 import { ParkPref } from './default-pref';
 import { SupportedLanguage } from '@/providers/i18n';
@@ -62,13 +63,14 @@ export type ShowPrevProps = {
 
 export const ChipAddition = () => {
   const { toggleStatus } = useDialogContext<false>();
+  const translate = useTranslate();
 
   return (
     <Chip
       clickable
       component="div"
       onClick={toggleStatus}
-      label="More"
+      label={translate('ha.words.more')}
       variant={'filled'}
       icon={<AddIcon />}
     />
