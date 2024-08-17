@@ -70,19 +70,18 @@ export const LoginPageContent = () => {
               {translate('ha.login.illustration.header')}
             </Typography>
             <Typography sx={{ fontSize: '15px', color: secondaryColor }}>
-              Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
-              sint cillum sint consectetur cupidatat.
+              {translate('ha.login.illustration.description')}
             </Typography>
             <img
-              width={250}
+              height={280}
               alt="hackoholics-login"
               src={loginIllustration}
               style={{ display: 'block' }}
             />
             <Typography sx={{ color: secondaryColor, fontSize: '15px' }}>
-              Trouver ici notre{' '}
+              {translate('ha.login.illustration.find_our')}{' '}
               <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                Règle Génerale
+                {translate('ha.login.illustration.general_rules')}
               </span>
             </Typography>
           </FlexBox>

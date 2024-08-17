@@ -11,10 +11,10 @@ import { FIREBASE_AUTH } from '@/config/firebase-config';
 
 export type SigninProviderType =
   | {
-      email: string;
-      password: string;
-    }
-  | { new (): GoogleAuthProvider };
+    email: string;
+    password: string;
+  }
+  | { new(): GoogleAuthProvider };
 
 const USER_ID_CACHE_NAME = 'auth-user-id';
 const TOKEN_ID_CACHE_NAME = 'auth-token-id';
@@ -55,7 +55,9 @@ const signup = async (provider: SigninProviderType) => {
 
 const signOut = async () => {
   await firebaseSignOut(FIREBASE_AUTH);
+  const currentTheme = localStorage.getItem("RaStore.theme");
   localStorage.clear();
+  localStorage.setItem("RaStore.theme", currentTheme || "dark");
 };
 
 const resetPassword = async (email: string) => {

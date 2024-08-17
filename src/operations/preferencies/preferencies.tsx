@@ -13,10 +13,10 @@ import {
   Box,
 } from '@mui/material';
 import { FlexBox } from '@/common/components';
-import { Button, useLocale, useRedirect } from 'react-admin';
+import { Button, useLocale, useRedirect, useTranslate } from 'react-admin';
 import { ShowPref } from './show-pref';
 import { StateSetter } from '@/common/utils/types';
-import { useGetConnectedId, usePalette } from '@/common/hooks';
+import { useGetConnectedId, useIsDarkTheme, usePalette } from '@/common/hooks';
 import { useState } from 'react';
 import { PARK_DEFAULT_DATA, ParkPref } from './default-pref';
 import { Review } from './review';
@@ -52,12 +52,13 @@ const PreferenciesStepContent = ({
   setAnotherPref: StateSetter<{ types: string[]; activities: string[] }>;
 }) => {
   const { currentStep } = useStepperContext();
+  const translate = useTranslate();
 
   switch (currentStep) {
     case 0:
       return (
         <ShowPref
-          title="Choose what types of park you want"
+          title={translate("ha.pref.chooseTypes")}
           prefs={PARK_DEFAULT_DATA.types}
           type="types"
           setSelectedPreferencies={setSelectedPreferencies}
@@ -69,7 +70,7 @@ const PreferenciesStepContent = ({
     case 1:
       return (
         <ShowPref
-          title="Choose what king of park activities you want"
+          title={translate("ha.pref.chooseActivities")}
           type="activities"
           prefs={PARK_DEFAULT_DATA.activities}
           setSelectedPreferencies={setSelectedPreferencies}
@@ -85,14 +86,16 @@ const PreferenciesStepContent = ({
 
 const PreferenciesContent = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { primaryColor, palette, bgcolorPaper } = usePalette();
+  const { primaryColor, palette, bgcolor, bgcolorPaper } = usePalette();
   const locale = useLocale() as SupportedLanguage;
+  const isDarkTheme = useIsDarkTheme();
   const { currentStep, doNexStep, doPrevStep, maxStep } = useStepperContext();
   const [selectedPreferencies, setSelectedPreferencies] = useState<ParkPref[]>(
     []
   );
   const getId = useGetConnectedId();
   const redirect = useRedirect();
+  const translate = useTranslate();
   const [anotherPref, setAnotherPref] = useState<{
     types: string[];
     activities: string[];
@@ -119,7 +122,7 @@ const PreferenciesContent = () => {
 
   return (
     <>
-      <FlexBox sx={{ ...PREFERENCIES_SX, bgcolor: bgcolorPaper }}>
+      <FlexBox sx={{ ...PREFERENCIES_SX, bgcolor: isDarkTheme ? bgcolorPaper : bgcolor }}>
         <Typography
           sx={{
             fontSize: '1.8rem',
@@ -130,8 +133,10 @@ const PreferenciesContent = () => {
             color: primaryColor,
           }}
         >
-          Choose all of your preferencies, and we'll get your{' '}
-          <span style={{ color: palette.primary.main }}>dream park</span>
+          {translate("ha.pref.title")}
+          <span style={{ color: palette.primary.main }}>
+            {translate("ha.pref.titlePrefix")}
+          </span>
         </Typography>
         <Box sx={{ width: '80%' }}>
           <Stepper
@@ -164,21 +169,21 @@ const PreferenciesContent = () => {
             <Button
               disabled={currentStep === 0}
               onClick={doPrevStep}
-              label="Prev"
+              label={translate("ha.words.prev")}
               variant="outlined"
             />
             {currentStep !== maxStep && (
               <Button
                 disabled={selectedPreferencies.length === 0}
                 onClick={doNexStep}
-                label="Next"
+                label={translate("ha.words.next")}
                 variant="contained"
               />
             )}
             {currentStep === maxStep && (
               <Button
                 onClick={updateRequirements}
-                label="Enregisterr"
+                label={translate("ha.words.finish")}
                 variant="contained"
               />
             )}
