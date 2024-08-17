@@ -118,7 +118,7 @@ const PreferenciesContent = () => {
         ...anotherPref.activities,
       ])
       .then(() => {
-        redirect('/profiles');
+        redirect('/');
       })
       .finally(() => {
         setIsLoading(false);
