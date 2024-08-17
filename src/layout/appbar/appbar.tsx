@@ -1,6 +1,5 @@
 import { ChangeEvent, FC } from 'react';
 import {
-  SimpleForm,
   useAuthProvider,
   useGetOne,
   useLocale,
@@ -45,7 +44,6 @@ import {
 import { NativeStyle } from '@/common/utils/types';
 import { useFormContext, useWatch } from 'react-hook-form';
 import { usePalette } from '@/common/hooks';
-import { NOOP_FN } from '@/common/utils/noop';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
 import { SUPPORTED_LOCALES } from '@/providers/i18n';
 import { useWhoami } from '@/security/hooks';
@@ -214,14 +212,6 @@ export const AppBarContent = () => {
     >
       <FlexBox sx={{ gap: 5 }}>
         <HackoholicsLogo />
-        <SimpleForm
-          sx={{ pb: '0 !important' }}
-          toolbar={false}
-          onSubmit={NOOP_FN}
-          disableInvalidFormNotification
-        >
-          <SearchInput />
-        </SimpleForm>
       </FlexBox>
       <FlexBox sx={{ gap: 0.5 }}>
         <ThemeAndLocaleSwitch

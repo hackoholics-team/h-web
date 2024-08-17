@@ -3,7 +3,7 @@ import { LinearProgress } from '@mui/material';
 import { SxProps } from '@mui/material';
 import { ParkDetail } from './park-detail';
 import { PlacesSearchResult } from '@/gen/client';
-import { useListContext } from 'react-admin';
+import { useGetList, useListContext } from 'react-admin';
 
 const CONTAINER_SX: SxProps = {
   justifyContent: 'start',
@@ -17,15 +17,25 @@ export const RecomendationsList = () => {
   const { data: places = [], isLoading } = useListContext<
     Required<PlacesSearchResult> & { id: string }
   >();
+  const { data: favorites, isLoading: isGetListLoading } = useGetList<{
+    placeId: string;
+    id: number;
+  }>('favorites');
 
-  if (isLoading) {
+  if (isLoading && isGetListLoading) {
     return <LinearProgress />;
   }
 
   return (
     <FlexBox sx={CONTAINER_SX}>
       {places.map((place) => (
-        <ParkDetail key={place.id} place={place} />
+        <ParkDetail
+          key={place.id}
+          place={place}
+          isFavorite={
+            favorites?.map((e) => e.placeId).includes(place.id) || false
+          }
+        />
       ))}
     </FlexBox>
   );

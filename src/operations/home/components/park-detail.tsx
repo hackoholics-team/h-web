@@ -120,7 +120,8 @@ export const ParkDetailContent = ({ placeId }: { placeId: string }) => {
 
 export const ParkDetail: FC<{
   place: Required<PlacesSearchResult> & { id: string };
-}> = ({ place }) => {
+  isFavorite: boolean;
+}> = ({ place, isFavorite }) => {
   return (
     <Dialog
       actionHandler={
@@ -128,7 +129,9 @@ export const ParkDetail: FC<{
           name={place.name}
           imageSrc={place.photo}
           rating={place.rating}
+          placeId={place.placeId}
           address={place.address}
+          isFavorite={isFavorite}
         />
       }
       fullWidth

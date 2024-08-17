@@ -42,7 +42,7 @@ export const haFrenchMessages: any = {
       },
       illustration: {
         header:
-          'Bienvenue chez Hackoholics, votre application pour trouver des parcs',
+          'Bienvenue sur Naturo Match, votre application pour trouver des parcs',
         description:
           'Ce sera votre nouveau compagnon écologique, vous aidant à faire des choix durables et à réduire votre impact environnemental.',
         find_our: 'Trouver ici notre',

@@ -3,6 +3,7 @@ import { HackoholicDataProvider } from './types';
 import { dummyProvider } from './dummy-provider';
 import { userProvider } from './user-provider';
 import { placeProvider } from './place-provider';
+import { favoritesProvider } from './favorites-provider';
 
 export const getProvider = (resource: string): HackoholicDataProvider<any> => {
   switch (resource) {
@@ -12,6 +13,8 @@ export const getProvider = (resource: string): HackoholicDataProvider<any> => {
       return placeProvider;
     case 'dummies':
       return dummyProvider;
+    case 'favorites':
+      return favoritesProvider;
     default:
       throw new Error('Unknown resource type');
   }

@@ -6,13 +6,14 @@ import {
   SxProps,
   Box,
   Divider,
+  IconButton,
 } from '@mui/material';
-import { StarBorder, Star } from '@mui/icons-material';
+import { StarBorder, Star, Favorite } from '@mui/icons-material';
 import { useDialogContext } from '@/common/services/dialog';
 import { prefixImageUrl } from '..';
 
 const CARD_STYLE: SxProps = {
-  maxWidth: '45%',
+  maxWidth: '50%',
   overflow: 'hidden',
 };
 
@@ -35,7 +36,9 @@ export type ParkCardProps = {
   name: string;
   imageSrc: string;
   rating: number;
+  placeId: string;
   address: string;
+  isFavorite: boolean;
 };
 
 export const ParkCard = ({
@@ -43,16 +46,33 @@ export const ParkCard = ({
   imageSrc,
   rating,
   address,
+  isFavorite,
 }: ParkCardProps) => {
   const { toggleStatus } = useDialogContext<false>();
 
   return (
     <Card sx={CARD_STYLE} onClick={toggleStatus}>
-      <CardMedia
-        component={'img'}
-        sx={CARD_MEDIA_STYLE}
-        image={prefixImageUrl(imageSrc)}
-      />
+      <Box
+        sx={{
+          position: 'relative',
+        }}
+      >
+        <CardMedia
+          component={'img'}
+          sx={CARD_MEDIA_STYLE}
+          image={prefixImageUrl(imageSrc)}
+        />
+        <IconButton
+          sx={{
+            position: 'absolute',
+            zIndex: 9999,
+            bottom: 0,
+            left: 5,
+          }}
+        >
+          {isFavorite ? <Favorite /> : <></>}
+        </IconButton>
+      </Box>
       <Box sx={CARD_CONTENT_STYLE}>
         <CardContent
           sx={{
