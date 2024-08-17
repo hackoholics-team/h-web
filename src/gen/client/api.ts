@@ -137,6 +137,86 @@ export interface NotAuthorizedException {
 /**
  *
  * @export
+ * @interface Payment
+ */
+export interface Payment {
+  /**
+   *
+   * @type {string}
+   * @memberof Payment
+   */
+  id?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof Payment
+   */
+  amount?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof Payment
+   */
+  creationDatetime?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Payment
+   */
+  currency?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Payment
+   */
+  paymentMethodId?: string;
+}
+/**
+ *
+ * @export
+ * @interface PaymentMethod
+ */
+export interface PaymentMethod {
+  /**
+   *
+   * @type {string}
+   * @memberof PaymentMethod
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PaymentMethod
+   */
+  number?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PaymentMethod
+   */
+  cvc?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof PaymentMethod
+   */
+  brand?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof PaymentMethod
+   */
+  exp_month?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof PaymentMethod
+   */
+  exp_year?: number;
+}
+/**
+ *
+ * @export
  * @interface PlaceDetails
  */
 export interface PlaceDetails {
@@ -327,6 +407,19 @@ export interface PlacesSearchResultOpeningHours {
 /**
  *
  * @export
+ * @interface PreferedPlace
+ */
+export interface PreferedPlace {
+  /**
+   *
+   * @type {string}
+   * @memberof PreferedPlace
+   */
+  placeId?: string;
+}
+/**
+ *
+ * @export
  * @interface ResourceNotFoundException
  */
 export interface ResourceNotFoundException {
@@ -343,6 +436,40 @@ export interface ResourceNotFoundException {
    */
   message?: string;
 }
+/**
+ *
+ * @export
+ * @interface Subscription
+ */
+export interface Subscription {
+  /**
+   *
+   * @type {string}
+   * @memberof Subscription
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Subscription
+   */
+  creationDatetime?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Subscription
+   */
+  subscribeType?: SubscriptionSubscribeTypeEnum;
+}
+
+export const SubscriptionSubscribeTypeEnum = {
+  Free: 'FREE',
+  Premium: 'PREMIUM',
+} as const;
+
+export type SubscriptionSubscribeTypeEnum =
+  (typeof SubscriptionSubscribeTypeEnum)[keyof typeof SubscriptionSubscribeTypeEnum];
+
 /**
  *
  * @export
@@ -948,6 +1075,552 @@ export class HealthApi extends BaseAPI {
 }
 
 /**
+ * PayingApi - axios parameter creator
+ * @export
+ */
+export const PayingApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     *
+     * @summary Create or update payment method
+     * @param {string} userId
+     * @param {PaymentMethod} paymentMethod
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdatePaymentMethod: async (
+      userId: string,
+      paymentMethod: PaymentMethod,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'userId' is not null or undefined
+      assertParamExists('crupdatePaymentMethod', 'userId', userId);
+      // verify required parameter 'paymentMethod' is not null or undefined
+      assertParamExists(
+        'crupdatePaymentMethod',
+        'paymentMethod',
+        paymentMethod
+      );
+      const localVarPath = `/users/{userId}/paymentMethods`.replace(
+        `{${'userId'}}`,
+        encodeURIComponent(String(userId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'PUT',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        paymentMethod,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Retrieve a payment method
+     * @param {string} userId
+     * @param {string} pmId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPaymentMethod: async (
+      userId: string,
+      pmId: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'userId' is not null or undefined
+      assertParamExists('getPaymentMethod', 'userId', userId);
+      // verify required parameter 'pmId' is not null or undefined
+      assertParamExists('getPaymentMethod', 'pmId', pmId);
+      const localVarPath = `/users/{userId}/paymentMethods/{pmId}`
+        .replace(`{${'userId'}}`, encodeURIComponent(String(userId)))
+        .replace(`{${'pmId'}}`, encodeURIComponent(String(pmId)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get payment methods
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPaymentMethods: async (
+      userId: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'userId' is not null or undefined
+      assertParamExists('getPaymentMethods', 'userId', userId);
+      const localVarPath = `/users/{userId}/paymentMethods`.replace(
+        `{${'userId'}}`,
+        encodeURIComponent(String(userId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary pay the bill
+     * @param {string} userId
+     * @param {string} pmId
+     * @param {Payment} payment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pay: async (
+      userId: string,
+      pmId: string,
+      payment: Payment,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'userId' is not null or undefined
+      assertParamExists('pay', 'userId', userId);
+      // verify required parameter 'pmId' is not null or undefined
+      assertParamExists('pay', 'pmId', pmId);
+      // verify required parameter 'payment' is not null or undefined
+      assertParamExists('pay', 'payment', payment);
+      const localVarPath = `/users/{userId}/paymentMethods/{pmId}/payments`
+        .replace(`{${'userId'}}`, encodeURIComponent(String(userId)))
+        .replace(`{${'pmId'}}`, encodeURIComponent(String(pmId)));
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'POST',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        payment,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * PayingApi - functional programming interface
+ * @export
+ */
+export const PayingApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = PayingApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @summary Create or update payment method
+     * @param {string} userId
+     * @param {PaymentMethod} paymentMethod
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdatePaymentMethod(
+      userId: string,
+      paymentMethod: PaymentMethod,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.crupdatePaymentMethod(
+          userId,
+          paymentMethod,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['PayingApi.crupdatePaymentMethod']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Retrieve a payment method
+     * @param {string} userId
+     * @param {string} pmId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getPaymentMethod(
+      userId: string,
+      pmId: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaymentMethod>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getPaymentMethod(userId, pmId, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['PayingApi.getPaymentMethod']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get payment methods
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getPaymentMethods(
+      userId: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<PaymentMethod>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getPaymentMethods(userId, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['PayingApi.getPaymentMethods']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary pay the bill
+     * @param {string} userId
+     * @param {string} pmId
+     * @param {Payment} payment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async pay(
+      userId: string,
+      pmId: string,
+      payment: Payment,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Payment>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.pay(
+        userId,
+        pmId,
+        payment,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['PayingApi.pay']?.[localVarOperationServerIndex]
+          ?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * PayingApi - factory interface
+ * @export
+ */
+export const PayingApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance
+) {
+  const localVarFp = PayingApiFp(configuration);
+  return {
+    /**
+     *
+     * @summary Create or update payment method
+     * @param {string} userId
+     * @param {PaymentMethod} paymentMethod
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdatePaymentMethod(
+      userId: string,
+      paymentMethod: PaymentMethod,
+      options?: any
+    ): AxiosPromise<PaymentMethod> {
+      return localVarFp
+        .crupdatePaymentMethod(userId, paymentMethod, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Retrieve a payment method
+     * @param {string} userId
+     * @param {string} pmId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPaymentMethod(
+      userId: string,
+      pmId: string,
+      options?: any
+    ): AxiosPromise<PaymentMethod> {
+      return localVarFp
+        .getPaymentMethod(userId, pmId, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get payment methods
+     * @param {string} userId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPaymentMethods(
+      userId: string,
+      options?: any
+    ): AxiosPromise<Array<PaymentMethod>> {
+      return localVarFp
+        .getPaymentMethods(userId, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary pay the bill
+     * @param {string} userId
+     * @param {string} pmId
+     * @param {Payment} payment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    pay(
+      userId: string,
+      pmId: string,
+      payment: Payment,
+      options?: any
+    ): AxiosPromise<Payment> {
+      return localVarFp
+        .pay(userId, pmId, payment, options)
+        .then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * PayingApi - object-oriented interface
+ * @export
+ * @class PayingApi
+ * @extends {BaseAPI}
+ */
+export class PayingApi extends BaseAPI {
+  /**
+   *
+   * @summary Create or update payment method
+   * @param {string} userId
+   * @param {PaymentMethod} paymentMethod
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PayingApi
+   */
+  public crupdatePaymentMethod(
+    userId: string,
+    paymentMethod: PaymentMethod,
+    options?: RawAxiosRequestConfig
+  ) {
+    return PayingApiFp(this.configuration)
+      .crupdatePaymentMethod(userId, paymentMethod, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Retrieve a payment method
+   * @param {string} userId
+   * @param {string} pmId
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PayingApi
+   */
+  public getPaymentMethod(
+    userId: string,
+    pmId: string,
+    options?: RawAxiosRequestConfig
+  ) {
+    return PayingApiFp(this.configuration)
+      .getPaymentMethod(userId, pmId, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get payment methods
+   * @param {string} userId
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PayingApi
+   */
+  public getPaymentMethods(userId: string, options?: RawAxiosRequestConfig) {
+    return PayingApiFp(this.configuration)
+      .getPaymentMethods(userId, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary pay the bill
+   * @param {string} userId
+   * @param {string} pmId
+   * @param {Payment} payment
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof PayingApi
+   */
+  public pay(
+    userId: string,
+    pmId: string,
+    payment: Payment,
+    options?: RawAxiosRequestConfig
+  ) {
+    return PayingApiFp(this.configuration)
+      .pay(userId, pmId, payment, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+}
+
+/**
  * PlaceApi - axios parameter creator
  * @export
  */
@@ -1078,10 +1751,7 @@ export const PlaceApiFp = function (configuration?: Configuration) {
       placeId: string,
       options?: RawAxiosRequestConfig
     ): Promise<
-      (
-        axios?: AxiosInstance,
-        basePath?: string
-      ) => AxiosPromise<PlacesSearchResult>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<PlaceDetails>
     > {
       const localVarAxiosArgs =
         await localVarAxiosParamCreator.aboutParksOrReserve(placeId, options);
@@ -1153,7 +1823,7 @@ export const PlaceApiFactory = function (
     aboutParksOrReserve(
       placeId: string,
       options?: any
-    ): AxiosPromise<PlacesSearchResult> {
+    ): AxiosPromise<PlaceDetails> {
       return localVarFp
         .aboutParksOrReserve(placeId, options)
         .then((request) => request(axios, basePath));
@@ -1577,6 +2247,285 @@ export class SecurityApi extends BaseAPI {
 }
 
 /**
+ * SubscribeApi - axios parameter creator
+ * @export
+ */
+export const SubscribeApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     *
+     * @summary Create or update a subscription
+     * @param {string} uId
+     * @param {Subscription} [subscription]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateSubscription: async (
+      uId: string,
+      subscription?: Subscription,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'uId' is not null or undefined
+      assertParamExists('crupdateSubscription', 'uId', uId);
+      const localVarPath = `/users/{uId}/subscriptions`.replace(
+        `{${'uId'}}`,
+        encodeURIComponent(String(uId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'PUT',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        subscription,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary get current user subscriptions
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSubscription: async (
+      uId: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'uId' is not null or undefined
+      assertParamExists('getSubscription', 'uId', uId);
+      const localVarPath = `/users/{uId}/subscriptions`.replace(
+        `{${'uId'}}`,
+        encodeURIComponent(String(uId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * SubscribeApi - functional programming interface
+ * @export
+ */
+export const SubscribeApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    SubscribeApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @summary Create or update a subscription
+     * @param {string} uId
+     * @param {Subscription} [subscription]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateSubscription(
+      uId: string,
+      subscription?: Subscription,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.crupdateSubscription(
+          uId,
+          subscription,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['SubscribeApi.crupdateSubscription']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary get current user subscriptions
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getSubscription(
+      uId: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscription>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getSubscription(
+        uId,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['SubscribeApi.getSubscription']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * SubscribeApi - factory interface
+ * @export
+ */
+export const SubscribeApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance
+) {
+  const localVarFp = SubscribeApiFp(configuration);
+  return {
+    /**
+     *
+     * @summary Create or update a subscription
+     * @param {string} uId
+     * @param {Subscription} [subscription]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateSubscription(
+      uId: string,
+      subscription?: Subscription,
+      options?: any
+    ): AxiosPromise<Subscription> {
+      return localVarFp
+        .crupdateSubscription(uId, subscription, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary get current user subscriptions
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getSubscription(uId: string, options?: any): AxiosPromise<Subscription> {
+      return localVarFp
+        .getSubscription(uId, options)
+        .then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * SubscribeApi - object-oriented interface
+ * @export
+ * @class SubscribeApi
+ * @extends {BaseAPI}
+ */
+export class SubscribeApi extends BaseAPI {
+  /**
+   *
+   * @summary Create or update a subscription
+   * @param {string} uId
+   * @param {Subscription} [subscription]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof SubscribeApi
+   */
+  public crupdateSubscription(
+    uId: string,
+    subscription?: Subscription,
+    options?: RawAxiosRequestConfig
+  ) {
+    return SubscribeApiFp(this.configuration)
+      .crupdateSubscription(uId, subscription, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary get current user subscriptions
+   * @param {string} uId
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof SubscribeApi
+   */
+  public getSubscription(uId: string, options?: RawAxiosRequestConfig) {
+    return SubscribeApiFp(this.configuration)
+      .getSubscription(uId, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+}
+
+/**
  * UserApi - axios parameter creator
  * @export
  */
@@ -1637,6 +2586,115 @@ export const UserApiAxiosParamCreator = function (
         localVarRequestOptions,
         configuration
       );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Crupdate user references
+     * @param {string} uId
+     * @param {Array<PreferedPlace>} [preferedPlace]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateUserPreferences: async (
+      uId: string,
+      preferedPlace?: Array<PreferedPlace>,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'uId' is not null or undefined
+      assertParamExists('crupdateUserPreferences', 'uId', uId);
+      const localVarPath = `/users/{uId}/preferences`.replace(
+        `{${'uId'}}`,
+        encodeURIComponent(String(uId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'PUT',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        preferedPlace,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary Get user preferences
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPreferences: async (
+      uId: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'uId' is not null or undefined
+      assertParamExists('getPreferences', 'uId', uId);
+      const localVarPath = `/users/{uId}/preferences`.replace(
+        `{${'uId'}}`,
+        encodeURIComponent(String(uId))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: 'GET',
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication BearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
 
       return {
         url: toPathString(localVarUrlObj),
@@ -1739,6 +2797,76 @@ export const UserApiFp = function (configuration?: Configuration) {
     },
     /**
      *
+     * @summary Crupdate user references
+     * @param {string} uId
+     * @param {Array<PreferedPlace>} [preferedPlace]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateUserPreferences(
+      uId: string,
+      preferedPlace?: Array<PreferedPlace>,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<PreferedPlace>>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.crupdateUserPreferences(
+          uId,
+          preferedPlace,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['UserApi.crupdateUserPreferences']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary Get user preferences
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getPreferences(
+      uId: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<PreferedPlace>>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getPreferences(
+        uId,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap['UserApi.getPreferences']?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
      * @summary Get user requirements
      * @param {string} uId
      * @param {*} [options] Override http request option.
@@ -1800,6 +2928,38 @@ export const UserApiFactory = function (
     },
     /**
      *
+     * @summary Crupdate user references
+     * @param {string} uId
+     * @param {Array<PreferedPlace>} [preferedPlace]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateUserPreferences(
+      uId: string,
+      preferedPlace?: Array<PreferedPlace>,
+      options?: any
+    ): AxiosPromise<Array<PreferedPlace>> {
+      return localVarFp
+        .crupdateUserPreferences(uId, preferedPlace, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary Get user preferences
+     * @param {string} uId
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getPreferences(
+      uId: string,
+      options?: any
+    ): AxiosPromise<Array<PreferedPlace>> {
+      return localVarFp
+        .getPreferences(uId, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
      * @summary Get user requirements
      * @param {string} uId
      * @param {*} [options] Override http request option.
@@ -1836,6 +2996,39 @@ export class UserApi extends BaseAPI {
   ) {
     return UserApiFp(this.configuration)
       .crupdateRequirements(uId, requestBody, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Crupdate user references
+   * @param {string} uId
+   * @param {Array<PreferedPlace>} [preferedPlace]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UserApi
+   */
+  public crupdateUserPreferences(
+    uId: string,
+    preferedPlace?: Array<PreferedPlace>,
+    options?: RawAxiosRequestConfig
+  ) {
+    return UserApiFp(this.configuration)
+      .crupdateUserPreferences(uId, preferedPlace, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary Get user preferences
+   * @param {string} uId
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof UserApi
+   */
+  public getPreferences(uId: string, options?: RawAxiosRequestConfig) {
+    return UserApiFp(this.configuration)
+      .getPreferences(uId, options)
       .then((request) => request(this.axios, this.basePath));
   }
 

@@ -5,6 +5,7 @@ import {
   Settings as SettingsIcon,
   Home,
   AccountCircle,
+  AttachMoney,
 } from '@mui/icons-material';
 import { usePalette } from '@/common/hooks';
 import { PAPER_BOX_SX } from '@/common/utils/common-props';
@@ -82,6 +83,11 @@ export const MenuContent: FC<{ sx?: Omit<SxProps, 'boxShadow'> }> = ({
             to="/profiles"
             primaryText={translate('ha.words.profil')}
             leftIcon={<AccountCircle />}
+          />
+          <RaMenu.Item
+            to="/payments"
+            primaryText={'Payment Method'}
+            leftIcon={<AttachMoney />}
           />
           <RaMenu.Item
             leftIcon={<SettingsIcon />}

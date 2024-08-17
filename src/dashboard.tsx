@@ -11,6 +11,8 @@ import { hackoholicDarkTheme, hackoholicLightTheme } from './themes';
 import { dataProvider, authProvider } from './providers';
 import { i18nProvider } from './providers/i18n';
 import { DUMMY_UI } from './operations/dummies';
+import { CreateMethods } from './operations/payments';
+import { PaymentMethodsList } from './operations/payments/payment.methods.list';
 
 const Dashboard = () => (
   <Admin
@@ -26,8 +28,25 @@ const Dashboard = () => (
     dataProvider={dataProvider}
   >
     <Resource name="profiles" />
+    <Resource name="paymentMethods" />
     <Resource name="dummies" {...DUMMY_UI} />
     <CustomRoutes>
+      <Route
+        path="/payments"
+        element={
+          <Authenticated>
+            <PaymentMethodsList />
+          </Authenticated>
+        }
+      />
+      <Route
+        path="/payments/methods"
+        element={
+          <Authenticated>
+            <CreateMethods />
+          </Authenticated>
+        }
+      />
       <Route
         element={
           <Authenticated>

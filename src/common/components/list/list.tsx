@@ -35,9 +35,8 @@ export const List: FC<ListProps> = ({
     <RaList
       sx={{
         '& .RaList-actions': {
-          bgcolor,
           p: 1,
-          mb: 1,
+          my: 1,
           borderRadius: '8px',
         },
         '& *': {
